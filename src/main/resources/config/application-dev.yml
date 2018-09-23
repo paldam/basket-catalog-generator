@@ -35,9 +35,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/basketExt?useUnicode=true&characterEncoding=utf8&useSSL=false
-        username: root
-        password:
+        url: jdbc:mysql://localhost:3306/basketExt?useUnicode=yes&characterEncoding=UTF-8&yourMySqlDatabase?zeroDateTimeBehavior=convertToNull
+        username: paldam
+        password: Paluch12
         hikari:
             auto-commit: false
             data-source-properties:

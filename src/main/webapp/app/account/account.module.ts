@@ -23,7 +23,7 @@ import {
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
-        SettingsComponent
+        SettingsComponent ,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

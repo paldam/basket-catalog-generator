@@ -20,6 +20,7 @@ import { BasketExtEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import {BasketModule} from './basket/basket.module';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         BasketExtCoreModule,
         BasketExtHomeModule,
         BasketExtAccountModule,
-        BasketExtEntityModule
+        BasketExtEntityModule ,
+        BasketModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

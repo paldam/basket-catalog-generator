@@ -16,8 +16,6 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "inlineStyle": true,
-      "inlineTemplate": false,
       "spec": false,
       "prefix": "jhi",
       "styleExt": "css"
