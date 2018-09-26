@@ -6,11 +6,10 @@ import { Injectable } from '@angular/core';
 export class SelectedBasketService {
 
     public selectedBasket: any[] = [];
-    public numberOfBasket: number = 0;
+    public numberOfBasket = 0;
 
     constructor() {
     }
-
 
     addBasket(basket: any) {
               this.selectedBasket.push(basket);

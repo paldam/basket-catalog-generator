@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectedBasketService} from "../selected-baskets/selected-basket.service";
+import {SelectedBasketService} from '../selected-baskets/selected-basket.service';
 
 @Component({
   selector: 'jhi-basket-customize',
@@ -8,12 +8,10 @@ import {SelectedBasketService} from "../selected-baskets/selected-basket.service
 })
 export class BasketCustomizeComponent implements OnInit {
 
-    public basketToCustomize: any[] =[];
+    public basketToCustomize: any[] = [];
 
-  constructor(private  selectedBasketService : SelectedBasketService) {
+  constructor(private  selectedBasketService: SelectedBasketService) {
       this.basketToCustomize = selectedBasketService.selectedBasket;
-
-
 
   }
 
