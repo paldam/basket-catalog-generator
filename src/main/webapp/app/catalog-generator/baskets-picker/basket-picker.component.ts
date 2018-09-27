@@ -1,0 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import {CatalogGeneratorService} from '../catalog-generator.service';
+import {SelectedBasketService} from '../selected-baskets/selected-basket.service';
+
+@Component({
+  selector: 'jhi-basket',
+  templateUrl: './basket-picker.component.html',
+  styleUrls: ['./basket-picker.component.css']
+})
+export class BasketPickerComponent implements OnInit {
+
+    public baskets: any[] = [];
+
+  constructor(private catalogGeneratorService: CatalogGeneratorService, private  selectedBasketService: SelectedBasketService) {
+                catalogGeneratorService.getBasket().subscribe(data => {
+                    this.baskets = data.body;
+                });
+  }
+
+  ngOnInit() {
+  }
+
+  addBasket(basket: any)  {
+        this.selectedBasketService.addBasket(basket);
+  }
+
+}

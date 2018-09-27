@@ -1,8 +1,3 @@
-<button class="btn bg-primary text" [routerLink]="['/basketcustomize']">Przejdź do personalizacji</button>
-<button class="btn bg-primary text">Wybierz klienta</button>
-
-
-
 
 <p-dataTable [value]="baskets" [rows]="10" [paginator]="true"  #dt
  loadingIcon="fa-circle-o-notch" expandableRows="true" (onRowDblclick)="addBasket($event.data)">
@@ -16,18 +11,17 @@
 
 
 <p-column field="basketName" header="Nazwa kosza" [sortable]="true"></p-column>
-<p-column field="basketType.basketTypeName" header="Typ kosza" [sortable]="true" ></p-column>
-<p-column field="season" header="Sezon" [sortable]="true" ></p-column>
 <p-column field="basketTotalPrice"  header="Cena kosza "  [sortable]="true" >
     <ng-template let-row="rowData" pTemplate="body">
         {{row.basketTotalPrice/100| number : '1.2-2'}} zł.
     </ng-template>
 </p-column>
 
-<p-column  header="Akcja" styleClass="action_col">
+<p-column  header="Zdjęcie kosza"  [style]="{'width':'120px'}">
     <ng-template let-basket="rowData" pTemplate="body">
-        <i  class="fa fa-pencil-square-o fa-2x" aria-hidden="true"  title="Edytuj kosz" [routerLink]="['/basket/', basket.basketId] "></i>
-        <i  class="fa fa-trash fa-2x edit_icon" aria-hidden="true" title="Usuń kosz"  ></i>
+
+
+        <img src="http://145.239.92.96/dd/kosz.png" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event)">
     </ng-template>
 </p-column>
 
@@ -61,3 +55,7 @@
 
 
 <jhi-selected-baskets>dfdfdf </jhi-selected-baskets>
+
+<p-overlayPanel #op1>
+    <img src="http://145.239.92.96/dd/kosz.png" alt="Galleria 1" height="300" width="300" />
+</p-overlayPanel>
