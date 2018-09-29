@@ -14,6 +14,8 @@ export class BasketPickerComponent implements OnInit {
   constructor(private catalogGeneratorService: CatalogGeneratorService, private  selectedBasketService: SelectedBasketService) {
                 catalogGeneratorService.getBasket().subscribe(data => {
                     this.baskets = data.body;
+
+                    console.log(JSON.stringify(this.baskets));
                 });
   }
 

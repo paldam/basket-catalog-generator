@@ -10,8 +10,8 @@ export class BasketCustomizeComponent implements OnInit {
 
     public basketToCustomize: any[] = [];
 
-  constructor(private  selectedBasketService: SelectedBasketService) {
-      this.basketToCustomize = selectedBasketService.selectedBasket;
+  constructor(public selectedBasketService: SelectedBasketService) {
+
 
   }
 

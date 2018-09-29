@@ -7,7 +7,6 @@ export class CatalogDetails{
         public customerAssistantEmail?: string,
         public customerAssistantPhone?: string,
         public catalogLastPageDesc?: string
-
     ) {
     }
 }

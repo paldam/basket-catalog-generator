@@ -343,6 +343,15 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-data</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext7-core</artifactId>
+            <version>7.0.3</version>
+            <type>pom</type>
+        </dependency>
+
+
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
 
