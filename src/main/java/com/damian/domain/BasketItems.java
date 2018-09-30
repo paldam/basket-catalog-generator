@@ -1,9 +1,12 @@
 package com.damian.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by Damian on 27.09.2018.
  */
 public class BasketItems {
+    private Integer basketItemsId;
     private String productName;
     private String productCapacity;
     private Integer quantity;
@@ -17,6 +20,18 @@ public class BasketItems {
         this.quantity = quantity;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "basket_items_id", nullable = false)
+    public Integer getBasketItemsId() {
+        return basketItemsId;
+    }
+
+    public void setBasketItemsId(Integer basketItemsId) {
+        this.basketItemsId = basketItemsId;
+    }
+    @Basic
+    @Column(name = "product_name", nullable = false)
     public String getProductName() {
         return productName;
     }
@@ -25,6 +40,8 @@ public class BasketItems {
         this.productName = productName;
     }
 
+    @Basic
+    @Column(name = "capacity", nullable = false)
     public String getProductCapacity() {
         return productCapacity;
     }
@@ -33,6 +50,8 @@ public class BasketItems {
         this.productCapacity = productCapacity;
     }
 
+    @Basic
+    @Column(name = "quantity", nullable = false)
     public Integer getQuantity() {
         return quantity;
     }
