@@ -14,9 +14,10 @@ import {TableModule} from 'primeng/table';
 import { CatalogGeneratorCoreComponent } from './catalog-generator-core/catalog-generator-core.component';
 import {StepsModule} from 'primeng/steps';
 import { CatalogGeneratorDetailsComponent } from './catalog-generator-details/catalog-generator-details.component';
+import { HttpModule } from '@angular/http'
 
 @NgModule({
-    imports: [BasketExtSharedModule, RouterModule.forChild(BASKET_ROUTE), TabViewModule, FileUploadModule, OverlayPanelModule, FieldsetModule, DataTableModule, StepsModule, BrowserModule, BrowserAnimationsModule, TableModule],
+    imports: [BasketExtSharedModule, RouterModule.forChild(BASKET_ROUTE),HttpModule, TabViewModule, FileUploadModule, OverlayPanelModule, FieldsetModule, DataTableModule, StepsModule, BrowserModule, BrowserAnimationsModule, TableModule],
     declarations: [
         BasketPickerComponent,
         SelectedBasketsComponent,

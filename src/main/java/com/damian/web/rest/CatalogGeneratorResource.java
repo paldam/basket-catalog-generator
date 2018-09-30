@@ -31,14 +31,14 @@ public class CatalogGeneratorResource {
 
 
     @CrossOrigin
-    @RequestMapping(value = "/generatecatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> generateCatalog() throws IOException {
+    @RequestMapping(value = "/generatecatalog", method = RequestMethod.POST, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> generateCatalog(@RequestBody Catalog catalog) throws IOException {
 
 
 
 
         CatalogGenerator catalogGenerator = new CatalogGenerator();
-        ByteArrayInputStream bis = catalogGenerator.generateCatalog();
+        ByteArrayInputStream bis = catalogGenerator.generateCatalog(catalog);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=catalog222.pdf");

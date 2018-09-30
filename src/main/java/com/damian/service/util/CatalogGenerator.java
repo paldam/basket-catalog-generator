@@ -4,6 +4,7 @@ import com.damian.domain.Basket;
 import com.damian.domain.BasketItems;
 import com.damian.domain.Catalog;
 import com.damian.domain.CatalogDetails;
+import com.damian.service.MailService;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.color.DeviceRgb;
@@ -23,22 +24,32 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 
 public class CatalogGenerator {
 
+//    public static final String FONT_SEGOPR = "fonts/segoepr.ttf" ;
+//    public static final String FONT_ROBOTO_ITALIC = "fonts/Roboto-Italic.ttf" ;
+//    public static final String FONT_ROBOTO_BOLD = "fonts/Roboto-Bold.ttf" ;
+//    public static final String FONT_ROBOTO_REGULAR = "fonts/Roboto-Regular.ttf" ;
+
+    private static final Logger log = LoggerFactory.getLogger(CatalogGenerator.class);
 
 
     public static final String FONT_SEGOPR = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\segoepr.ttf" ;
     public static final String FONT_ROBOTO_ITALIC = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Italic.ttf" ;
     public static final String FONT_ROBOTO_BOLD = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Bold.ttf" ;
     public static final String FONT_ROBOTO_REGULAR = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Regular.ttf" ;
+
     public static final String FIRST_PAGE_IMAGE = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\niebieskiobraz.jpg" ;
     public static final String COMPANY_LOGO = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\logo.png" ;
     public static final String CONTENT_PAGE_TOP_BACKGROUND = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\belkaniebieska.jpg" ;
@@ -46,49 +57,18 @@ public class CatalogGenerator {
 
 
 
-    public static ByteArrayInputStream generateCatalog() throws IOException {
+    public static ByteArrayInputStream generateCatalog(Catalog catalog) throws IOException {
+
+//        String theme = catalog2.getCatalogDetails().getCatalogTheme();
+//
+//        String FIRST_PAGE_IMAGE = "themes/" +theme + "/obraz.jpg";
+//        String CONTENT_PAGE_TOP_BACKGROUND = "themes/" +theme + "/belka.jpg";
+//
+//        String COMPANY_LOGO = "fonts/logo.png" ;
+//        String BASKET_EXAMPLE = "fonts/kosz.png" ;
 
 
 
-
-        BasketItems bi1 = new BasketItems("Siwucha" , "0,5L" , 1);
-        BasketItems bi2 = new BasketItems("Wino czerwone Isal" , "0,5l" , 1);
-        BasketItems bi3 = new BasketItems("Alokochol bee" , "1L" , 1);
-        BasketItems bi4 = new BasketItems("Łysoń Czekolada miód truskawka cripsy" , "100gr" , 1);
-        BasketItems bi5 = new BasketItems("Góralskie Praliny \"Skarb Janosika\"" , "12gr" , 1);
-        BasketItems bi6 = new BasketItems("Stara Wędzarnia Krakowska sucha" , "330ml" , 1);
-        BasketItems bi7 = new BasketItems("Dobre Smaki Syrop z żurawiny" , "200ml" , 1);
-        BasketItems bi8 = new BasketItems("Łysoń Czekolada miód truskawka cripsy" , "100gr" , 1);
-        BasketItems bi9= new BasketItems("Ogródek Dziadunia Żurawina w syropie" , "270gr" , 1);
-        BasketItems bi10 = new BasketItems("Łysoń Miód Nektarowy wielokwiatowy" , "250gr" , 1);
-        BasketItems bi11 = new BasketItems("Alokochol bee" , "1L" , 1);
-        BasketItems bi12 = new BasketItems("Łysoń Czekolada miód truskawka cripsy" , "100gr" , 1);
-
-        ArrayList<BasketItems> itemList = new ArrayList<BasketItems>();
-        itemList.add(bi1);
-        itemList.add(bi2);
-        itemList.add(bi3);
-        itemList.add(bi4);
-        itemList.add(bi5);
-        itemList.add(bi6);
-        itemList.add(bi7);
-        itemList.add(bi8);
-        itemList.add(bi9);
-        itemList.add(bi10);
-        itemList.add(bi11);
-        itemList.add(bi12);
-
-
-        Basket b1 = new Basket("Kosz rozkoszy2",new BigDecimal(1999),itemList) ;
-        Basket b2 = new Basket("Niebiańskie praliny nocą",new BigDecimal(299 ),itemList) ;
-
-        ArrayList<Basket> baskets = new ArrayList<Basket>() ;
-        baskets.add(b1);
-        baskets.add(b2);
-
-
-        CatalogDetails cd = new CatalogDetails("Świąteczne Upominki katalog 2018","Paczkopol Logistic","Damian Paluch","dami@onet.eu","508789763","Oferta przygotwana specjalnie dla państwa");
-        Catalog catalog = new Catalog(baskets,cd) ;
 
 
 
@@ -127,7 +107,7 @@ public class CatalogGenerator {
         setBorderForAllElement(logoImg);
 
 
-        Text catalogName = new Text("Świąteczne Upominki katalog 2018.")
+        Text catalogName = new Text(catalog.getCatalogDetails().getCatalogName())
             .setFont(fontSegopr)
             .setFontSize(37)
             .setFontColor(dBordowy)
@@ -156,7 +136,7 @@ public class CatalogGenerator {
             .setWidth(408)
             .setFixedLeading(40f);
 
-        Text customer = new Text("EnterStore Komputery")
+        Text customer = new Text(catalog.getCatalogDetails().getCatalogFor())
             .setFont(fontRobotoBold)
             .setFontSize(36)
             .setFontColor(dSzary)
@@ -186,7 +166,7 @@ public class CatalogGenerator {
             .setFixedLeading(40f);
 
 
-        Text customeAssistantName = new Text("Jan Kowalski")
+        Text customeAssistantName = new Text(catalog.getCatalogDetails().getCustomerAssistantName())
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
@@ -200,7 +180,7 @@ public class CatalogGenerator {
             .setFixedLeading(40f);
         setBorderForAllElement(p5);
 
-        Text customeAssistantEmail = new Text("jan.kowalski@onet.pl:")
+        Text customeAssistantEmail = new Text(catalog.getCatalogDetails().getCustomerAssistantEmail())
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
@@ -213,7 +193,7 @@ public class CatalogGenerator {
             .setWidth(408)
             .setFixedLeading(40f);
         setBorderForAllElement(p6);
-        Text customeAssistantPhone = new Text("508323188")
+        Text customeAssistantPhone = new Text(catalog.getCatalogDetails().getCustomerAssistantPhone())
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
@@ -246,107 +226,118 @@ public class CatalogGenerator {
         canvas.closePathStroke();
 
 
-        PdfCanvas canvasPage2 = new PdfCanvas(pdfDoc.addNewPage());
-        doc.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
+
+         ArrayList<Basket> basketList = catalog.getBaskets();
+
+            for (Basket basket : basketList) {
+                log.error("Noa strona ____________________________ "  );
+
+                PdfCanvas canvasPage2 = new PdfCanvas(pdfDoc.addNewPage());
+                doc.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
 
-        Image topImage = new Image(ImageDataFactory.create(CONTENT_PAGE_TOP_BACKGROUND));
-        topImage.setFixedPosition(0, 669);
-        topImage.setHeight(99);
-        topImage.setWidth(1366);
+                Image topImage = new Image(ImageDataFactory.create(CONTENT_PAGE_TOP_BACKGROUND));
+                topImage.setFixedPosition(0, 669);
+                topImage.setHeight(99);
+                topImage.setWidth(1366);
 
 
-        Text catalogNameContent = new Text("Świąteczne Upominki katalog 2018.")
-            .setFont(fontSegopr)
-            .setFontSize(49)
-            .setFontColor(Color.WHITE)
-            .setTextAlignment(TextAlignment.CENTER)
-            .setHorizontalAlignment(HorizontalAlignment.CENTER);
+                Text catalogNameContent = new Text(catalog.getCatalogDetails().getCatalogName())
+                    .setFont(fontSegopr)
+                    .setFontSize(49)
+                    .setFontColor(Color.WHITE)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        Paragraph catalogNameContentParagraph = new Paragraph().add(catalogNameContent);
-        catalogNameContentParagraph.setFixedPosition(40, 660, 1330);
-        setBorderForAllElement(catalogNameContentParagraph);
-        catalogNameContentParagraph.setHeight(120);
-        catalogNameContentParagraph.setWidth(1366);
-
-
-        Image BasketImage = new Image(ImageDataFactory.create(BASKET_EXAMPLE));
-        BasketImage.setFixedPosition(43, 35);
-        BasketImage.setHeight(597);
-        BasketImage.setWidth(850);
+                Paragraph catalogNameContentParagraph = new Paragraph().add(catalogNameContent);
+                catalogNameContentParagraph.setFixedPosition(40, 660, 1330);
+                setBorderForAllElement(catalogNameContentParagraph);
+                catalogNameContentParagraph.setHeight(120);
+                catalogNameContentParagraph.setWidth(1366);
 
 
-        Text basketName = new Text("01.Góralski podarek Marianny")
-            .setFont(fontSegopr)
-            .setFontSize(40)
-            .setFontColor(dBordowy)
-            .setTextAlignment(TextAlignment.CENTER)
-            .setHorizontalAlignment(HorizontalAlignment.CENTER);
-
-        Paragraph basketNameParagraph = new Paragraph().add(basketName);
-        basketNameParagraph.setFixedPosition(830, 520, 500);
-        setBorderForAllElement(basketNameParagraph);
-        basketNameParagraph.setHeight(90);
-        basketNameParagraph.setWidth(500);
-        setBorderForAllElement(basketNameParagraph);
-
-        canvasPage2.setStrokeColor(dZloty);
-        canvasPage2.moveTo(830, 510);
-        canvasPage2.lineTo(1300, 510).setLineWidth(3f);
-        canvasPage2.closePathStroke();
-
-        ArrayList<BasketItems> bi = catalog.getBaskets().get(0).getBasketItems();
+                Image BasketImage = new Image(ImageDataFactory.create(BASKET_EXAMPLE));
+                BasketImage.setFixedPosition(43, 35);
+                BasketImage.setHeight(597);
+                BasketImage.setWidth(850);
 
 
-        int hPosition = 430;
-        for (BasketItems basketItems : bi) {
+                Text basketName = new Text(basket.getBasketName())
+                    .setFont(fontSegopr)
+                    .setFontSize(40)
+                    .setFontColor(dBordowy)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+                Paragraph basketNameParagraph = new Paragraph().add(basketName);
+                basketNameParagraph.setFixedPosition(830, 520, 500);
+                setBorderForAllElement(basketNameParagraph);
+                basketNameParagraph.setHeight(90);
+                basketNameParagraph.setWidth(500);
+                setBorderForAllElement(basketNameParagraph);
+
+                canvasPage2.setStrokeColor(dZloty);
+                canvasPage2.moveTo(830, 510);
+                canvasPage2.lineTo(1300, 510).setLineWidth(3f);
+                canvasPage2.closePathStroke();
+
+                ArrayList<BasketItems> bi = basket.getBasketItems();
 
 
-            Text productName = new Text("- "+basketItems.getProductName() + " " + basketItems.getProductCapacity())
-                .setFont(fontRobotoItalic)
-                .setFontSize(18)
-                .setFontColor(dSzary)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setHorizontalAlignment(HorizontalAlignment.CENTER);
+                int hPosition = 430;
+                for (BasketItems basketItems : bi) {
 
-            Paragraph productNameParagraph = new Paragraph().add(productName);
-            productNameParagraph.setFixedPosition(830, hPosition, 500);
-            setBorderForAllElement(productNameParagraph);
-            productNameParagraph.setHeight(50);
-            productNameParagraph.setWidth(500);
-            setBorderForAllElement(productNameParagraph);
+                    log.error("Składowe basktItems " + basketItems.getProductName() );
+                    Text productName = new Text("- " + basketItems.getProductName() + " " + basketItems.getProductCapacity())
+                        .setFont(fontRobotoItalic)
+                        .setFontSize(18)
+                        .setFontColor(dSzary)
+                        .setTextAlignment(TextAlignment.CENTER)
+                        .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-            hPosition -= 20;
+                    Paragraph productNameParagraph = new Paragraph().add(productName);
+                    productNameParagraph.setFixedPosition(830, hPosition, 500);
+                    setBorderForAllElement(productNameParagraph);
+                    productNameParagraph.setHeight(50);
+                    productNameParagraph.setWidth(500);
+                    setBorderForAllElement(productNameParagraph);
 
-            doc.add(productNameParagraph);
+                    hPosition -= 20;
 
-        }
+                    doc.add(productNameParagraph);
 
-        canvasPage2.setStrokeColor(dZloty);
-        canvasPage2.moveTo(830, hPosition - 1);
-        canvasPage2.lineTo(1300, hPosition - 1).setLineWidth(3f);
-        canvasPage2.closePathStroke();
+                }
 
-        Text basketPrice = new Text("Cena: 349 zł")
-            .setFont(fontSegopr)
-            .setFontSize(40)
-            .setFontColor(dBordowy)
-            .setTextAlignment(TextAlignment.CENTER)
-            .setHorizontalAlignment(HorizontalAlignment.CENTER);
+                canvasPage2.setStrokeColor(dZloty);
+                canvasPage2.moveTo(830, hPosition - 1);
+                canvasPage2.lineTo(1300, hPosition - 1).setLineWidth(3f);
+                canvasPage2.closePathStroke();
 
-        Paragraph basketPriceParagraph = new Paragraph().add(basketPrice);
-        basketPriceParagraph.setFixedPosition(1040, hPosition-90, 500);
-        setBorderForAllElement(basketPriceParagraph);
-        basketPriceParagraph.setHeight(90);
-        basketPriceParagraph.setWidth(500);
-        setBorderForAllElement(basketPriceParagraph);
+                Text basketPrice = new Text(basket.getBasketPrice() + " zł")
+                    .setFont(fontSegopr)
+                    .setFontSize(40)
+                    .setFontColor(dBordowy)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setHorizontalAlignment(HorizontalAlignment.CENTER);
+
+                Paragraph basketPriceParagraph = new Paragraph().add(basketPrice);
+                basketPriceParagraph.setFixedPosition(1040, hPosition - 90, 500);
+                setBorderForAllElement(basketPriceParagraph);
+                basketPriceParagraph.setHeight(90);
+                basketPriceParagraph.setWidth(500);
+                setBorderForAllElement(basketPriceParagraph);
 
 
-        doc.add(topImage);
-        doc.add(catalogNameContentParagraph);
-        doc.add(BasketImage);
-        doc.add(basketNameParagraph);
-        doc.add(basketPriceParagraph);
+                doc.add(topImage);
+                doc.add(catalogNameContentParagraph);
+                doc.add(BasketImage);
+                doc.add(basketNameParagraph);
+                doc.add(basketPriceParagraph);
+
+
+            }
+
+
         doc.close();
 
         return new ByteArrayInputStream(out.toByteArray());

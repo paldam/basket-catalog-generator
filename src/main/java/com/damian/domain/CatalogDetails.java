@@ -9,17 +9,19 @@ public class CatalogDetails {
     private String customerAssistantEmail;
     private String customerAssistantPhone;
     private String catalogLastPageDesc;
+    private String catalogTheme;
 
     public CatalogDetails() {
     }
 
-    public CatalogDetails(String catalogName, String catalogFor, String customerAssistantName, String customerAssistantEmail, String customerAssistantPhone, String catalogLastPageDesc) {
+    public CatalogDetails(String catalogName, String catalogFor, String customerAssistantName, String customerAssistantEmail, String customerAssistantPhone, String catalogLastPageDesc, String catalogTheme) {
         this.catalogName = catalogName;
         this.catalogFor = catalogFor;
         this.customerAssistantName = customerAssistantName;
         this.customerAssistantEmail = customerAssistantEmail;
         this.customerAssistantPhone = customerAssistantPhone;
         this.catalogLastPageDesc = catalogLastPageDesc;
+        this.catalogTheme = catalogTheme;
     }
 
     public String getCatalogName() {
@@ -68,5 +70,13 @@ public class CatalogDetails {
 
     public void setCatalogLastPageDesc(String catalogLastPageDesc) {
         this.catalogLastPageDesc = catalogLastPageDesc;
+    }
+
+    public String getCatalogTheme() {
+        return catalogTheme;
+    }
+
+    public void setCatalogTheme(String catalogTheme) {
+        this.catalogTheme = catalogTheme;
     }
 }

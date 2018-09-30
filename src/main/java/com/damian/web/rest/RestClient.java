@@ -11,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RestClient {
 
-    private String serverURL = "http://localhost:8080/extbaskets";
+    private String serverURL = "http://145.239.92.96:8080/extbaskets";
+    //private String serverURL = "http://localhost:8080/extbaskets";
     private RestTemplate rest;
     private HttpHeaders headers;
     private HttpStatus status;

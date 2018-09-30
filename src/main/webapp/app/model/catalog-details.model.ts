@@ -6,7 +6,8 @@ export class CatalogDetails{
         public customerAssistantName?: string,
         public customerAssistantEmail?: string,
         public customerAssistantPhone?: string,
-        public catalogLastPageDesc?: string
+        public catalogLastPageDesc?: string,
+        public catalogTheme?: string
     ) {
     }
 }
