@@ -34,7 +34,7 @@ public class Product implements Serializable {
     @Column(name = "product_capacity", nullable = false)
     private String productCapacity;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Basket> baskets = new HashSet<>();

@@ -57,7 +57,7 @@ public class CatalogArchive implements Serializable {
     @Column(name = "logo_content_type")
     private String logoContentType;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "catalog_archive_baskets",
                joinColumns = @JoinColumn(name = "catalog_archives_id", referencedColumnName = "id"),

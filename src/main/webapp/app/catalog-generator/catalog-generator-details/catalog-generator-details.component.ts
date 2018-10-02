@@ -6,6 +6,7 @@ import { CatalogGeneratorService } from '../catalog-generator.service';
 import { CatalogArchive, Theme } from '../../shared/model/catalog-archive.model';
 import { Basket } from '../../shared/model/basket.model';
 import { Product } from '../../shared/model/product.model';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-catalog-generator-details',
@@ -19,7 +20,12 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     public formSubmitted: boolean = false;
     public loading: string = '...';
 
-    constructor(private selectedBasketService: SelectedBasketService, private catalogGeneratorService: CatalogGeneratorService) {}
+    constructor(
+        private selectedBasketService: SelectedBasketService,
+        private catalogGeneratorService: CatalogGeneratorService,
+        private dataUtils: JhiDataUtils,
+        private jhiAlertService: JhiAlertService
+    ) {}
 
     ngOnInit() {
         this.catalogArchive.catalogAdditionalDesc = 'Oferta przygotwana dla firmy EnterStroe';
@@ -43,11 +49,11 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
                     productToAdd.push(new Product(basketI.product.productName, basketI.product.capacity));
                 });
 
-                console.log('Jakie produkty !!!! ' + JSON.stringify(productToAdd[0].productName));
-
                 this.baskets.push(new Basket(basket.basketName, basket.basketTotalPrice, basket.basketId, productToAdd));
                 productToAdd = [];
             });
+
+            console.log('ss' + JSON.stringify(this.catalogArchive));
 
             this.catalogArchive.baskets = this.baskets;
 
@@ -64,5 +70,17 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
 
             this.loading = 'załadowano';
         });
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 }

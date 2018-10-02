@@ -64,18 +64,22 @@
 
 
             <div class="form-group">
-                <small id="add_file" class="text-muted">Wgraj Logo</small>
-                <p-fileUpload name="files"  multiple="multiple"  maxFileSize="5000000"
-                              invalidFileSizeMessageSummary="{0} - plik jest za duży" invalidFileSizeMessageDetail="rozmiar pliku może wynosić maksymalnie {0}"
-                              [showUploadButton]="false" chooseLabel="Wybierz plik" uploadLabel="Wgraj"   cancelLabel="Anuluj wgrywanie plików"   >
-
-
-                    <ng-template pTemplate="content">
-
-
-                    </ng-template>
-
-                </p-fileUpload>
+                <label class="form-control-label" for="field_logo">Wgraj logo</label>
+                <div>
+                    <div *ngIf="catalogArchive.logo" class="form-text text-danger clearfix">
+                        <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a><br>
+                        <span class="pull-left">{{catalogArchive.logoContentType}}, {{byteSize(catalogArchive.logo)}}</span>
+                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"
+                                class="btn btn-secondary btn-xs pull-right">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                        </button>
+                    </div>
+                    <input type="file" id="file_logo" (change)="setFileData($event, catalogArchive, 'logo', false)"/>
+                </div>
+                <input type="hidden" class="form-control" name="logo" id="field_logo"
+                       [(ngModel)]="catalogArchive.logo" />
+                <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                       [(ngModel)]="catalogArchive.logoContentType" />
             </div>
 
 

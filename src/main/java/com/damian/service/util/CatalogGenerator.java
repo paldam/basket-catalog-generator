@@ -25,49 +25,31 @@ import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 
 public class CatalogGenerator {
 
-//    public static final String FONT_SEGOPR = "fonts/segoepr.ttf" ;
-//    public static final String FONT_ROBOTO_ITALIC = "fonts/Roboto-Italic.ttf" ;
-//    public static final String FONT_ROBOTO_BOLD = "fonts/Roboto-Bold.ttf" ;
-//    public static final String FONT_ROBOTO_REGULAR = "fonts/Roboto-Regular.ttf" ;
 
     private static final Logger log = LoggerFactory.getLogger(CatalogGenerator.class);
 
 
-    public static final String FONT_SEGOPR = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\segoepr.ttf" ;
-    public static final String FONT_ROBOTO_ITALIC = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Italic.ttf" ;
-    public static final String FONT_ROBOTO_BOLD = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Bold.ttf" ;
-    public static final String FONT_ROBOTO_REGULAR = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\Roboto-Regular.ttf" ;
+    public static final String FONT_SEGOPR = "themes/fonts/segoepr.ttf" ;
+    public static final String FONT_ROBOTO_ITALIC = "themes/fonts/Roboto-Italic.ttf" ;
+    public static final String FONT_ROBOTO_BOLD = "themes/fonts/Roboto-Bold.ttf" ;
+    public static final String FONT_ROBOTO_REGULAR = "themes/fonts/Roboto-Regular.ttf" ;
 
-    public static final String FIRST_PAGE_IMAGE = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\obraz.jpg" ;
-    public static final String COMPANY_LOGO = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\logo.png" ;
-    public static final String CONTENT_PAGE_TOP_BACKGROUND = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\belka.jpg" ;
-    public static final String BASKET_EXAMPLE = "C:\\Users\\Damian\\Desktop\\katalogimg\\nieb\\kosz.png" ;
-//
+
     public static ByteArrayInputStream generateCatalog(CatalogArchive catalog) throws IOException {
 
-//        String theme = catalog.getCatalogTheme().name();
-//
-//        String FIRST_PAGE_IMAGE = "themes/" +theme + "/obraz.jpg";
-//        String CONTENT_PAGE_TOP_BACKGROUND = "themes/" +theme + "/belka.jpg";
-//
-//        String COMPANY_LOGO = "fonts/logo.png" ;
-//        String BASKET_EXAMPLE = "fonts/kosz.png" ;
+        String theme = catalog.getCatalogTheme().name();
 
-
-
+        String FIRST_PAGE_IMAGE = "themes/" +theme + "/obraz.jpg";
+        String CONTENT_PAGE_TOP_BACKGROUND = "themes/" +theme + "/belka.jpg";
+        String BASKET_EXAMPLE = "themes/fonts/kosz.png" ;
 
 
 
@@ -98,7 +80,8 @@ public class CatalogGenerator {
         img.setWidth(891);
 
 
-        Image logoImg = new Image(ImageDataFactory.create(COMPANY_LOGO));
+
+        Image logoImg = new Image(ImageDataFactory.create(catalog.getLogo()));
         logoImg.setFixedPosition(40, 450);
         logoImg.setHeight(300);
         logoImg.setWidth(400);
@@ -346,7 +329,7 @@ public class CatalogGenerator {
         imgLast.setWidth(891);
 
 
-        Image logoImgLast = new Image(ImageDataFactory.create(COMPANY_LOGO));
+        Image logoImgLast = new Image(ImageDataFactory.create(catalog.getLogo()));
         logoImgLast.setFixedPosition(40, 450);
         logoImgLast.setHeight(300);
         logoImgLast.setWidth(400);

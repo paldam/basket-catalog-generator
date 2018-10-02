@@ -41,7 +41,7 @@ public class Basket implements Serializable {
     @Column(name = "orgin_basket_id", nullable = false)
     private Integer orginBasketId;
 
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "basket_products",
                joinColumns = @JoinColumn(name = "baskets_id", referencedColumnName = "id"),

@@ -58,6 +58,8 @@ export class CatalogArchiveUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+
+        console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD' + JSON.stringify(this.catalogArchive));
         if (this.catalogArchive.id !== undefined) {
             this.subscribeToSaveResponse(this.catalogArchiveService.update(this.catalogArchive));
         } else {
