@@ -521,8 +521,8 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/basketExt</url>
-                    <defaultSchemaName>basketExt</defaultSchemaName>
+                    <url>jdbc:mysql://localhost:3306/basketcatalog</url>
+                    <defaultSchemaName>basketcatalog</defaultSchemaName>
                     <username>root</username>
                     <password></password>
                     <referenceUrl>hibernate:spring:com.damian.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
@@ -623,7 +623,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>basketext</repository>
+                    <repository>basketcatalog</repository>
                     <contextDirectory>${project.build.directory}</contextDirectory>
                 </configuration>
             </plugin>

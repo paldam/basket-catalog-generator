@@ -1,0 +1,61 @@
+{
+    "name": "CatalogArchive",
+    "fields": [
+        {
+            "fieldName": "catalogName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "forWho",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "customerAssistantName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "customerAssistantEmail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "customerAssistantTel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "catalogAdditionalDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "catalogTheme",
+            "fieldType": "Theme",
+            "fieldValues": "NIEBIESKI,CZERWONY"
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "catalogArchive",
+            "relationshipName": "baskets",
+            "otherEntityName": "basket",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181002062923",
+    "entityTableName": "catalog_archive",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -38,6 +38,13 @@ public class CacheConfiguration {
             cm.createCache(com.damian.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.damian.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.damian.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.damian.domain.CatalogArchive.class.getName(), jcacheConfiguration);
+            cm.createCache(com.damian.domain.CatalogArchive.class.getName() + ".baskets", jcacheConfiguration);
+            cm.createCache(com.damian.domain.Basket.class.getName(), jcacheConfiguration);
+            cm.createCache(com.damian.domain.Basket.class.getName() + ".products", jcacheConfiguration);
+            cm.createCache(com.damian.domain.Basket.class.getName() + ".catalogArchives", jcacheConfiguration);
+            cm.createCache(com.damian.domain.Product.class.getName(), jcacheConfiguration);
+            cm.createCache(com.damian.domain.Product.class.getName() + ".baskets", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

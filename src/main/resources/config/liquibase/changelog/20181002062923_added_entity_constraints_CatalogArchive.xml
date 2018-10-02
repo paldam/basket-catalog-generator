@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CatalogArchive.
+    -->
+    <changeSet id="20181002062923-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="catalog_archives_id"
+                                 baseTableName="catalog_archive_baskets"
+                                 constraintName="fk_catalog_archive_baskets_catalog_archives_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="catalog_archive"/>
+        <addForeignKeyConstraint baseColumnNames="baskets_id"
+                                 baseTableName="catalog_archive_baskets"
+                                 constraintName="fk_catalog_archive_baskets_baskets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="basket"/>
+        
+    </changeSet>
+</databaseChangeLog>

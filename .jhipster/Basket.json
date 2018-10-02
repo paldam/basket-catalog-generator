@@ -1,0 +1,53 @@
+{
+    "name": "Basket",
+    "fields": [
+        {
+            "fieldName": "basketName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "basketPrice",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "orginBasketId",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "baskets",
+            "relationshipName": "products",
+            "otherEntityName": "product",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "catalogArchive",
+            "otherEntityName": "catalogArchive",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "baskets"
+        }
+    ],
+    "changelogDate": "20181002062924",
+    "javadoc": "not an ignored comment",
+    "entityTableName": "basket",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

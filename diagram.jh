@@ -1,0 +1,44 @@
+entity CatalogArchive {
+	catalogName String required,
+    forWho String,
+    customerAssistantName String,
+    customerAssistantEmail String,
+    customerAssistantTel String,
+    catalogAdditionalDesc String,
+    catalogTheme Theme,
+    logo Blob,  
+}
+
+
+// an ignored comment
+/** not an ignored comment */
+entity Basket {
+	basketName String required,
+	basketPrice BigDecimal required,
+    orginBasketId Integer required
+}
+
+
+entity Product {
+	 productName String required ,
+     productCapacity String required 
+}
+
+enum Theme {
+    NIEBIESKI, CZERWONY
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+
+relationship ManyToMany {
+  CatalogArchive{baskets} to Basket{catalogArchive}
+  Basket{products} to Product{baskets}
+}
+
+
+
+
+

@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="basket">
+            <h2><span>Basket</span> {{basket.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Basket Name</span></dt>
+                <dd>
+                    <span>{{basket.basketName}}</span>
+                </dd>
+                <dt><span>Basket Price</span></dt>
+                <dd>
+                    <span>{{basket.basketPrice}}</span>
+                </dd>
+                <dt><span>Orgin Basket Id</span></dt>
+                <dd>
+                    <span>{{basket.orginBasketId}}</span>
+                </dd>
+                <dt><span>Products</span></dt>
+                <dd>
+                    <span *ngFor="let products of basket.products; let last = last">
+                        <a [routerLink]="['/product', products?.id, 'view' ]">{{products.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/basket', basket.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
     },
     "jhipsterVersion": "5.3.4",
     "applicationType": "monolith",
-    "baseName": "basketExt",
+    "baseName": "basketCatalog",
     "packageName": "com.damian",
     "packageFolder": "com/damian",
     "serverPort": "8080",

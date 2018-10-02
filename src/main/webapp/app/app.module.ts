@@ -9,8 +9,6 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
 import { NotificationInterceptor } from './blocks/interceptor/notification.interceptor';
-import { BasketExtSharedModule } from 'app/shared';
-import { BasketExtCoreModule } from 'app/core';
 import { BasketExtAppRoutingModule } from './app-routing.module';
 import { BasketExtHomeModule } from './home/home.module';
 import { BasketExtAccountModule } from './account/account.module';
@@ -18,7 +16,8 @@ import { BasketExtEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
-import {CatalogGeneratorModule} from './catalog-generator/catalog-generator.module';
+import { CatalogGeneratorModule } from './catalog-generator/catalog-generator.module';
+import { BasketExtSharedModule } from './shared/shared.module';
 
 @NgModule({
     imports: [
@@ -26,11 +25,11 @@ import {CatalogGeneratorModule} from './catalog-generator/catalog-generator.modu
         BasketExtAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         BasketExtSharedModule,
-        BasketExtCoreModule,
         BasketExtHomeModule,
         BasketExtAccountModule,
-        BasketExtEntityModule ,
-        CatalogGeneratorModule
+        BasketExtEntityModule,
+        CatalogGeneratorModule,
+        BasketExtEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

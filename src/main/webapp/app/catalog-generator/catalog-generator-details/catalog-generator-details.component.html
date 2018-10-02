@@ -1,0 +1,98 @@
+
+<div class="order_detail_form col-md-6">
+    <p-panel header="Dodatkowe informacje">
+        <form id="CatalogForm" novalidate #form="ngForm">
+
+
+
+            <div class="form-group">
+                <small id="catalog_nameDescript" class="text-muted">Nazwa katalogu</small>
+                <input type="text" name="catalog_name" #catalog_name="ngModel"  class="form-control" size="300"  aria-describedby="catalog_nameDesc" required [(ngModel)]="catalogArchive.catalogName">
+                <ul class="text-danger list-unstyled" *ngIf="catalog_name.dirty|| formSubmitted">
+                    <li  *ngIf="catalog_name.errors?.required">Wprowadz nazwę katalogu</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <small id="catalogForDescript" class="text-muted">Katalog dla</small>
+                <input type="text" name="catalog_for" #catalog_for="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.forWho">
+                <ul class="text-danger list-unstyled" *ngIf="catalog_for.dirty|| formSubmitted">
+                    <li  *ngIf="catalog_for.errors?.required">Wprowadź dla jakiej firmy przeznaczony jest katalog</li>
+                </ul>
+            </div>
+
+
+
+            <p-fieldset legend="Opiekun klienta">
+
+                <div class="form-group">
+                    <small id="customerAssistantNameDescript" class="text-muted">Imię i nazwisko opiekuna</small>
+                    <input type="text" name="customerAssistantName" #customerAssistantName="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantName">
+                    <ul class="text-danger list-unstyled" *ngIf="customerAssistantName.dirty|| formSubmitted">
+                        <li  *ngIf="customerAssistantName.errors?.required">Wprowadź opiekuna firmy</li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <small id="customerAssistantEmailDescript" class="text-muted">Email</small>
+                    <input type="text" name="customerAssistantEmail" #customerAssistantEmail="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantEmail">
+                    <ul class="text-danger list-unstyled" *ngIf="customerAssistantEmail.dirty|| formSubmitted">
+                        <li  *ngIf="customerAssistantEmail.errors?.required">Wprowadź email</li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <small id="customerAssistantPhoneDescript" class="text-muted">Telefon</small>
+                    <input type="text" name="customerAssistantPhone" #customerAssistantPhone="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantTel">
+                    <ul class="text-danger list-unstyled" *ngIf="customerAssistantPhone.dirty|| formSubmitted">
+                        <li  *ngIf="customerAssistantPhone.errors?.required">Wprowadź telefon</li>
+                    </ul>
+                </div>
+
+
+                <div class="form-group">
+                    <small id="catalogThemeDescript" class="text-muted">Motyw</small>
+                    <input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">
+                    <ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">
+                        <li  *ngIf="catalogTheme.errors?.required">wpisz motyw</li>
+                    </ul>
+                </div>
+
+            </p-fieldset>
+
+
+
+
+            <div class="form-group">
+                <small id="add_file" class="text-muted">Wgraj Logo</small>
+                <p-fileUpload name="files"  multiple="multiple"  maxFileSize="5000000"
+                              invalidFileSizeMessageSummary="{0} - plik jest za duży" invalidFileSizeMessageDetail="rozmiar pliku może wynosić maksymalnie {0}"
+                              [showUploadButton]="false" chooseLabel="Wybierz plik" uploadLabel="Wgraj"   cancelLabel="Anuluj wgrywanie plików"   >
+
+
+                    <ng-template pTemplate="content">
+
+
+                    </ng-template>
+
+                </p-fileUpload>
+            </div>
+
+
+            <div class="form-group">
+                <small id="catalogLastPageDescDescript" class="text-muted">Informacje na ostatnią stronę</small>
+                <input type="text" name="catalogLastPageDesc" #catalogLastPageDesc="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.catalogAdditionalDesc">
+                <ul class="text-danger list-unstyled" *ngIf="catalogLastPageDesc.dirty|| formSubmitted">
+                    <li  *ngIf="catalogLastPageDesc.errors?.required">Wprowadź informacje dodatkowe na ostatnią stronę</li>
+                </ul>
+            </div>
+
+        </form>
+        <button class="btn bg-primary " (click)="submitForm(form)" form="CatalogForm" >Generuj katalog</button>
+        <button class="btn bg-primary "  >Anuluj </button>
+        <!--<div *ngIf="orderItems.length<1 && formSubmitted" class="alert alert-danger" role="alert">-->
+            <!--<strong>Błąd. Zamówienie nie może być puste</strong>-->
+        <!--</div>-->
+    </p-panel>
+
+</div>

@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="catalogArchive">
+            <h2><span>Catalog Archive</span> {{catalogArchive.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Catalog Name</span></dt>
+                <dd>
+                    <span>{{catalogArchive.catalogName}}</span>
+                </dd>
+                <dt><span>For Who</span></dt>
+                <dd>
+                    <span>{{catalogArchive.forWho}}</span>
+                </dd>
+                <dt><span>Customer Assistant Name</span></dt>
+                <dd>
+                    <span>{{catalogArchive.customerAssistantName}}</span>
+                </dd>
+                <dt><span>Customer Assistant Email</span></dt>
+                <dd>
+                    <span>{{catalogArchive.customerAssistantEmail}}</span>
+                </dd>
+                <dt><span>Customer Assistant Tel</span></dt>
+                <dd>
+                    <span>{{catalogArchive.customerAssistantTel}}</span>
+                </dd>
+                <dt><span>Catalog Additional Desc</span></dt>
+                <dd>
+                    <span>{{catalogArchive.catalogAdditionalDesc}}</span>
+                </dd>
+                <dt><span>Catalog Theme</span></dt>
+                <dd>
+                    <span>{{catalogArchive.catalogTheme}}</span>
+                </dd>
+                <dt><span>Logo</span></dt>
+                <dd>
+                    <div *ngIf="catalogArchive.logo">
+                        <a (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a>
+                        {{catalogArchive.logoContentType}}, {{byteSize(catalogArchive.logo)}}
+                    </div>
+                </dd>
+                <dt><span>Baskets</span></dt>
+                <dd>
+                    <span *ngFor="let baskets of catalogArchive.baskets; let last = last">
+                        <a [routerLink]="['/basket', baskets?.id, 'view' ]">{{baskets.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/catalog-archive', catalogArchive.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

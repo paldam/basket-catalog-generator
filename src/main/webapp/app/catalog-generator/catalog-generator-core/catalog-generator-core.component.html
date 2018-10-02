@@ -1,0 +1,11 @@
+<p-tabView>
+    <p-tabPanel header="Krok 1 - wybór koszy" leftIcon="pi pi-calendar" >
+        <jhi-basket></jhi-basket>
+    </p-tabPanel>
+    <p-tabPanel header="Krok 2 - edycja koszy" leftIcon="pi pi-inbox" [disabled]="isTabDisabled()">
+        <jhi-basket-customize></jhi-basket-customize>
+    </p-tabPanel>
+    <p-tabPanel header="Krok 3 - dodatkowe informacje" leftIcon="pi pi-user" rightIcon="pi pi-star" >
+        <jhi-catalog-generator-details></jhi-catalog-generator-details>
+    </p-tabPanel>
+</p-tabView>
