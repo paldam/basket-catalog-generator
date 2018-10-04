@@ -3,6 +3,7 @@ package com.damian.web.rest;
 //import com.damian.service.util.CatalogGenerator;
 import com.damian.domain.CatalogArchive;
 import com.damian.repository.CatalogArchiveRepository;
+import com.damian.service.CatalogGeneratorService;
 import com.damian.service.util.CatalogGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,11 @@ public class CatalogGeneratorResource {
 
     private final Logger log = LoggerFactory.getLogger(CatalogGeneratorResource.class);
     private CatalogArchiveRepository catalogArchiveRepository;
+    private CatalogGeneratorService catalogGeneratorService;
 
-    public CatalogGeneratorResource(CatalogArchiveRepository catalogArchiveRepository) {
+    public CatalogGeneratorResource(CatalogArchiveRepository catalogArchiveRepository, CatalogGeneratorService catalogGeneratorService) {
         this.catalogArchiveRepository = catalogArchiveRepository;
+        this.catalogGeneratorService = catalogGeneratorService;
     }
 
     @CrossOrigin
@@ -31,7 +34,7 @@ public class CatalogGeneratorResource {
     public ResponseEntity<InputStreamResource> generateCatalog(@RequestBody CatalogArchive catalog) throws IOException {
 
 
-        CatalogArchive result = catalogArchiveRepository.save(catalog);
+        catalogGeneratorService.generateCatalog(catalog);
 
         CatalogGenerator catalogGenerator = new CatalogGenerator();
         ByteArrayInputStream bis = catalogGenerator.generateCatalog(catalog);
@@ -45,6 +48,9 @@ public class CatalogGeneratorResource {
             .contentType(MediaType.APPLICATION_PDF)
             .body(new InputStreamResource(bis));
     }
+
+
+
 
 
 

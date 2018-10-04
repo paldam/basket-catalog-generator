@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
 
 import com.damian.domain.enumeration.Theme;
 
@@ -26,6 +24,10 @@ public class CatalogArchive implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Basic
+
+    @Column(name = "date_of_generate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date dateOfGenerate;
 
     @NotNull
     @Column(name = "catalog_name", nullable = false)
@@ -60,11 +62,14 @@ public class CatalogArchive implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "catalog_archive_baskets",
-               joinColumns = @JoinColumn(name = "catalog_archives_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "baskets_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "catalog_archives_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "baskets_id", referencedColumnName = "id"))
     private Set<Basket> baskets = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @ManyToOne()
+    private User user;
+
+
     public Long getId() {
         return id;
     }
@@ -73,13 +78,16 @@ public class CatalogArchive implements Serializable {
         this.id = id;
     }
 
-    public String getCatalogName() {
-        return catalogName;
+    public Date getDateOfGenerate() {
+        return dateOfGenerate;
     }
 
-    public CatalogArchive catalogName(String catalogName) {
-        this.catalogName = catalogName;
-        return this;
+    public void setDateOfGenerate(Date dateOfGenerate) {
+        this.dateOfGenerate = dateOfGenerate;
+    }
+
+    public String getCatalogName() {
+        return catalogName;
     }
 
     public void setCatalogName(String catalogName) {
@@ -90,22 +98,12 @@ public class CatalogArchive implements Serializable {
         return forWho;
     }
 
-    public CatalogArchive forWho(String forWho) {
-        this.forWho = forWho;
-        return this;
-    }
-
     public void setForWho(String forWho) {
         this.forWho = forWho;
     }
 
     public String getCustomerAssistantName() {
         return customerAssistantName;
-    }
-
-    public CatalogArchive customerAssistantName(String customerAssistantName) {
-        this.customerAssistantName = customerAssistantName;
-        return this;
     }
 
     public void setCustomerAssistantName(String customerAssistantName) {
@@ -116,22 +114,12 @@ public class CatalogArchive implements Serializable {
         return customerAssistantEmail;
     }
 
-    public CatalogArchive customerAssistantEmail(String customerAssistantEmail) {
-        this.customerAssistantEmail = customerAssistantEmail;
-        return this;
-    }
-
     public void setCustomerAssistantEmail(String customerAssistantEmail) {
         this.customerAssistantEmail = customerAssistantEmail;
     }
 
     public String getCustomerAssistantTel() {
         return customerAssistantTel;
-    }
-
-    public CatalogArchive customerAssistantTel(String customerAssistantTel) {
-        this.customerAssistantTel = customerAssistantTel;
-        return this;
     }
 
     public void setCustomerAssistantTel(String customerAssistantTel) {
@@ -142,22 +130,12 @@ public class CatalogArchive implements Serializable {
         return catalogAdditionalDesc;
     }
 
-    public CatalogArchive catalogAdditionalDesc(String catalogAdditionalDesc) {
-        this.catalogAdditionalDesc = catalogAdditionalDesc;
-        return this;
-    }
-
     public void setCatalogAdditionalDesc(String catalogAdditionalDesc) {
         this.catalogAdditionalDesc = catalogAdditionalDesc;
     }
 
     public Theme getCatalogTheme() {
         return catalogTheme;
-    }
-
-    public CatalogArchive catalogTheme(Theme catalogTheme) {
-        this.catalogTheme = catalogTheme;
-        return this;
     }
 
     public void setCatalogTheme(Theme catalogTheme) {
@@ -168,22 +146,12 @@ public class CatalogArchive implements Serializable {
         return logo;
     }
 
-    public CatalogArchive logo(byte[] logo) {
-        this.logo = logo;
-        return this;
-    }
-
     public void setLogo(byte[] logo) {
         this.logo = logo;
     }
 
     public String getLogoContentType() {
         return logoContentType;
-    }
-
-    public CatalogArchive logoContentType(String logoContentType) {
-        this.logoContentType = logoContentType;
-        return this;
     }
 
     public void setLogoContentType(String logoContentType) {
@@ -194,61 +162,81 @@ public class CatalogArchive implements Serializable {
         return baskets;
     }
 
-    public CatalogArchive baskets(Set<Basket> baskets) {
-        this.baskets = baskets;
-        return this;
-    }
-
-    public CatalogArchive addBaskets(Basket basket) {
-        this.baskets.add(basket);
-        basket.getCatalogArchives().add(this);
-        return this;
-    }
-
-    public CatalogArchive removeBaskets(Basket basket) {
-        this.baskets.remove(basket);
-        basket.getCatalogArchives().remove(this);
-        return this;
-    }
-
     public void setBaskets(Set<Basket> baskets) {
         this.baskets = baskets;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CatalogArchive that = (CatalogArchive) o;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getDateOfGenerate() != null ? !getDateOfGenerate().equals(that.getDateOfGenerate()) : that.getDateOfGenerate() != null)
             return false;
-        }
-        CatalogArchive catalogArchive = (CatalogArchive) o;
-        if (catalogArchive.getId() == null || getId() == null) {
+        if (getCatalogName() != null ? !getCatalogName().equals(that.getCatalogName()) : that.getCatalogName() != null)
             return false;
-        }
-        return Objects.equals(getId(), catalogArchive.getId());
+        if (getForWho() != null ? !getForWho().equals(that.getForWho()) : that.getForWho() != null) return false;
+        if (getCustomerAssistantName() != null ? !getCustomerAssistantName().equals(that.getCustomerAssistantName()) : that.getCustomerAssistantName() != null)
+            return false;
+        if (getCustomerAssistantEmail() != null ? !getCustomerAssistantEmail().equals(that.getCustomerAssistantEmail()) : that.getCustomerAssistantEmail() != null)
+            return false;
+        if (getCustomerAssistantTel() != null ? !getCustomerAssistantTel().equals(that.getCustomerAssistantTel()) : that.getCustomerAssistantTel() != null)
+            return false;
+        if (getCatalogAdditionalDesc() != null ? !getCatalogAdditionalDesc().equals(that.getCatalogAdditionalDesc()) : that.getCatalogAdditionalDesc() != null)
+            return false;
+        if (getCatalogTheme() != that.getCatalogTheme()) return false;
+        if (!Arrays.equals(getLogo(), that.getLogo())) return false;
+        if (getLogoContentType() != null ? !getLogoContentType().equals(that.getLogoContentType()) : that.getLogoContentType() != null)
+            return false;
+        if (getBaskets() != null ? !getBaskets().equals(that.getBaskets()) : that.getBaskets() != null) return false;
+        return getUser() != null ? getUser().equals(that.getUser()) : that.getUser() == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getDateOfGenerate() != null ? getDateOfGenerate().hashCode() : 0);
+        result = 31 * result + (getCatalogName() != null ? getCatalogName().hashCode() : 0);
+        result = 31 * result + (getForWho() != null ? getForWho().hashCode() : 0);
+        result = 31 * result + (getCustomerAssistantName() != null ? getCustomerAssistantName().hashCode() : 0);
+        result = 31 * result + (getCustomerAssistantEmail() != null ? getCustomerAssistantEmail().hashCode() : 0);
+        result = 31 * result + (getCustomerAssistantTel() != null ? getCustomerAssistantTel().hashCode() : 0);
+        result = 31 * result + (getCatalogAdditionalDesc() != null ? getCatalogAdditionalDesc().hashCode() : 0);
+        result = 31 * result + (getCatalogTheme() != null ? getCatalogTheme().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getLogo());
+        result = 31 * result + (getLogoContentType() != null ? getLogoContentType().hashCode() : 0);
+        result = 31 * result + (getBaskets() != null ? getBaskets().hashCode() : 0);
+        result = 31 * result + (getUser() != null ? getUser().hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "CatalogArchive{" +
-            "id=" + getId() +
-            ", catalogName='" + getCatalogName() + "'" +
-            ", forWho='" + getForWho() + "'" +
-            ", customerAssistantName='" + getCustomerAssistantName() + "'" +
-            ", customerAssistantEmail='" + getCustomerAssistantEmail() + "'" +
-            ", customerAssistantTel='" + getCustomerAssistantTel() + "'" +
-            ", catalogAdditionalDesc='" + getCatalogAdditionalDesc() + "'" +
-            ", catalogTheme='" + getCatalogTheme() + "'" +
-            ", logo='" + getLogo() + "'" +
-            ", logoContentType='" + getLogoContentType() + "'" +
-            "}";
+            "id=" + id +
+            ", dateOfGenerate=" + dateOfGenerate +
+            ", catalogName='" + catalogName + '\'' +
+            ", forWho='" + forWho + '\'' +
+            ", customerAssistantName='" + customerAssistantName + '\'' +
+            ", customerAssistantEmail='" + customerAssistantEmail + '\'' +
+            ", customerAssistantTel='" + customerAssistantTel + '\'' +
+            ", catalogAdditionalDesc='" + catalogAdditionalDesc + '\'' +
+            ", catalogTheme=" + catalogTheme +
+            ", logo=" + Arrays.toString(logo) +
+            ", logoContentType='" + logoContentType + '\'' +
+            ", baskets=" + baskets +
+            ", user=" + user +
+            '}';
     }
 }

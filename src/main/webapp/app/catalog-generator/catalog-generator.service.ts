@@ -29,8 +29,8 @@ export class CatalogGeneratorService {
     }
 
     sendCataloqDataToGeneratePdF(catalog: CatalogArchive): any {
-        return this.http2.post(SERVER_API_URL + 'api/generatecatalog', catalog, { responseType: ResponseContentType.Blob }).map(res => {
-            return new Blob([res.blob()], { type: 'application/pdf' });
+        return this.http.post(SERVER_API_URL + 'api/generatecatalog', catalog, { observe: 'body', responseType: 'blob' }).map(res => {
+            return new Blob([res], { type: 'application/pdf' });
         });
     }
 }
