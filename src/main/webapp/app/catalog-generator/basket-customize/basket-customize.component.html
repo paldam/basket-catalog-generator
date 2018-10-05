@@ -1,10 +1,10 @@
 <p-table [value]="selectedBasketService.selectedBasket" >
       <ng-template pTemplate="header">
           <tr>
-              <th>Strona</th>
-              <th>Strona</th>
+              <th></th>
+              <th>Numer strony</th>
               <th>Nazwa</th>
-              <th>cena kosza</th>
+              <th>Cena kosza</th>
               <th>Zdjęcie kosza</th>
           </tr>
       </ng-template>
@@ -29,7 +29,7 @@
               </td>
 
               <td>
-                  <img src="http://145.239.92.96/dd/kosz.png" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event)">
+                  <img src="http://generatorzestawow.pl/basket-image/{{row.basketId}}.jpg" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event);selectImageToPreview(row.basketId)">
               </td>
           </tr>
 
@@ -40,5 +40,5 @@
 
 
 <p-overlayPanel #op1>
-    <img src="http://145.239.92.96/dd/kosz.png" alt="Galleria 1" height="300" width="300" />
+    <img src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="300" width="300" />
 </p-overlayPanel>

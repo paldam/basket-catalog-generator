@@ -237,7 +237,13 @@ public class CatalogGenerator {
                 catalogNameContentParagraph.setWidth(1366);
 
 
-                Image BasketImage = new Image(ImageDataFactory.create(BASKET_EXAMPLE));
+                StringBuilder sb = new StringBuilder();
+                sb.append("basket-image/");
+                sb.append(basket.getOrginBasketId().toString());
+                sb.append(".jpg");
+                String BASKET_IMG = sb.toString();
+
+                Image BasketImage = new Image(ImageDataFactory.create(BASKET_IMG));
                 BasketImage.setFixedPosition(43, 35);
                 BasketImage.setHeight(597);
                 BasketImage.setWidth(850);

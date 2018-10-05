@@ -1,7 +1,7 @@
-
+<p-panel header="Wybierz kosze do katalogu">
     <p-dataTable [value]="baskets" [rows]="10" [paginator]="true"  #dt
      loadingIcon="fa-circle-o-notch" expandableRows="true" (onRowDblclick)="addBasket($event.data)">
-    <p-column expander="true" header="Zawartość" styleClass="col-icon " [style]="{'width':'70px'}"></p-column>
+    <p-column expander="true" header="Zawartośćsdsds" styleClass="col-icon " [style]="{'width':'70px'}"></p-column>
 
     <p-column  header="lp."   [style]="{'width':'70px'}">
         <ng-template let-i="rowIndex" pTemplate="rowexpansion">
@@ -11,7 +11,7 @@
 
 
     <p-column field="basketName" header="Nazwa kosza" [sortable]="true"></p-column>
-    <p-column field="basketTotalPrice"  header="Cena kosza "  [sortable]="true" >
+    <p-column field="basketTotalPrice"  header="Cena kosza"  [sortable]="true" >
         <ng-template let-row="rowData" pTemplate="body">
             {{row.basketTotalPrice/100| number : '1.2-2'}} zł.
         </ng-template>
@@ -21,7 +21,7 @@
         <ng-template let-basket="rowData" pTemplate="body">
 
 
-            <img src="http://145.239.92.96/dd/kosz.png" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event)">
+            <img src="http://generatorzestawow.pl/basket-image/{{basket.basketId}}.jpg" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event) ;selectImageToPreview(basket.basketId)">
         </ng-template>
     </p-column>
 
@@ -57,5 +57,6 @@
     <jhi-selected-baskets>dfdfdf </jhi-selected-baskets>
 
     <p-overlayPanel #op1>
-        <img src="http://145.239.92.96/dd/kosz.png" alt="Galleria 1" height="300" width="300" />
+        <img src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="300" width="300" />
     </p-overlayPanel>
+</p-panel>
