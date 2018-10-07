@@ -30,10 +30,10 @@
 
 
             <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+                <a class="nav-link" routerLink="cataloglist" (click)="collapseNavbar()">
                     <span>
                         <fa-icon [icon]="'book-open'"></fa-icon>
-                        <span>Katalogi</span>
+                        <span>Wygenerowane Katalogi</span>
                     </span>
                 </a>
             </li>

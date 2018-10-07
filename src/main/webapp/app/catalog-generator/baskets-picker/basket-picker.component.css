@@ -1,3 +1,15 @@
-.img_col {
-    width: 30px;
+.basket_card {
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.basket_card_in {
+    margin: auto;
+}
+
+body .ui-card {
+    margin-bottom: 20px;
+    margin-right: 20px;
+    text-align: left;
 }

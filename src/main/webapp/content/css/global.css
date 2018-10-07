@@ -17,7 +17,7 @@ body {
 }
 
 .ui-widget {
-    font-size: 12px !important;
+    font-size: 15px !important;
     font-family: 'Oswald', sans-serif !important;
 }
 
@@ -249,6 +249,10 @@ body .ui-datatable .ui-datatable-data tr.ui-datatable-even:hover {
 body .ui-datatable .ui-datatable-data tr.ui-datatable-odd:hover {
     cursor: pointer;
     background-color: #d6f2c2;
+}
+
+.ui-tabview .ui-tabview-title {
+    font-size: 16px;
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

@@ -1,4 +1,4 @@
-<p-table [value]="selectedBasketService.selectedBasket" >
+<p-table [value]="selectedBasketService.selectedBasket"  [(contextMenuSelection)]="selectedCar" [contextMenu]="cm">
       <ng-template pTemplate="header">
           <tr>
               <th></th>
@@ -42,3 +42,5 @@
 <p-overlayPanel #op1>
     <img src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="300" width="300" />
 </p-overlayPanel>
+
+<p-contextMenu #cm  [model]="items"> </p-contextMenu>

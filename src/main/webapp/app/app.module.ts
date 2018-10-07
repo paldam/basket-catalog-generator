@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { CatalogGeneratorModule } from './catalog-generator/catalog-generator.module';
 import { BasketExtSharedModule } from './shared/shared.module';
+import { GeneratedCatalogModule } from './generated-catalog/generated-catalog.module';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { BasketExtSharedModule } from './shared/shared.module';
         BasketExtAccountModule,
         BasketExtEntityModule,
         CatalogGeneratorModule,
-        BasketExtEntityModule
+        BasketExtEntityModule,
+        GeneratedCatalogModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

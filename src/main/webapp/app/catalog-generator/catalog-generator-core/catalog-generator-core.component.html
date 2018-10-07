@@ -1,11 +1,13 @@
-<p-tabView>
-    <p-tabPanel header="Krok 1 - wybór koszy" leftIcon="pi pi-calendar" >
-        <jhi-basket></jhi-basket>
-    </p-tabPanel>
-    <p-tabPanel header="Krok 2 - edycja koszy" leftIcon="pi pi-inbox" [disabled]="isTabDisabled()">
-        <jhi-basket-customize></jhi-basket-customize>
-    </p-tabPanel>
-    <p-tabPanel header="Krok 3 - dodatkowe informacje" leftIcon="pi pi-user" rightIcon="pi pi-star" >
-        <jhi-catalog-generator-details></jhi-catalog-generator-details>
-    </p-tabPanel>
-</p-tabView>
+<div class="tabStep1">
+    <p-tabView>
+        <p-tabPanel header="krok 1 - wybór koszy" leftIcon="fa fa-table fa-2x  " >
+            <jhi-basket></jhi-basket>
+        </p-tabPanel>
+        <p-tabPanel header="krok 2 - edycja koszy" leftIcon="fa fa-tasks fa-2x" [disabled]="isTabDisabled()">
+            <jhi-basket-customize></jhi-basket-customize>
+        </p-tabPanel>
+        <p-tabPanel header="krok 3 - dodatkowe informacje" leftIcon="fa fa-chevron-down fa-2x" [disabled]="isTabDisabled()" >
+            <jhi-catalog-generator-details></jhi-catalog-generator-details>
+        </p-tabPanel>
+    </p-tabView>
+</div>
