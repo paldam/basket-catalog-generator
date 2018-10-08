@@ -62,11 +62,40 @@
         <!--</p-overlayPanel>-->
     <!--</p-panel>-->
 <!--</div>-->
+ <div class="firstStepcontent">
 
-<div class="container-fluid">
-    <div class="row basket_card">
-            <p-card *ngFor="let basket of baskets" class="basket_card_in" title="{{basket.basketName}}" [style]="{width: '350px'}">
-                <div>hfghgfhghf</div>
-            </p-card>
+     <div class="sorting_section">
+
+
+             <div class="price-sort-div">
+                <h1 >Cena od: {{rangeValues[0]/100 + ' zł do ' + rangeValues[1]/100+ ' zł'}} </h1>
+                <p-slider *ngIf="filtersLoaded | async" [(ngModel)]="rangeValues" [style]="{'width':'14em'}"  [range]="true" [min]="rangeConst[0]" [max]="rangeConst[1]"   (onSlideEnd)="filterByPriceRange(rangeValues[0],rangeValues[1])"></p-slider>
+             </div>
+
+            <div class="sortdiv">
+                <span> Sortuj: </span>
+                <button type="button" class="btn btn-secondary" (click)="sortBasketASC()">Rosnąco</button>
+                <button type="button" class="btn btn-secondary" (click)="sortBasketDESC()">Malejąco</button>
+            </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row basket_card">
+
+
+                <p-card *ngFor="let basket of basketfiltered"  class="basket_card_in fadeIn" title="{{basket.basketName}}" [style]="{width: '260px',height:'390px'}">
+
+                    <img  class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
+                        <img src="http://generatorzestawow.pl/basket-image/{{basket.basketId}}.jpg" class="img-fluid" height="300" width="300" alt="" (click)="op1.toggle($event) ;selectImageToPreview(basket.basketId)">
+
+
+                    <div class="basket_price">{{basket.basketTotalPrice/100}} zł</div>
+                    <button *ngIf="!idExistsOnSelectedBasket(basket.basketId)"type="button" class="addBasketButton fadeIn" [disabled]='idExistsOnSelectedBasket(basket.basketId)'  (click)="addBasket(basket)" >Dodaj</button>
+                    <button *ngIf="idExistsOnSelectedBasket(basket.basketId)" type="button" class="del_button addBasketButton fadeIn" [disabled]='!idExistsOnSelectedBasket(basket.basketId)'  (click)="removeFromSelectedBasketList(basket.basketId)" >Usuń</button>
+                </p-card>
         </div>
+    </div>
+    <p-overlayPanel #op1>
+    <img  src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="700" width="700" />
+    </p-overlayPanel>
 </div>

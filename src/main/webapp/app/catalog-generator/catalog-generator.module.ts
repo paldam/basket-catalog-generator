@@ -18,10 +18,13 @@ import { HttpModule } from '@angular/http';
 import { PanelModule } from 'primeng/panel';
 import { MenuItem } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { BasketExtSharedLibsModule } from '../shared/shared-libs.module';
+import { BasketResolve } from './basket-reolve';
 
 @NgModule({
     imports: [
         BasketExtSharedModule,
+        BasketExtSharedLibsModule,
         RouterModule.forChild(BASKET_ROUTE),
         HttpModule,
         TabViewModule,
@@ -45,6 +48,6 @@ import { CardModule } from 'primeng/card';
         CatalogGeneratorDetailsComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [CatalogGeneratorService]
+    providers: [CatalogGeneratorService, BasketResolve]
 })
 export class CatalogGeneratorModule {}

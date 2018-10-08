@@ -14,7 +14,7 @@ export interface IBasket {
 export class Basket implements IBasket {
     constructor(
         public basketName?: string,
-        public basketPrice?: number,
+        public basketTotalPrice?: number,
         public orginBasketId?: number,
         public products?: Product[],
         public catalogArchives?: ICatalogArchive[],

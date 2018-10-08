@@ -1,7 +1,8 @@
 .basket_card {
-    padding: 10px;
     margin-bottom: 10px;
     text-align: center;
+    margin-right: -30px;
+    margin-left: -30px;
 }
 
 .basket_card_in {
@@ -9,7 +10,88 @@
 }
 
 body .ui-card {
-    margin-bottom: 20px;
-    margin-right: 20px;
     text-align: left;
+    position: relative;
+    margin: 20px;
+}
+
+.addBasketButton {
+    position: absolute;
+    left: 180px;
+    bottom: 20px;
+    width: 60px;
+    height: 30px;
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.added-basket-card {
+    border-style: solid;
+    border-color: yellowgreen;
+    border-width: 2px;
+}
+
+da {
+    border-style: solid;
+    border-color: yellowgreen;
+    border-width: 2px;
+}
+h1 {
+    font-size: 19px;
+}
+.sortdiv {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.firstStepcontent {
+    position: relative;
+}
+.price-sort-div {
+    position: absolute;
+    right: 300px;
+    top: 7px;
+}
+.sorting_section {
+    height: 50px;
+    width: auto;
+}
+
+.basket_price {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    font-size: 20px;
+}
+
+.del_button {
+    color: lightcoral;
+}
+.alcohol_img {
+    position: absolute;
+    right: 10px;
+    top: 13px;
 }

@@ -13,7 +13,7 @@ export class CatalogGeneratorCoreComponent implements OnInit {
     ngOnInit() {}
 
     isTabDisabled(): boolean {
-        if (this.selectedBasketService.numberOfBasket > 0) {
+        if (this.selectedBasketService.selectedBasket.length > 0) {
             return false;
         } else {
             return true;
