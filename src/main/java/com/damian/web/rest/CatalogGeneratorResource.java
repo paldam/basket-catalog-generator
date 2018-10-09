@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -51,7 +52,29 @@ public class CatalogGeneratorResource {
 
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/regeneratecatalog/{catalogId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> reGenerateCatalog(@PathVariable Long catalogId) throws IOException {
 
+        log.error("WWWWWWWWWWWWWWWWWWWWWWW" + catalogId);
+        Optional<CatalogArchive> ca = catalogArchiveRepository.findOneWithEagerRelationships(catalogId);
+
+         ca.get();
+
+        CatalogGenerator catalogGenerator = new CatalogGenerator();
+        ByteArrayInputStream bis = catalogGenerator.generateCatalog(ca.get());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=catalog222.pdf");
+        new InputStreamResource(bis)  ;
+        return ResponseEntity
+            .ok()
+            .headers(headers)
+            .contentType(MediaType.APPLICATION_PDF)
+            .body(new InputStreamResource(bis));
+
+
+    }
 
 
 

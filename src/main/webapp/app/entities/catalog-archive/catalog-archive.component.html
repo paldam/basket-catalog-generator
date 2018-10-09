@@ -1,12 +1,7 @@
 <div>
     <h2 id="page-heading">
-        <span>Catalog Archives</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-catalog-archive" [routerLink]="['/catalog-archive/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create new Catalog Archive
-            </span>
-        </button>
+        <span>Archiwum wygenerowanych katalogów</span>
+
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -14,51 +9,30 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>ID</span></th>
-            <th><span>Catalog Name</span></th>
-            <th><span>For Who</span></th>
-            <th><span>Customer Assistant Name</span></th>
-            <th><span>Customer Assistant Email</span></th>
-            <th><span>Customer Assistant Tel</span></th>
-            <th><span>Catalog Additional Desc</span></th>
-            <th><span>Catalog Theme</span></th>
-            <th><span>Logo</span></th>
-            <th><span>Baskets</span></th>
+            <th><span>Data</span></th>
+            <th><span>Nazwa Katalogu</span></th>
+            <th><span>Dla</span></th>
+            <th><span>Przedstawiciel</span></th>
+            <th><span>Dodatkowe informacje</span></th>
+            <th><span>Motyw</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let catalogArchive of catalogArchives ;trackBy: trackId">
-                <td><a [routerLink]="['/catalog-archive', catalogArchive.id, 'view' ]">{{catalogArchive.id}}</a></td>
+                <td>{{catalogArchive.dateOfGenerate| date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                 <td>{{catalogArchive.catalogName}}</td>
                 <td>{{catalogArchive.forWho}}</td>
                 <td>{{catalogArchive.customerAssistantName}}</td>
-                <td>{{catalogArchive.customerAssistantEmail}}</td>
-                <td>{{catalogArchive.customerAssistantTel}}</td>
+
                 <td>{{catalogArchive.catalogAdditionalDesc}}</td>
                 <td>{{catalogArchive.catalogTheme}}</td>
-                <td>
-                    <a *ngIf="catalogArchive.logo" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a>
-                    <span *ngIf="catalogArchive.logo">{{catalogArchive.logoContentType}}, {{byteSize(catalogArchive.logo)}}</span>
-                </td>
-                <td>
-                    <span *ngFor="let baskets of catalogArchive.baskets; let last = last">
-                            <a class="form-control-static" [routerLink]="['../basket', baskets?.id, 'view' ]">{{baskets.id}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
+
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/catalog-archive', catalogArchive.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                        <button (click) = "genCatalog(catalogArchive.id)">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/catalog-archive', catalogArchive.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Wygeneruj</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'catalog-archive/'+ catalogArchive.id + '/delete'} }]"
@@ -66,7 +40,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Usuń</span>
                         </button>
                     </div>
                 </td>

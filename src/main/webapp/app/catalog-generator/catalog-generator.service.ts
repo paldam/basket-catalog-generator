@@ -33,4 +33,10 @@ export class CatalogGeneratorService {
             return new Blob([res], { type: 'application/pdf' });
         });
     }
+
+    reGenerteCatalog(catalogId: number) {
+        return this.http.get(SERVER_API_URL + `api/regeneratecatalog/${catalogId}`, { observe: 'body', responseType: 'blob' }).map(res => {
+            return new Blob([res], { type: 'application/pdf' });
+        });
+    }
 }

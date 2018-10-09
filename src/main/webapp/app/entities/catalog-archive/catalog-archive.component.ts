@@ -3,9 +3,10 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { ICatalogArchive } from 'app/shared/model/catalog-archive.model';
+import { CatalogArchive, ICatalogArchive } from 'app/shared/model/catalog-archive.model';
 import { Principal } from 'app/core';
 import { CatalogArchiveService } from './catalog-archive.service';
+import { CatalogGeneratorService } from '../../catalog-generator/catalog-generator.service';
 
 @Component({
     selector: 'jhi-catalog-archive',
@@ -21,7 +22,8 @@ export class CatalogArchiveComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private catalogGeneratorService: CatalogGeneratorService
     ) {}
 
     loadAll() {
@@ -39,6 +41,7 @@ export class CatalogArchiveComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInCatalogArchives();
+        console.log('dfsfdsf' + this.catalogArchives);
     }
 
     ngOnDestroy() {
@@ -63,5 +66,12 @@ export class CatalogArchiveComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    genCatalog(id: number) {
+        this.catalogGeneratorService.reGenerteCatalog(id).subscribe(res => {
+            var fileURL = URL.createObjectURL(res);
+            window.open(fileURL);
+        });
     }
 }

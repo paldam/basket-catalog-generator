@@ -59,7 +59,7 @@ public class CatalogArchive implements Serializable {
     @Column(name = "logo_content_type")
     private String logoContentType;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "catalog_archive_baskets",
         joinColumns = @JoinColumn(name = "catalog_archives_id", referencedColumnName = "id"),
@@ -68,6 +68,10 @@ public class CatalogArchive implements Serializable {
 
     @ManyToOne()
     private User user;
+
+    public CatalogArchive() {
+    }
+
 
 
     public Long getId() {

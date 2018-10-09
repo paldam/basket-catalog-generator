@@ -57,9 +57,16 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="user_id" type="bigint"/>
+
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="date_of_generate" type="TIMESTAMP"/>
+
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="catalog_archive" constraintName="FKm5u8q5kfkbm7l0ro8vov0awnk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+
         <createTable tableName="catalog_archive_baskets">
             <column name="baskets_id" type="bigint">
                 <constraints nullable="false"/>
@@ -70,7 +77,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="catalog_archives_id, baskets_id" tableName="catalog_archive_baskets"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

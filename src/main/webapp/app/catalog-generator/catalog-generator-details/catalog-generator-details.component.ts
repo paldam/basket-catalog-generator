@@ -7,6 +7,7 @@ import { CatalogArchive, Theme } from '../../shared/model/catalog-archive.model'
 import { Basket } from '../../shared/model/basket.model';
 import { Product } from '../../shared/model/product.model';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-catalog-generator-details',
@@ -24,7 +25,8 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         private selectedBasketService: SelectedBasketService,
         private catalogGeneratorService: CatalogGeneratorService,
         private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -58,6 +60,8 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
             this.catalogArchive.baskets = this.baskets;
 
             this.genCatalog(this.catalogArchive);
+            this.selectedBasketService.selectedBasket = [];
+            this.router.navigateByUrl('/catalog-archive');
         }
 
         this.formSubmitted = false;
@@ -67,8 +71,6 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         this.catalogGeneratorService.sendCataloqDataToGeneratePdF(catalog).subscribe(res => {
             var fileURL = URL.createObjectURL(res);
             window.open(fileURL);
-
-            this.loading = 'załadowano';
         });
     }
 
