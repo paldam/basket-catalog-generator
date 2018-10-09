@@ -104,8 +104,6 @@ export class BasketPickerComponent implements OnInit {
     }
 
     idExistsOnSelectedBasket(basketId: number): boolean {
-        console.log('asdasd');
-
         return this.selectedBasketService.selectedBasket.some(vendor => vendor['basketId'] == basketId);
     }
 

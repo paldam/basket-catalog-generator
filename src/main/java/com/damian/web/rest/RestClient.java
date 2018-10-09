@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RestClient {
 
-    private String serverURL = "http://51.68.153.88:8080/extbaskets";
+    private String serverURL = "http://51.68.153.88:8080/basketsextlist";
     //private String serverURL = "http://localhost:8080/extbaskets";
     private RestTemplate rest;
     private HttpHeaders headers;
@@ -28,6 +28,9 @@ public class RestClient {
     public String get() {
         HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
         ResponseEntity<String> responseEntity = rest.exchange(serverURL, HttpMethod.GET, requestEntity, String.class);
+
+
+
         this.setStatus(responseEntity.getStatusCode());
         return responseEntity.getBody();
     }

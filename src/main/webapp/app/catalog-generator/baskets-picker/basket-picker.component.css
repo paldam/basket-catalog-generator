@@ -26,8 +26,8 @@ body .ui-card {
 .fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
@@ -94,4 +94,10 @@ h1 {
     position: absolute;
     right: 10px;
     top: 13px;
+}
+
+.ui-overlaypanel {
+    position: absolute;
+    top: 100px !important;
+    margin: 0 auto !important;
 }

@@ -1,21 +1,35 @@
-<p-table [value]="selectedBasketService.selectedBasket"  [(contextMenuSelection)]="selectedCar" [contextMenu]="cm">
+
+
+<p-table [value]="selectedBasketService.selectedBasket"   [contextMenu]="menuc">
       <ng-template pTemplate="header">
           <tr>
-              <th></th>
-              <th>Numer strony</th>
-              <th>Nazwa</th>
+              <th class="order_col">Przesuń</th>
+              <th >Numer strony</th>
+              <th >Nazwa</th>
               <th>Cena kosza</th>
               <th>Zdjęcie kosza</th>
+              <th class="action_col">Akcja</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row let-index="rowIndex">
 
           <tr [pReorderableRow]="index">
-              <td>
-                  <i class="fa fa-bars" pReorderableRowHandle></i>
+              <td >
+                  <i class="fa fa-bars fa-2x icon_bar" pReorderableRowHandle></i>
+                  <i class="fa fa-arrow-up fa-2x icon_up" aria-hidden="true" (click)="UpOnList(row.basketId)"></i>
+                  <i class="fa fa-arrow-down fa-2x" aria-hidden="true" (click)="DownOnList(row.basketId)"></i>
               </td>
               <td>{{index+1}}</td>
-              <td>{{row.basketName}}</td>
+              <td pEditableColumn>
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input type="text" [(ngModel)]="row.basketName">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{row.basketName}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
 
               <td pEditableColumn>
                   <p-cellEditor>
@@ -23,14 +37,19 @@
                           <input type="text" [(ngModel)]="row.basketTotalPrice">
                       </ng-template>
                       <ng-template pTemplate="output">
-                          {{row.basketTotalPrice}}
+                          {{row.basketTotalPrice}} zł
                       </ng-template>
                   </p-cellEditor>
               </td>
 
               <td>
-                  <img src="http://generatorzestawow.pl/basket-image/{{row.basketId}}.jpg" class="img-fluid" height="100" width="100" alt="" (click)="op1.toggle($event);selectImageToPreview(row.basketId)">
+                  <img src="http://generatorzestawow.pl/basket-image/{{row.basketId}}.jpg" class="img-fluid" height="80" width="80" alt="" (click)="op1.toggle($event);selectImageToPreview(row.basketId)">
               </td>
+
+              <td>
+                  <i class="fa fa-trash fa-2x edit_icon" aria-hidden="true" title="Usuń zamówienie" (click)="selectedBasketService.removeBasket(row.basketId)"></i>
+              </td>
+
           </tr>
 
 
@@ -43,4 +62,5 @@
     <img src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="300" width="300" />
 </p-overlayPanel>
 
-<p-contextMenu #cm  [model]="items"> </p-contextMenu>
+
+

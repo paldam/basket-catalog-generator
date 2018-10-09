@@ -1,0 +1,13 @@
+.icon_bar {
+    margin-right: 35px;
+}
+.icon_up {
+    margin-right: 10px;
+}
+.order_col {
+    max-width: 30px !important;
+}
+
+.action_col {
+    max-width: 100px;
+}

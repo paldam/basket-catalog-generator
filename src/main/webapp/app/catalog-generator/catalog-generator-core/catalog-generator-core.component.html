@@ -1,12 +1,12 @@
 <div class="tabStep1">
     <p-tabView>
-        <p-tabPanel header="krok 1 - wybór koszy" leftIcon="fa fa-table fa-2x  " >
+        <p-tabPanel header="krok 1 - wybór koszy" leftIcon="fa fa-table fa-2x  "  >
             <jhi-basket></jhi-basket>
         </p-tabPanel>
-        <p-tabPanel header="krok 2 - edycja koszy" leftIcon="fa fa-tasks fa-2x" [disabled]="isTabDisabled()">
+        <p-tabPanel header="krok 2 - edycja koszy" leftIcon="fa fa-tasks fa-2x" [disabled]="isTabDisabled()"  >
             <jhi-basket-customize></jhi-basket-customize>
         </p-tabPanel>
-        <p-tabPanel header="krok 3 - dodatkowe informacje" leftIcon="fa fa-chevron-down fa-2x" [disabled]="isTabDisabled()" >
+        <p-tabPanel header="krok 3 - dodatkowe informacje" leftIcon="fa fa-chevron-down fa-2x" [disabled]="isTabDisabled()"  >
             <jhi-catalog-generator-details></jhi-catalog-generator-details>
         </p-tabPanel>
     </p-tabView>
