@@ -105,13 +105,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/account/reset-password/init").hasAnyAuthority(AuthoritiesConstants.SUPERADMIN)
             .antMatchers("/api/account/reset-password/finish").hasAnyAuthority(AuthoritiesConstants.SUPERADMIN)
-            .antMatchers("/api/generatecatalog").permitAll()
+//            .antMatchers("/api/generatecatalog").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/extbaskets").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/api/generatecatalog").permitAll()
             .antMatchers("/management/info").permitAll()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.SUPERADMIN)
         .and()
             .apply(securityConfigurerAdapter());
 
