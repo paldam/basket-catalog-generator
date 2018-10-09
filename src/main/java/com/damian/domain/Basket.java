@@ -35,7 +35,7 @@ public class Basket implements Serializable {
 
     @NotNull
     @Column(name = "basket_price", precision = 10, scale = 2, nullable = false)
-    private BigDecimal basketPrice;
+    private BigDecimal basketTotalPrice;
 
     @NotNull
     @Column(name = "orgin_basket_id", nullable = false)
@@ -75,18 +75,18 @@ public class Basket implements Serializable {
         this.basketName = basketName;
     }
 
-    public BigDecimal getBasketPrice() {
-        return basketPrice;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public Basket basketPrice(BigDecimal basketPrice) {
-        this.basketPrice = basketPrice;
-        return this;
+    public BigDecimal getBasketTotalPrice() {
+        return basketTotalPrice;
     }
 
-    public void setBasketPrice(BigDecimal basketPrice) {
-        this.basketPrice = basketPrice;
+    public void setBasketTotalPrice(BigDecimal basketTotalPrice) {
+        this.basketTotalPrice = basketTotalPrice;
     }
+
 
     public Integer getOrginBasketId() {
         return orginBasketId;
@@ -175,10 +175,12 @@ public class Basket implements Serializable {
     @Override
     public String toString() {
         return "Basket{" +
-            "id=" + getId() +
-            ", basketName='" + getBasketName() + "'" +
-            ", basketPrice=" + getBasketPrice() +
-            ", orginBasketId=" + getOrginBasketId() +
-            "}";
+            "id=" + id +
+            ", basketName='" + basketName + '\'' +
+            ", basketTotalPrice=" + basketTotalPrice +
+            ", orginBasketId=" + orginBasketId +
+            ", products=" + products +
+            ", catalogArchives=" + catalogArchives +
+            '}';
     }
 }

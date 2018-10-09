@@ -1,6 +1,6 @@
 
 
-<p-table [value]="selectedBasketService.selectedBasket"   [contextMenu]="menuc">
+<p-table [value]="selectedBasketService.selectedBasket" >
       <ng-template pTemplate="header">
           <tr>
               <th class="order_col">Przesuń</th>
@@ -19,7 +19,7 @@
                   <i class="fa fa-arrow-up fa-2x icon_up" aria-hidden="true" (click)="UpOnList(row.basketId)"></i>
                   <i class="fa fa-arrow-down fa-2x" aria-hidden="true" (click)="DownOnList(row.basketId)"></i>
               </td>
-              <td>{{index+1}}</td>
+              <td>strona {{index+1}}</td>
               <td pEditableColumn>
                   <p-cellEditor>
                       <ng-template pTemplate="input">

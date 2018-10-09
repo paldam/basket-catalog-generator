@@ -64,7 +64,7 @@
 
 
             <div class="form-group">
-                <label class="form-control-label" for="field_logo">Wgraj logo</label>
+                <label class="form-control-label" for="field_logo">Wgraj logo (rozmiar szer. 400px  wys 300px format .jpg lub .png)</label>
                 <div>
                     <div *ngIf="catalogArchive.logo" class="form-text text-danger clearfix">
                         <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a><br>
@@ -76,10 +76,14 @@
                     </div>
                     <input type="file" id="file_logo" (change)="setFileData($event, catalogArchive, 'logo', false)"/>
                 </div>
-                <input type="hidden" class="form-control" name="logo" id="field_logo"
-                       [(ngModel)]="catalogArchive.logo" />
-                <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
-                       [(ngModel)]="catalogArchive.logoContentType" />
+                <input type="hidden" class="form-control" name="logo" id="field_logo" #logo="ngModel"
+                       [(ngModel)]="catalogArchive.logo" required />
+                <!--<input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"-->
+                       <!--[(ngModel)]="catalogArchive.logoContentType" />-->
+                <ul class="text-danger list-unstyled" *ngIf="formSubmitted">
+                    <li  *ngIf="logo.errors?.required">To pole nie może być puste</li>
+                </ul>
+
             </div>
 
 

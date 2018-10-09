@@ -16,6 +16,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
@@ -49,8 +50,11 @@ public class CatalogGenerator {
 
         String FIRST_PAGE_IMAGE = "themes/" +theme + "/obraz.jpg";
         String CONTENT_PAGE_TOP_BACKGROUND = "themes/" +theme + "/belka.jpg";
+        String THEME_FONT = "themes/" +theme + "/czcionka.ttf";
+
         String BASKET_EXAMPLE = "themes/fonts/kosz.png" ;
 
+        PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
 
 
 
@@ -89,7 +93,7 @@ public class CatalogGenerator {
 
 
         Text catalogName = new Text(catalog.getCatalogName())
-            .setFont(fontSegopr)
+            .setFont(fontTheme)
             .setFontSize(37)
             .setFontColor(dBordowy)
             .setTextAlignment(TextAlignment.CENTER)
@@ -126,7 +130,7 @@ public class CatalogGenerator {
 
 
         Paragraph p3 = new Paragraph().add(customer)
-            .setFixedPosition(30, 150, 390);
+            .setFixedPosition(30, 180, 390);
         setBorderForAllElement(p3)
             .setHeight(80)
             .setWidth(408)
@@ -224,7 +228,7 @@ public class CatalogGenerator {
 
 
                 Text catalogNameContent = new Text(catalog.getCatalogName())
-                    .setFont(fontSegopr)
+                    .setFont(fontTheme)
                     .setFontSize(49)
                     .setFontColor(Color.WHITE)
                     .setTextAlignment(TextAlignment.CENTER)
@@ -250,7 +254,7 @@ public class CatalogGenerator {
 
 
                 Text basketName = new Text(basket.getBasketName())
-                    .setFont(fontSegopr)
+                    .setFont(fontTheme)
                     .setFontSize(40)
                     .setFontColor(dBordowy)
                     .setTextAlignment(TextAlignment.CENTER)
@@ -300,8 +304,8 @@ public class CatalogGenerator {
                 canvasPage2.lineTo(1300, hPosition - 1).setLineWidth(3f);
                 canvasPage2.closePathStroke();
 
-                Text basketPrice = new Text(basket.getBasketPrice() + " zł")
-                    .setFont(fontSegopr)
+                Text basketPrice = new Text(basket.getBasketTotalPrice() + " zł")
+                    .setFont(fontTheme)
                     .setFontSize(40)
                     .setFontColor(dBordowy)
                     .setTextAlignment(TextAlignment.CENTER)
@@ -370,7 +374,6 @@ public class CatalogGenerator {
     }
 
     private static Image setBorderForAllElement (Image image){
-
         //return   image.setBorder(new SolidBorder(1));
         return   image.setBorder(Border.NO_BORDER);
     }
