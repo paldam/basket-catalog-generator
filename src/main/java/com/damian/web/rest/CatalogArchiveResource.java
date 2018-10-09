@@ -2,7 +2,10 @@ package com.damian.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.damian.domain.CatalogArchive;
+import com.damian.domain.User;
 import com.damian.repository.CatalogArchiveRepository;
+import com.damian.repository.UserRepository;
+import com.damian.security.SecurityUtils;
 import com.damian.web.rest.errors.BadRequestAlertException;
 import com.damian.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,9 +33,11 @@ public class CatalogArchiveResource {
     private static final String ENTITY_NAME = "catalogArchive";
 
     private final CatalogArchiveRepository catalogArchiveRepository;
+    private UserRepository userRepository;
 
-    public CatalogArchiveResource(CatalogArchiveRepository catalogArchiveRepository) {
+    public CatalogArchiveResource(CatalogArchiveRepository catalogArchiveRepository , UserRepository userRepository) {
         this.catalogArchiveRepository = catalogArchiveRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -87,7 +92,16 @@ public class CatalogArchiveResource {
     @Timed
     public List<CatalogArchive> getAllCatalogArchives(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all CatalogArchives");
-        return catalogArchiveRepository.findAllWithEagerRelationships();
+
+        Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
+
+
+
+        Optional<User> currentUser = userRepository.findOneByLogin(userLogin.get());
+
+        Long currentUserId = currentUser.get().getId();
+
+        return catalogArchiveRepository.findAllByUser(currentUserId);
     }
 
     /**

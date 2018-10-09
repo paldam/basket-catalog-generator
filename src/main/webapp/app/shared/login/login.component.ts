@@ -54,7 +54,13 @@ export class JhiLoginModalComponent implements AfterViewInit {
                 this.authenticationError = false;
                 this.activeModal.dismiss('login success');
                 if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
-                    this.router.navigate(['']);
+                    this.router.navigateByUrl('/catalog-archive');
+                }
+
+                if (this.router.url === '/') {
+                    setTimeout(() => {
+                        this.router.navigateByUrl('/generator');
+                    }, 1000);
                 }
 
                 this.eventManager.broadcast({

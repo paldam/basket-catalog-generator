@@ -27,4 +27,8 @@ public interface CatalogArchiveRepository extends JpaRepository<CatalogArchive, 
     @Query("select catalog_archive from CatalogArchive catalog_archive left join fetch catalog_archive.baskets where catalog_archive.id =:id")
     Optional<CatalogArchive> findOneWithEagerRelationships(@Param("id") Long id);
 
+
+    @Query(value = "SELECT * FROM catalog_archive WHERE user_id = ?1 ORDER BY date_of_generate DESC ", nativeQuery = true)
+    List<CatalogArchive> findAllByUser(Long id);
+
 }

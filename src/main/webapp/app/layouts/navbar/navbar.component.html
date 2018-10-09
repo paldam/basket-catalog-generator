@@ -27,13 +27,22 @@
                     </span>
                 </a>
             </li>
-
+            register
 
             <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="catalog-archive" (click)="collapseNavbar()">
                     <span>
                         <fa-icon [icon]="'book-open'"></fa-icon>
                         <span>Wygenerowane Katalogi</span>
+                    </span>
+                </a>
+            </li>
+
+            <li *jhiHasAnyAuthority="'ROLE_SUPERADMIN'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="register" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon [icon]="'book-open'"></fa-icon>
+                        <span>Dodaj użytkownika</span>
                     </span>
                 </a>
             </li>
@@ -70,7 +79,7 @@
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-            <li  ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_SUPERADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
                         <fa-icon [icon]="'user-plus'"></fa-icon>
