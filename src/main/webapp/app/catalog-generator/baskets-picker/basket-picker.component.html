@@ -65,7 +65,7 @@
  <div class="firstStepcontent">
 
      <p-overlayPanel #op1 >
-         <img  src="http://generatorzestawow.pl/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="500" width="500" />
+         <img  src="http://www.kosze.ovh/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="500" width="500" />
      </p-overlayPanel>
 
      <div class="sorting_section">
@@ -92,7 +92,7 @@
                 <p-card *ngFor="let basket of basketfiltered"  class="basket_card_in fadeIn" title="{{basket.basketName}}" [style]="{width: '260px',height:'390px'}">
 
                     <img  *ngIf="basket.isAlcoholic==1" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
-                        <img src="http://generatorzestawow.pl/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="op1.toggle($event) ;selectImageToPreview(basket.basketId)">
+                        <img src="http://www.kosze.ovh/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="op1.toggle($event) ;selectImageToPreview(basket.basketId)">
 
 
                     <div class="basket_price">{{basket.basketTotalPrice}} zł</div>
