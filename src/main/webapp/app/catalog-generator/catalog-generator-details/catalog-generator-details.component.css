@@ -2,3 +2,47 @@ legend {
     width: 150px;
     font-size: 10px !important;
 }
+
+.loading {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    height: 250px;
+    padding-top: 70px;
+}
+
+.ui-dialog-content {
+    height: 300px;
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.pdf_link:hover {
+    cursor: pointer;
+}
+.filebox {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

@@ -20,6 +20,7 @@ export class BasketPickerComponent implements OnInit {
     public rangeValues: number[] = [0, 0];
     public rangeConst: number[] = [0, 0];
     public selectedBasketOnContextMenu: Basket = new Basket();
+    display: boolean = false;
 
     filtersLoaded: Promise<boolean>;
 
@@ -45,6 +46,7 @@ export class BasketPickerComponent implements OnInit {
                 );
 
                 this.filtersLoaded = Promise.resolve(true);
+                console.log(this.selectedBasketService.selectedBasket);
             });
     }
 
@@ -109,5 +111,13 @@ export class BasketPickerComponent implements OnInit {
 
     removeFromSelectedBasketList(basketId: number) {
         this.selectedBasketService.removeBasket(basketId);
+    }
+
+    showDialog() {
+        this.display = true;
+    }
+
+    closeDialog() {
+        this.display = false;
     }
 }

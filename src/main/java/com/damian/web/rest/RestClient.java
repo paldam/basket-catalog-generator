@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestClient {
 
     private String serverURL = "http://51.68.153.88:8080/basketsextlist";
+    private String serverStockURL = "http://51.68.153.88:8080/basket_ext_stock";
     //private String serverURL = "http://localhost:8080/extbaskets";
     private RestTemplate rest;
     private HttpHeaders headers;
@@ -29,12 +30,17 @@ public class RestClient {
         HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
         ResponseEntity<String> responseEntity = rest.exchange(serverURL, HttpMethod.GET, requestEntity, String.class);
 
-
-
         this.setStatus(responseEntity.getStatusCode());
         return responseEntity.getBody();
     }
 
+    public String getStock() {
+        HttpEntity<String> requestEntity = new HttpEntity<String>("", headers);
+        ResponseEntity<String> responseEntity = rest.exchange(serverStockURL, HttpMethod.GET, requestEntity, String.class);
+
+        this.setStatus(responseEntity.getStatusCode());
+        return responseEntity.getBody();
+    }
 
     public HttpStatus getStatus() {
         return status;

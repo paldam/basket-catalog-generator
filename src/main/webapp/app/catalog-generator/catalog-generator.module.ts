@@ -4,7 +4,14 @@ import { BasketExtSharedModule } from '../shared/';
 import { BasketPickerComponent } from './baskets-picker/basket-picker.component';
 import { BASKET_ROUTE } from './catalog-generator-.route';
 import { CatalogGeneratorService } from './catalog-generator.service';
-import { DataTableModule, FieldsetModule, FileUploadModule, OverlayPanelModule } from 'primeng/primeng';
+import {
+    DataTableModule,
+    DialogModule,
+    FieldsetModule,
+    FileUploadModule,
+    OverlayPanelModule,
+    ProgressSpinnerModule
+} from 'primeng/primeng';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { TabViewModule } from 'primeng/tabview';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +45,9 @@ import { BasketResolve } from './basket-reolve';
         BrowserAnimationsModule,
         TableModule,
         ContextMenuModule,
-        CardModule
+        CardModule,
+        ProgressSpinnerModule,
+        DialogModule
     ],
     declarations: [
         BasketPickerComponent,

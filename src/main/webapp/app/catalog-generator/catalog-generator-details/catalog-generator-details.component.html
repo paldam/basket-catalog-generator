@@ -63,28 +63,32 @@
 
 
 
-            <div class="form-group">
-                <label class="form-control-label" for="field_logo">Wgraj logo (rozmiar szer. 400px  wys 300px format .jpg lub .png)</label>
+            <div class="form-group filebox">
+                <label class="form-control-label" for="field_logo">Wgraj logo (rozmiar szer. 400px  wys 300px format .jpg)</label>
                 <div>
                     <div *ngIf="catalogArchive.logo" class="form-text text-danger clearfix">
                         <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a><br>
-                        <span class="pull-left">{{catalogArchive.logoContentType}}, {{byteSize(catalogArchive.logo)}}</span>
-                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"
+                        <span class="pull-left">{{catalogArchive.logoContentType}}, {{size| number:'1.1-2'}}MB</span>
+                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"s
                                 class="btn btn-secondary btn-xs pull-right">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>
-                    <input type="file" id="file_logo" (change)="setFileData($event, catalogArchive, 'logo', false)"/>
+                    <input  #coverFilesInput type="file" id="file_logo" (change)="setFileData($event, catalogArchive, 'logo', false);onChange($event)"/>
                 </div>
                 <input type="hidden" class="form-control" name="logo" id="field_logo" #logo="ngModel"
                        [(ngModel)]="catalogArchive.logo" required />
                 <!--<input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"-->
                        <!--[(ngModel)]="catalogArchive.logoContentType" />-->
-                <ul class="text-danger list-unstyled" *ngIf="formSubmitted">
-                    <li  *ngIf="logo.errors?.required">To pole nie może być puste</li>
-                </ul>
 
+                <!--<ul class="text-danger list-unstyled" *ngIf="formSubmitted">-->
+                    <!--<li  *ngIf="logo.errors?.required">To pole nie może być puste</li>-->
+                <!--</ul>-->
+                <ul class="text-danger list-unstyled" *ngIf="uploadSuccess && !chceckImageValid()">
+                    <li >Błąd. Plik nie spełnia wymagań. Wgrany plik ma typ  {{fileType}} rozmiar: {{size| number:'1.1-2'}}MB rozdzielczośc {{width}} x {{height}} px</li>
+                </ul>
             </div>
+
 
 
             <div class="form-group">
@@ -104,3 +108,24 @@
     </p-panel>
 
 </div>
+
+
+
+<p-dialog  header="Generowanie katalogu" closeOnEscape="true" modal="true" width="400" height="200" [(visible)]="showPdfGenStatusModal"  >
+
+   <div *ngIf="!fileFilterLoaded" class="loading fadeIn">
+       <p-progressSpinner ></p-progressSpinner>
+       <p> Trwa generowanie katalogu </p>
+   </div>
+
+    <div *ngIf="fileFilterLoaded" class="loading fadeIn">
+
+        <p class="pdf_link" (click)="openPdfInBrowser()"> Pobierz katalog </p>
+    </div>
+
+
+
+
+
+
+</p-dialog>

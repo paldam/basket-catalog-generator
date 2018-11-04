@@ -34,8 +34,8 @@ public class Basket implements Serializable {
     private String basketName;
 
     @NotNull
-    @Column(name = "basket_price", precision = 10, scale = 2, nullable = false)
-    private BigDecimal basketTotalPrice;
+    @Column(name = "basket_price")
+    private Integer basketTotalPrice;
 
     @NotNull
     @Column(name = "orgin_basket_id", nullable = false)
@@ -79,11 +79,11 @@ public class Basket implements Serializable {
         return serialVersionUID;
     }
 
-    public BigDecimal getBasketTotalPrice() {
+    public Integer getBasketTotalPrice() {
         return basketTotalPrice;
     }
 
-    public void setBasketTotalPrice(BigDecimal basketTotalPrice) {
+    public void setBasketTotalPrice(Integer basketTotalPrice) {
         this.basketTotalPrice = basketTotalPrice;
     }
 

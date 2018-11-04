@@ -34,8 +34,9 @@ public class CatalogGeneratorResource {
     @RequestMapping(value = "/generatecatalog", method = RequestMethod.POST, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> generateCatalog(@RequestBody CatalogArchive catalog) throws IOException {
 
+            catalogGeneratorService.generateCatalog(catalog);
 
-        catalogGeneratorService.generateCatalog(catalog);
+       // catalogGeneratorService.generateCatalog(catalog);
 
         CatalogGenerator catalogGenerator = new CatalogGenerator();
         ByteArrayInputStream bis = catalogGenerator.generateCatalog(catalog);
@@ -48,6 +49,10 @@ public class CatalogGeneratorResource {
             .headers(headers)
             .contentType(MediaType.APPLICATION_PDF)
             .body(new InputStreamResource(bis));
+
+
+
+
 
 
     }

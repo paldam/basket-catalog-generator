@@ -11,7 +11,7 @@ import { CatalogArchive } from '../shared/model/catalog-archive.model';
 @Injectable()
 export class CatalogGeneratorService {
     private resourceUrl = SERVER_API_URL + '/extbaskets';
-
+    private basketStockResourceUrl = SERVER_API_URL + '/extbaskets_stock';
     constructor(
         private http: HttpClient,
         private http2: Http,
@@ -23,6 +23,15 @@ export class CatalogGeneratorService {
         const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
 
         return this.http.get(this.resourceUrl, {
+            headers: { ['Authorization']: 'Bearer ' + token },
+            observe: 'response'
+        });
+    }
+
+    getBasketStock(): Observable<HttpResponse<any>> {
+        const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
+
+        return this.http.get(this.basketStockResourceUrl, {
             headers: { ['Authorization']: 'Bearer ' + token },
             observe: 'response'
         });

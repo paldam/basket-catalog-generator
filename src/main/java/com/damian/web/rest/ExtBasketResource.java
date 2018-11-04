@@ -25,5 +25,11 @@ public class ExtBasketResource {
         return new ResponseEntity<String>(restClient.get(), HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @GetMapping("/extbaskets_stock")
+    ResponseEntity<String> getBasketStock(){
+
+        return new ResponseEntity<String>(restClient.getStock(), HttpStatus.OK);
+    }
 
 }

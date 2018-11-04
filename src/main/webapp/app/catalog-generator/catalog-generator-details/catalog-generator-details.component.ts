@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { SelectedBasketService } from '../selected-baskets/selected-basket.service';
 import { NgForm } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Basket } from '../../shared/model/basket.model';
 import { Product } from '../../shared/model/product.model';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
     selector: 'jhi-catalog-generator-details',
@@ -20,6 +21,19 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     public baskets: Basket[] = [];
     public formSubmitted: boolean = false;
     public loading: string = '...';
+    public showPdfGenStatusModal: boolean = false;
+    fileFilterLoaded: Promise<boolean>;
+
+    //public generatedUrl: any;
+    public generatedPdf: any;
+    percentDone: number;
+    uploadSuccess: boolean;
+    size: any;
+    width: number;
+    height: number;
+    fileType: string;
+
+    @ViewChild('coverFilesInput') imgType: ElementRef;
 
     constructor(
         private selectedBasketService: SelectedBasketService,
@@ -43,7 +57,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     submitForm(form: NgForm) {
         this.formSubmitted = true;
 
-        if (form.valid) {
+        if (form.valid && this.chceckImageValid()) {
             this.selectedBasketService.selectedBasket.forEach(basket => {
                 let productToAdd: Product[] = [];
 
@@ -62,19 +76,38 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
             this.genCatalog(this.catalogArchive);
             this.selectedBasketService.selectedBasket = [];
 
-            setTimeout(() => {
-                this.router.navigateByUrl('/catalog-archive');
-            }, 1000);
+            // setTimeout(() => {
+            //     this.router.navigateByUrl('/catalog-archive');
+            // }, 1000);
         }
 
         this.formSubmitted = false;
     }
 
     genCatalog(catalog: CatalogArchive) {
+        this.showPdfGenStatusModal = true;
         this.catalogGeneratorService.sendCataloqDataToGeneratePdF(catalog).subscribe(res => {
-            var fileURL = URL.createObjectURL(res);
-            window.open(fileURL);
+            setTimeout(() => {
+                this.fileFilterLoaded = Promise.resolve(true);
+            }, 1800);
+
+            //this.generatedUrl = URL.createObjectURL(res);
+            this.generatedPdf = res;
         });
+    }
+
+    openPdfInBrowser() {
+        //window.open(this.generatedUrl);
+        let d = new Date();
+        let pdfName = 'katalog_' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString() + '.pdf';
+
+        saveAs(this.generatedPdf, pdfName);
+        this.showPdfGenStatusModal = false;
+        this.generatedPdf = [];
+
+        setTimeout(() => {
+            this.router.navigateByUrl('/catalog-archive');
+        }, 1000);
     }
 
     byteSize(field) {
@@ -87,5 +120,47 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
 
     setFileData(event, entity, field, isImage) {
         this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    onChange(evt: any) {
+        this.percentDone = 100;
+        this.uploadSuccess = true;
+        let image: any = evt.target.files[0];
+        this.size = image.size / 1024 / 1000;
+        this.fileType = image.type;
+        let fr = new FileReader();
+        fr.onload = () => {
+            // when file has loaded
+            var img = new Image();
+
+            img.onload = () => {
+                this.width = img.width;
+                this.height = img.height;
+            };
+            console.log('xxxx' + this.width + this.height);
+            img.src = fr.result; // This is the data URL
+        };
+
+        fr.readAsDataURL(image);
+
+        this.imgType.nativeElement.value = '';
+    }
+
+    chceckImageValid(): boolean {
+        console.log('Typ danych to ' + this.fileType);
+        if (this.fileType != 'image/jpeg') {
+            return false;
+        }
+        if (this.width != 400) {
+            return false;
+        }
+        if (this.height != 300) {
+            return false;
+        }
+        if (this.size > 11) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

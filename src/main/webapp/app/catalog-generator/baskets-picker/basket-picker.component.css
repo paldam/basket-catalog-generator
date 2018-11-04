@@ -96,8 +96,20 @@ h1 {
     top: 13px;
 }
 
-.ui-overlaypanel {
+.center {
+    margin: 0 auto;
+    width: 700px;
+    height: 700px;
+    text-align: center;
+}
+
+.available_status {
+    position: relative;
+    left: 0px;
+    top: -8px;
+}
+.close_icon {
     position: absolute;
-    top: 100px !important;
-    margin: 0 auto !important;
+    top: 5px;
+    right: 5px;
 }

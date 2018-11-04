@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Set;
 
 
@@ -38,10 +39,10 @@ public class CatalogGenerator {
     private static final Logger log = LoggerFactory.getLogger(CatalogGenerator.class);
 
 
-    public static final String FONT_SEGOPR = "themes/fonts/segoepr.ttf" ;
-    public static final String FONT_ROBOTO_ITALIC = "themes/fonts/Roboto-Italic.ttf" ;
-    public static final String FONT_ROBOTO_BOLD = "themes/fonts/Roboto-Bold.ttf" ;
-    public static final String FONT_ROBOTO_REGULAR = "themes/fonts/Roboto-Regular.ttf" ;
+    private static final String FONT_SEGOPR = "themes/fonts/segoepr.ttf" ;
+    private static final String FONT_ROBOTO_ITALIC = "themes/fonts/Roboto-Italic.ttf" ;
+    private static final String FONT_ROBOTO_BOLD = "themes/fonts/Roboto-Bold.ttf" ;
+    private static final String FONT_ROBOTO_REGULAR = "themes/fonts/Roboto-Regular.ttf" ;
 
 
     public static ByteArrayInputStream generateCatalog(CatalogArchive catalog) throws IOException {
@@ -80,7 +81,7 @@ public class CatalogGenerator {
 
         Image img = new Image(ImageDataFactory.create(FIRST_PAGE_IMAGE));
         img.setFixedPosition(475, 0);
-        img.setHeight(768);
+        img.setHeight(900);
         img.setWidth(891);
 
 
@@ -213,7 +214,7 @@ public class CatalogGenerator {
 
 
          Set<Basket> basketList = catalog.getBaskets();
-
+           int currentPosition = 0;
             for (Basket basket : basketList) {
                 log.error("Noa strona ____________________________ "  );
 
@@ -249,8 +250,8 @@ public class CatalogGenerator {
 
                 Image BasketImage = new Image(ImageDataFactory.create(BASKET_IMG));
                 BasketImage.setFixedPosition(43, 35);
-                BasketImage.setHeight(597);
-                BasketImage.setWidth(850);
+                BasketImage.setHeight(600);
+                BasketImage.setWidth(600);
 
 
                 Text basketName = new Text(basket.getBasketName())
@@ -275,28 +276,59 @@ public class CatalogGenerator {
                  Set<Product> productsList = basket.getProducts();
 
 
-                int hPosition = 430;
+                int hPosition = 460;
                 for (Product products : productsList) {
 
                     log.error("Składowe basktItems " + products.getProductName() );
                     Text productName = new Text("- " + products.getProductName() + " " + products.getProductCapacity())
+
                         .setFont(fontRobotoItalic)
                         .setFontSize(18)
                         .setFontColor(dSzary)
                         .setTextAlignment(TextAlignment.CENTER)
                         .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
+
+                    log.error("posiotn" + currentPosition);
+
+                    if(currentPosition!=0){
+
+                        if(products.getProductName().length() > 52){
+                            hPosition -=  38;
+                        }else{
+                            hPosition -= 20;
+                        }
+                    }
+
+
+
                     Paragraph productNameParagraph = new Paragraph().add(productName);
                     productNameParagraph.setFixedPosition(830, hPosition, 500);
-                    setBorderForAllElement(productNameParagraph);
-                    productNameParagraph.setHeight(50);
-                    productNameParagraph.setWidth(500);
-                    setBorderForAllElement(productNameParagraph);
 
-                    hPosition -= 20;
+
+                    if(products.getProductName().length() > 52){
+                        productNameParagraph.setHeight(60);
+                        productNameParagraph.setFixedLeading(20f);
+                    }else{
+                        productNameParagraph.setHeight(50);
+                    }
+
+                    //setBorderForAllElement(productNameParagraph);
+                    //productNameParagraph.setHeight(50);
+                    productNameParagraph.setWidth(500);
+                    //setBorderForAllElement(productNameParagraph);
+
+
+                    log.error(" produk " +products.getProductName().length());
 
                     doc.add(productNameParagraph);
+                    currentPosition++;
 
+
+
+                        if(products.getProductName().length() > 52) {
+                            hPosition -= 7;
+                        }
                 }
 
                 canvasPage2.setStrokeColor(dZloty);
@@ -304,7 +336,9 @@ public class CatalogGenerator {
                 canvasPage2.lineTo(1300, hPosition - 1).setLineWidth(3f);
                 canvasPage2.closePathStroke();
 
-                Text basketPrice = new Text(basket.getBasketTotalPrice() + " zł")
+                BigDecimal db = new BigDecimal(100);
+
+                Text basketPrice = new Text(basket.getBasketTotalPrice()/100 + " zł")
                     .setFont(fontTheme)
                     .setFontSize(40)
                     .setFontColor(dBordowy)
@@ -312,7 +346,7 @@ public class CatalogGenerator {
                     .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
                 Paragraph basketPriceParagraph = new Paragraph().add(basketPrice);
-                basketPriceParagraph.setFixedPosition(1040, hPosition - 90, 500);
+                basketPriceParagraph.setFixedPosition(1160, hPosition - 90, 500);
                 setBorderForAllElement(basketPriceParagraph);
                 basketPriceParagraph.setHeight(90);
                 basketPriceParagraph.setWidth(500);

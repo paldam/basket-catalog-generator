@@ -37,7 +37,7 @@
                           <input type="text" [(ngModel)]="row.basketTotalPrice">
                       </ng-template>
                       <ng-template pTemplate="output">
-                          {{row.basketTotalPrice}} zł
+                          {{row.basketTotalPrice/100| number : '1.2-2'}} zł
                       </ng-template>
                   </p-cellEditor>
               </td>
