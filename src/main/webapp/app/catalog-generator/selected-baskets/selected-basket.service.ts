@@ -11,6 +11,7 @@ export class SelectedBasketService {
     constructor() {}
 
     addBasket(basket: any) {
+        basket.ownPrice = basket.basketTotalPrice / 100;
         this.selectedBasket.push(basket);
         this.numberOfBasket = this.selectedBasket.length;
         this.selectedBasketIds.push(basket.basketId);

@@ -32,6 +32,14 @@ export class BasketPickerComponent implements OnInit {
                 this.baskets = res.body;
                 this.basketfiltered = res.body;
 
+                // for (var item of this.baskets) {
+                //     item.basketTotalPrice = item.basketTotalPrice/100
+                // }
+                //
+                // for (var item of this.basketfiltered) {
+                //     item.basketTotalPrice = item.basketTotalPrice/100
+                // }
+
                 this.rangeConst[0] = this.rangeValues[0] = Math.min.apply(
                     Math,
                     this.basketfiltered.map(function(o) {
@@ -58,6 +66,9 @@ export class BasketPickerComponent implements OnInit {
                 command: event => this.addBasket(this.selectedBasketOnContextMenu)
             }
         ];
+        setTimeout(() => {
+            console.log('DDDDDD' + JSON.stringify(this.baskets));
+        }, 3000);
     }
 
     addBasket(basket: any) {

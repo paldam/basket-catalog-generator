@@ -46,3 +46,6 @@ legend {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.ui-galleria-caption {
+    width: 300px;
+}

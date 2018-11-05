@@ -38,6 +38,8 @@ export class CatalogGeneratorService {
     }
 
     sendCataloqDataToGeneratePdF(catalog: CatalogArchive): any {
+        console.log('FFFFFFFFF' + JSON.stringify(catalog.baskets));
+
         return this.http.post(SERVER_API_URL + 'api/generatecatalog', catalog, { observe: 'body', responseType: 'blob' }).map(res => {
             return new Blob([res], { type: 'application/pdf' });
         });

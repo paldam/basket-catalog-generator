@@ -1,12 +1,13 @@
 
-
-<p-table [value]="selectedBasketService.selectedBasket" >
+Complete
+<p-table [value]="selectedBasketService.selectedBasket" (onEditComplete)="onTableEditComplete($event)" (onEditInit)="onTableEditInit($event)" (onEditCancel)="onTableEditCancel($event)" >
       <ng-template pTemplate="header">
           <tr>
               <th class="order_col">Przesuń</th>
               <th >Numer strony</th>
               <th >Nazwa</th>
-              <th>Cena kosza</th>
+              <th>Cena zakupu</th>
+              <th>Cena własna</th>
               <th>Zdjęcie kosza</th>
               <th class="action_col">Akcja</th>
           </tr>
@@ -31,13 +32,19 @@
                   </p-cellEditor>
               </td>
 
-              <td pEditableColumn>
+              <td>
+                  {{row.basketTotalPrice/100| number : '1.2-2'}} zł
+
+              </td>
+
+
+              <td pEditableColumn [pEditableColumn]="row" [pEditableColumnField]="col">
                   <p-cellEditor>
                       <ng-template pTemplate="input">
-                          <input type="text" [(ngModel)]="row.basketTotalPrice">
+                          <input type="text" [(ngModel)]="row.ownPrice">
                       </ng-template>
                       <ng-template pTemplate="output">
-                          {{row.basketTotalPrice/100| number : '1.2-2'}} zł
+                          {{row.ownPrice| number : '1.2-2'}} zł
                       </ng-template>
                   </p-cellEditor>
               </td>

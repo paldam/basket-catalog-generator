@@ -1,5 +1,5 @@
 
-<div class="order_detail_form col-md-6">
+<div class="order_detail_form col-md-4">
     <p-panel header="Dodatkowe informacje">
         <form id="CatalogForm" novalidate #form="ngForm">
 
@@ -7,15 +7,16 @@
 
             <div class="form-group">
                 <small id="catalog_nameDescript" class="text-muted">Nazwa katalogu</small>
-                <input type="text" name="catalog_name" #catalog_name="ngModel"  class="form-control" size="300"  aria-describedby="catalog_nameDesc" required [(ngModel)]="catalogArchive.catalogName">
+                <input type="text" name="catalog_name" #catalog_name="ngModel"  class="form-control" size="50" maxlength="32" aria-describedby="catalog_nameDesc" required [(ngModel)]="catalogArchive.catalogName">
                 <ul class="text-danger list-unstyled" *ngIf="catalog_name.dirty|| formSubmitted">
                     <li  *ngIf="catalog_name.errors?.required">Wprowadz nazwę katalogu</li>
+                    <li  *ngIf="catalog_name.errors?.maxlength">Nazwa katalogu może mieć maksymalnie 32 znaki</li>
                 </ul>
             </div>
 
             <div class="form-group">
                 <small id="catalogForDescript" class="text-muted">Katalog dla</small>
-                <input type="text" name="catalog_for" #catalog_for="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.forWho">
+                <input type="text" name="catalog_for" #catalog_for="ngModel"  class="form-control" size="50"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.forWho">
                 <ul class="text-danger list-unstyled" *ngIf="catalog_for.dirty|| formSubmitted">
                     <li  *ngIf="catalog_for.errors?.required">Wprowadź dla jakiej firmy przeznaczony jest katalog</li>
                 </ul>
@@ -50,17 +51,24 @@
                 </div>
 
 
-                <div class="form-group">
-                    <small id="catalogThemeDescript" class="text-muted">Motyw</small>
-                    <input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">
-                    <ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">
-                        <li  *ngIf="catalogTheme.errors?.required">wpisz motyw</li>
-                    </ul>
-                </div>
+
 
             </p-fieldset>
 
+            <div class="form-group">
+                <small id="catalogThemeDescript" class="text-muted">Motyw</small>
+                <input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">
+                <ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">
+                    <li  *ngIf="catalogTheme.errors?.required">wpisz motyw</li>
+                </ul>
+            </div>
 
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option *ngFor="let theme of themesImages">{{theme.name}}</option>
+                </select>
+            </div>
 
 
             <div class="form-group filebox">
@@ -93,7 +101,8 @@
 
             <div class="form-group">
                 <small id="catalogLastPageDescDescript" class="text-muted">Informacje na ostatnią stronę</small>
-                <input type="text" name="catalogLastPageDesc" #catalogLastPageDesc="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.catalogAdditionalDesc">
+                <!--<input type="text" name="catalogLastPageDesc" #catalogLastPageDesc="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.catalogAdditionalDesc">-->
+                <textarea type="text" name="catalogLastPageDesc" #catalogLastPageDesc="ngModel"  class="form-control" [maxlength]="550"   aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.catalogAdditionalDesc"> </textarea>
                 <ul class="text-danger list-unstyled" *ngIf="catalogLastPageDesc.dirty|| formSubmitted">
                     <li  *ngIf="catalogLastPageDesc.errors?.required">Wprowadź informacje dodatkowe na ostatnią stronę</li>
                 </ul>
@@ -109,9 +118,17 @@
 
 </div>
 
+<!--<div>-->
+
+    <!--<img  *ngIf="basket.isAlcoholic==1" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />-->
 
 
-<p-dialog  header="Generowanie katalogu" closeOnEscape="true" modal="true" width="400" height="200" [(visible)]="showPdfGenStatusModal"  >
+
+<!--</div>-->
+
+
+
+<p-dialog  header="Generowaniee katalogu" closeOnEscape="true" modal="true" width="400" height="200" [(visible)]="showPdfGenStatusModal"  >
 
    <div *ngIf="!fileFilterLoaded" class="loading fadeIn">
        <p-progressSpinner ></p-progressSpinner>
@@ -129,3 +146,8 @@
 
 
 </p-dialog>
+
+
+<!--<p-dialog header="Wybierz motyw" modal="true" width="1000" [(visible)]="showThemePickerVisible" >-->
+    <!--<p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria>-->
+<!--</p-dialog>-->

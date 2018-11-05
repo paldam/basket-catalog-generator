@@ -5,10 +5,13 @@ import { BasketPickerComponent } from './baskets-picker/basket-picker.component'
 import { BASKET_ROUTE } from './catalog-generator-.route';
 import { CatalogGeneratorService } from './catalog-generator.service';
 import {
+    ConfirmationService,
+    ConfirmDialogModule,
     DataTableModule,
     DialogModule,
     FieldsetModule,
     FileUploadModule,
+    GalleriaModule,
     OverlayPanelModule,
     ProgressSpinnerModule
 } from 'primeng/primeng';
@@ -47,7 +50,8 @@ import { BasketResolve } from './basket-reolve';
         ContextMenuModule,
         CardModule,
         ProgressSpinnerModule,
-        DialogModule
+        DialogModule,
+        GalleriaModule
     ],
     declarations: [
         BasketPickerComponent,

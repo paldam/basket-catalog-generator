@@ -22,7 +22,9 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     public formSubmitted: boolean = false;
     public loading: string = '...';
     public showPdfGenStatusModal: boolean = false;
+    public showThemePickerVisible: boolean = false;
     fileFilterLoaded: Promise<boolean>;
+    public themesImages: any[] = [];
 
     //public generatedUrl: any;
     public generatedPdf: any;
@@ -34,6 +36,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     fileType: string;
 
     @ViewChild('coverFilesInput') imgType: ElementRef;
+    @ViewChild('ww') ww: ElementRef;
 
     constructor(
         private selectedBasketService: SelectedBasketService,
@@ -52,6 +55,10 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
 
         this.catalogArchive.customerAssistantTel = '508703333';
         this.catalogArchive.forWho = 'EnterStore Damian Paluch';
+
+        this.themesImages.push({ name: 'Niebieski' });
+        this.themesImages.push({ name: 'Czerwony' });
+        console.log(this.ww);
     }
 
     submitForm(form: NgForm) {
@@ -65,7 +72,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
                     productToAdd.push(new Product(basketI.product.productName, basketI.product.capacity));
                 });
 
-                this.baskets.push(new Basket(basket.basketName, basket.basketTotalPrice, basket.basketId, productToAdd));
+                this.baskets.push(new Basket(basket.basketName, basket.ownPrice * 100, basket.basketId, productToAdd));
                 productToAdd = [];
             });
 
@@ -162,5 +169,9 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         } else {
             return true;
         }
+    }
+
+    showThemePicker() {
+        this.showThemePickerVisible = true;
     }
 }

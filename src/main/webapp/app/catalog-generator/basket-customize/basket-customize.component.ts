@@ -48,4 +48,14 @@ export class BasketCustomizeComponent implements OnInit {
             }
         }
     }
+
+    onTableEditInit(event: any) {
+        console.log('WWWWWWWWWW');
+        console.log(event.data);
+        event.data.ownPrice = 0;
+    }
+    // onTableEditComplete(event: any){
+    //     console.log(event.data);
+    //     event.data.ownPrice = event.data.basketTotalPrice*100;
+    // }
 }

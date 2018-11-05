@@ -279,7 +279,6 @@ public class CatalogGenerator {
                 int hPosition = 460;
                 for (Product products : productsList) {
 
-                    log.error("Składowe basktItems " + products.getProductName() );
                     Text productName = new Text("- " + products.getProductName() + " " + products.getProductCapacity())
 
                         .setFont(fontRobotoItalic)
@@ -289,7 +288,6 @@ public class CatalogGenerator {
                         .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
 
-                    log.error("posiotn" + currentPosition);
 
                     if(currentPosition!=0){
 
@@ -319,7 +317,7 @@ public class CatalogGenerator {
                     //setBorderForAllElement(productNameParagraph);
 
 
-                    log.error(" produk " +products.getProductName().length());
+
 
                     doc.add(productNameParagraph);
                     currentPosition++;
@@ -336,9 +334,20 @@ public class CatalogGenerator {
                 canvasPage2.lineTo(1300, hPosition - 1).setLineWidth(3f);
                 canvasPage2.closePathStroke();
 
-                BigDecimal db = new BigDecimal(100);
+                BigDecimal db = new BigDecimal(basket.getBasketTotalPrice()).divide(new BigDecimal("100"));
 
-                Text basketPrice = new Text(basket.getBasketTotalPrice()/100 + " zł")
+                StringBuilder convertedPriceb = new StringBuilder();
+                convertedPriceb
+                    .append(db.toString())
+                    .append(" zł");
+
+                String convertedPrice = convertedPriceb.toString();
+
+
+
+                Text basketPrice = new Text(convertedPrice)
+
+
                     .setFont(fontTheme)
                     .setFontSize(40)
                     .setFontColor(dBordowy)
@@ -346,7 +355,54 @@ public class CatalogGenerator {
                     .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
                 Paragraph basketPriceParagraph = new Paragraph().add(basketPrice);
-                basketPriceParagraph.setFixedPosition(1160, hPosition - 90, 500);
+
+
+
+
+
+
+                switch (convertedPrice.length()) {
+                    case 5:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+                        basketPriceParagraph.setFixedPosition(1180, hPosition - 90, 500);
+                        break;
+                    case 6:
+                        basketPriceParagraph.setFixedPosition(1150, hPosition - 90, 500);
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        break;
+                    case 7:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        basketPriceParagraph.setFixedPosition(1120, hPosition - 90, 500);
+                        break;
+                    case 8:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        basketPriceParagraph.setFixedPosition(1110, hPosition - 90, 500);
+                        break;
+                    case 9:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        basketPriceParagraph.setFixedPosition(1080, hPosition - 90, 500);
+                        break;
+                    case 10:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        basketPriceParagraph.setFixedPosition(1050, hPosition - 90, 500);
+                        break;
+                    default:
+                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
+                        basketPriceParagraph.setFixedPosition(1160, hPosition - 90, 500);
+                        break;
+
+                }
+
+
+
+
+
                 setBorderForAllElement(basketPriceParagraph);
                 basketPriceParagraph.setHeight(90);
                 basketPriceParagraph.setWidth(500);
