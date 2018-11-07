@@ -2,7 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="myUserLabel">
-                Create or edit a User
+                Utwórz lub edytuj użytkownika
             </h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -20,47 +20,47 @@
                     <div *ngIf="loginInput.dirty && loginInput.invalid">
                         <small class="form-text text-danger"
                         *ngIf="loginInput.errors.required">
-                            This field is required.
+                            To pole jest obowiązkowe.
                         </small>
 
                         <small class="form-text text-danger"
                         *ngIf="loginInput.errors.maxlength"
                        >
-                            This field cannot be longer than 50 characters.
+                            Login nie może być dłuższy niż 50 znaków
                         </small>
 
                         <small class="form-text text-danger"
                         *ngIf="loginInput.errors.pattern">
-                            This field can only contain letters, digits and e-mail addresses.
+                            Login może zawierać tylko litery i cyfry lub adres email
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">First Name</label>
-                    <input type="text" class="form-control" name="firstName" #firstNameInput="ngModel"
-                        [(ngModel)]="user.firstName" maxlength="50">
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label">First Name</label>-->
+                    <!--<input type="text" class="form-control" name="firstName" #firstNameInput="ngModel"-->
+                        <!--[(ngModel)]="user.firstName" maxlength="50">-->
 
-                    <div *ngIf="firstNameInput.dirty && firstNameInput.invalid">
-                        <small class="form-text text-danger"
-                        *ngIf="firstNameInput.errors.maxlength"
-                       >
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" name="lastName" #lastNameInput="ngModel"
-                        [(ngModel)]="user.lastName" maxlength="50">
+                    <!--<div *ngIf="firstNameInput.dirty && firstNameInput.invalid">-->
+                        <!--<small class="form-text text-danger"-->
+                        <!--*ngIf="firstNameInput.errors.maxlength"-->
+                       <!--&gt;-->
+                            <!--This field cannot be longer than 50 characters.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label>Last Name</label>-->
+                    <!--<input type="text" class="form-control" name="lastName" #lastNameInput="ngModel"-->
+                        <!--[(ngModel)]="user.lastName" maxlength="50">-->
 
-                    <div *ngIf="lastNameInput.dirty && lastNameInput.invalid">
-                        <small class="form-text text-danger"
-                        *ngIf="lastNameInput.errors.maxlength"
-                       >
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
+                    <!--<div *ngIf="lastNameInput.dirty && lastNameInput.invalid">-->
+                        <!--<small class="form-text text-danger"-->
+                        <!--*ngIf="lastNameInput.errors.maxlength"-->
+                       <!--&gt;-->
+                            <!--This field cannot be longer than 50 characters.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="form-group">
                     <label class="form-control-label">Email</label>
                     <input type="email" class="form-control" name="email" #emailInput="ngModel"
@@ -92,13 +92,13 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label" for="activated">
-                        <input class="form-check-input" [disabled]="user.id === null" type="checkbox" id="activated" name="activated" [(ngModel)]="user.activated">
-                        <span>Activated</span>
+                        <input class="form-check-input"  type="checkbox" id="activated" name="activated" [(ngModel)]="user.activated">
+                        <span>Aktywowany ?</span>
                     </label>
                 </div>
 
                 <div class="form-group">
-                    <label>Profiles</label>
+                    <label>Profile</label>
                     <select class="form-control" multiple name="authority" [(ngModel)]="user.authorities">
                         <option *ngFor="let authority of authorities" [value]="authority">{{authority}}</option>
                     </select>
@@ -107,10 +107,10 @@
             <div>
                 <button type="button" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
-                   >Cancel</span>
+                   >Anuluj</span>
                 </button>
                 <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Zapisz</span>
                 </button>
             </div>
         </form>

@@ -25,6 +25,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     public showThemePickerVisible: boolean = false;
     fileFilterLoaded: Promise<boolean>;
     public themesImages: any[] = [];
+    public themee: string;
 
     //public generatedUrl: any;
     public generatedPdf: any;
@@ -47,18 +48,25 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.catalogArchive.catalogAdditionalDesc = 'Oferta przygotwana dla firmy EnterStroe';
-        this.catalogArchive.catalogName = 'Kosze świąteczne 2018';
-        this.catalogArchive.catalogTheme = Theme.NIEBIESKI;
-        this.catalogArchive.customerAssistantEmail = 'dami@onet.eu';
-        this.catalogArchive.customerAssistantName = 'Kamil Nowak';
+        // this.catalogArchive.catalogAdditionalDesc = 'Oferta przygotwana dla firmy EnterStroe';
+        // this.catalogArchive.catalogName = 'Kosze świąteczne 2018';
+        // //this.catalogArchive.catalogTheme = Theme.NIEBIESKI;
+        // this.catalogArchive.customerAssistantEmail = 'dami@onet.eu';
+        // this.catalogArchive.customerAssistantName = 'Kamil Nowak';
+        //
+        // this.catalogArchive.customerAssistantTel = '508703333';
+        // this.catalogArchive.forWho = 'EnterStore Damian Paluch';
 
-        this.catalogArchive.customerAssistantTel = '508703333';
-        this.catalogArchive.forWho = 'EnterStore Damian Paluch';
-
-        this.themesImages.push({ name: 'Niebieski' });
-        this.themesImages.push({ name: 'Czerwony' });
-        console.log(this.ww);
+        this.themesImages.push({ name: 'Motyw_1' });
+        this.themesImages.push({ name: 'Motyw_2' });
+        this.themesImages.push({ name: 'Motyw_3' });
+        this.themesImages.push({ name: 'Motyw_4' });
+        this.themesImages.push({ name: 'Motyw_5' });
+        this.themesImages.push({ name: 'Motyw_6' });
+        this.themesImages.push({ name: 'Motyw_7' });
+        this.themesImages.push({ name: 'Motyw_8' });
+        this.themesImages.push({ name: 'Motyw_9' });
+        this.themesImages.push({ name: 'Motyw_10' });
     }
 
     submitForm(form: NgForm) {

@@ -1,11 +1,26 @@
 
-Complete
-<p-table [value]="selectedBasketService.selectedBasket" (onEditComplete)="onTableEditComplete($event)" (onEditInit)="onTableEditInit($event)" (onEditCancel)="onTableEditCancel($event)" >
+
+
+
+
+
+
+<div class="alert alert-info tool_info" role="alert">
+   <p>
+       <i class="fa fa-pencil" aria-hidden="true"> </i>  Edytuj pola <i>"Nazwa kosza"</i> oraz <i>"Cena własna"</i> poprzez dwukrotne kliknięcie na konkretnej komórce. Po każdej edycji komórki, zatwierdź zmianę poprzez wciśnięcie klawisza enter "
+</p>
+<p>
+    Wybór kolejności wyświetlania koszy w katalogu można dokonac poprzez ikony   <i class="fa fa-arrow-up  icon_up" aria-hidden="true"></i>  <i class="fa fa-arrow-down " aria-hidden="true" (click)="DownOnList(row.basketId)"> </i>
+    lub poprzez przeciągnięcie kosza na żadaną pozycję poprzez ikonę  <i class="fa fa-bars  icon_bar" aria-hidden="true""> </i>
+</p>
+
+</div>
+<p-table [value]="selectedBasketService.selectedBasket" (onEditComplete)="onTableEditComplete($event)" (onEditInit)="onTableEditInit($event)" >
       <ng-template pTemplate="header">
           <tr>
               <th class="order_col">Przesuń</th>
               <th >Numer strony</th>
-              <th >Nazwa</th>
+              <th >Nazwa kosza</th>
               <th>Cena zakupu</th>
               <th>Cena własna</th>
               <th>Zdjęcie kosza</th>
@@ -24,9 +39,10 @@ Complete
               <td pEditableColumn>
                   <p-cellEditor>
                       <ng-template pTemplate="input">
-                          <input type="text" [(ngModel)]="row.basketName">
+                          <input type="text"   [(ngModel)]="row.basketName" [maxlength]="27" >
+
                       </ng-template>
-                      <ng-template pTemplate="output">
+                      <ng-template  pTemplate="output">
                           {{row.basketName}}
                       </ng-template>
                   </p-cellEditor>
@@ -41,10 +57,11 @@ Complete
               <td pEditableColumn [pEditableColumn]="row" [pEditableColumnField]="col">
                   <p-cellEditor>
                       <ng-template pTemplate="input">
-                          <input type="text" [(ngModel)]="row.ownPrice">
+                          <input type="text"   [(ngModel)]="row.ownPrice" >
                       </ng-template>
-                      <ng-template pTemplate="output">
+                      <ng-template  pTemplate="output">
                           {{row.ownPrice| number : '1.2-2'}} zł
+
                       </ng-template>
                   </p-cellEditor>
               </td>

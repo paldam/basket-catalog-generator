@@ -13,7 +13,7 @@ export const BASKET_ROUTE: Routes = [
         component: CatalogGeneratorCoreComponent,
 
         data: {
-            authorities: ['ROLE_ADMIN']
+            authorities: ['ROLE_USER']
         },
         canActivate: [UserRouteAccessService]
     },
@@ -21,7 +21,7 @@ export const BASKET_ROUTE: Routes = [
         path: 'basketcustomize',
         component: BasketCustomizeComponent,
         data: {
-            authorities: ['ROLE_ADMIN']
+            authorities: ['ROLE_USER']
         },
         canActivate: [UserRouteAccessService]
     }

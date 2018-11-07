@@ -16,7 +16,7 @@
 
             <div class="form-group">
                 <small id="catalogForDescript" class="text-muted">Katalog dla</small>
-                <input type="text" name="catalog_for" #catalog_for="ngModel"  class="form-control" size="50"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.forWho">
+                <input type="text" name="catalog_for" #catalog_for="ngModel"  class="form-control" size="50"  maxlength="25" aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.forWho">
                 <ul class="text-danger list-unstyled" *ngIf="catalog_for.dirty|| formSubmitted">
                     <li  *ngIf="catalog_for.errors?.required">Wprowadź dla jakiej firmy przeznaczony jest katalog</li>
                 </ul>
@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <small id="customerAssistantNameDescript" class="text-muted">Imię i nazwisko opiekuna</small>
-                    <input type="text" name="customerAssistantName" #customerAssistantName="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantName">
+                    <input type="text" name="customerAssistantName" #customerAssistantName="ngModel"  class="form-control" maxlength="40" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantName">
                     <ul class="text-danger list-unstyled" *ngIf="customerAssistantName.dirty|| formSubmitted">
                         <li  *ngIf="customerAssistantName.errors?.required">Wprowadź opiekuna firmy</li>
                     </ul>
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <small id="customerAssistantEmailDescript" class="text-muted">Email</small>
-                    <input type="text" name="customerAssistantEmail" #customerAssistantEmail="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantEmail">
+                    <input type="text" name="customerAssistantEmail" #customerAssistantEmail="ngModel"  class="form-control"  maxlength="35" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantEmail">
                     <ul class="text-danger list-unstyled" *ngIf="customerAssistantEmail.dirty|| formSubmitted">
                         <li  *ngIf="customerAssistantEmail.errors?.required">Wprowadź email</li>
                     </ul>
@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <small id="customerAssistantPhoneDescript" class="text-muted">Telefon</small>
-                    <input type="text" name="customerAssistantPhone" #customerAssistantPhone="ngModel"  class="form-control" size="300"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantTel">
+                    <input type="text" name="customerAssistantPhone" #customerAssistantPhone="ngModel"  class="form-control" size="300"  maxlength="20"  aria-describedby="catalog_forDesc" required [(ngModel)]="catalogArchive.customerAssistantTel">
                     <ul class="text-danger list-unstyled" *ngIf="customerAssistantPhone.dirty|| formSubmitted">
                         <li  *ngIf="customerAssistantPhone.errors?.required">Wprowadź telefon</li>
                     </ul>
@@ -55,34 +55,51 @@
 
             </p-fieldset>
 
+            <!--<div class="form-group">-->
+                <!--<small id="catalogThemeDescript" class="text-muted">Motyw</small>-->
+                <!--<input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">-->
+                <!--<ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">-->
+                    <!--<li  *ngIf="catalogTheme.errors?.required">wpisz motyw</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+
             <div class="form-group">
-                <small id="catalogThemeDescript" class="text-muted">Motyw</small>
-                <input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">
+                <label for="exampleFormControlSelect1">Wybierz motyw</label>
+                <select name="profile" class="form-control" id="exampleFormControlSelect1" #catalogTheme="ngModel" [(ngModel)]="catalogArchive.catalogTheme" required>
+                    <option  *ngFor="let theme of themesImages" [value]="theme.name" >{{theme.name}}</option>
+                </select>
                 <ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">
-                    <li  *ngIf="catalogTheme.errors?.required">wpisz motyw</li>
+                    <li  *ngIf="catalogTheme.errors?.required">Wybierz motyw</li>
                 </ul>
             </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option *ngFor="let theme of themesImages">{{theme.name}}</option>
-                </select>
-            </div>
+
+
+            <!--<select name="profile" ngModel>-->
+                <!--<option *ngFor="let theme of themesImage" [ngValue]="prf">-->
+                    <!--{{ prf.prName }}-->
+                <!--</option>-->
+            <!--</select>-->
+
+
+            <!--<select [compareWith]="compareSupplier" class="form-control"  #supplier="ngModel" [(ngModel)]="product.supplier" name="supplier"  required >-->
+                <!--<option *ngFor="let item of productSuppliers"  [ngValue]="item"  >{{item.supplierName}}</option>-->
+            <!--</select>-->
+
 
 
             <div class="form-group filebox">
                 <label class="form-control-label" for="field_logo">Wgraj logo (rozmiar szer. 400px  wys 300px format .jpg)</label>
                 <div>
-                    <div *ngIf="catalogArchive.logo" class="form-text text-danger clearfix">
-                        <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)">open</a><br>
-                        <span class="pull-left">{{catalogArchive.logoContentType}}, {{size| number:'1.1-2'}}MB</span>
-                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"s
+                    <div *ngIf="catalogArchive.logo" class="form-text clearfix">
+                        <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)"></a><br>
+                        <span class="pull-left">{{catalogArchive.logoContentType}}, {{size| number:'1.1-2'}} MB</span>
+                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"
                                 class="btn btn-secondary btn-xs pull-right">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>
-                    <input  #coverFilesInput type="file" id="file_logo" (change)="setFileData($event, catalogArchive, 'logo', false);onChange($event)"/>
+                    <input  #coverFilesInput type="file" id="file_logo" required (change)="setFileData($event, catalogArchive, 'logo', false);onChange($event)"/>
                 </div>
                 <input type="hidden" class="form-control" name="logo" id="field_logo" #logo="ngModel"
                        [(ngModel)]="catalogArchive.logo" required />
