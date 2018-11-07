@@ -12,6 +12,9 @@ export class BasketCustomizeComponent implements OnInit {
     public basketToCustomize: any[] = [];
     public selectedImgeToPreview: number;
     selectCars: Basket[];
+    public bland: string;
+    public row: any;
+    public col: any;
 
     constructor(public selectedBasketService: SelectedBasketService) {}
 
@@ -54,8 +57,14 @@ export class BasketCustomizeComponent implements OnInit {
         console.log(event.data);
         event.data.ownPrice = 0;
     }
-    // onTableEditComplete(event: any){
-    //     console.log(event.data);
-    //     event.data.ownPrice = event.data.basketTotalPrice*100;
-    // }
+
+    onTableEditComplete(event: any) {
+        //    let regexp = new RegExp('^(?=.*?\\d)\\d*[.]?\\d{1,2}$');
+        //    let  test = regexp.test(event.data.ownPrice);
+        // alert("To pole musi zawierać format waluty z kropką np : 0.59 , 2.5 , 0.99 , 19.99"); // will display true
+        //
+        // console.log(regexp.test(event.data.ownPrice));
+    }
+
+    valid() {}
 }

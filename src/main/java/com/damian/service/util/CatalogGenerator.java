@@ -51,9 +51,22 @@ public class CatalogGenerator {
 
         String FIRST_PAGE_IMAGE = "themes/" +theme + "/obraz.jpg";
         String CONTENT_PAGE_TOP_BACKGROUND = "themes/" +theme + "/belka.jpg";
+
+
+
         String THEME_FONT = "themes/" +theme + "/czcionka.ttf";
 
         String BASKET_EXAMPLE = "themes/fonts/kosz.png" ;
+
+
+        try{
+            PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
+        }catch(com.itextpdf.io.IOException ex){
+            THEME_FONT = "themes/" +theme + "/czcionka.otf";
+            PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
+        }
+
+
 
         PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
 
@@ -93,6 +106,9 @@ public class CatalogGenerator {
         setBorderForAllElement(logoImg);
 
 
+
+
+
         Text catalogName = new Text(catalog.getCatalogName())
             .setFont(fontTheme)
             .setFontSize(37)
@@ -100,13 +116,17 @@ public class CatalogGenerator {
             .setTextAlignment(TextAlignment.CENTER)
             .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
+
+
+
         Paragraph p = new Paragraph().add(catalogName);
-        p.setFixedPosition(30, 275, 350);
+
+
         setBorderForAllElement(p);
         p.setHeight(120);
         p.setWidth(408);
         p.setFixedLeading(40f);
-
+        p.setFixedPosition(30, 275, 350);
 
         Text offertText = new Text("Oferta przygotowana dla firmy:")
             .setFont(fontRobotoItalic)
@@ -230,13 +250,41 @@ public class CatalogGenerator {
 
                 Text catalogNameContent = new Text(catalog.getCatalogName())
                     .setFont(fontTheme)
-                    .setFontSize(49)
                     .setFontColor(Color.WHITE)
                     .setTextAlignment(TextAlignment.CENTER)
                     .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
+
+
+
+
+                if(!theme.equals("Motyw_10") ){
+                    catalogNameContent.setFontSize(60);
+
+                }else{
+                    catalogNameContent.setFontSize(49);
+
+                }
+
+
+
                 Paragraph catalogNameContentParagraph = new Paragraph().add(catalogNameContent);
-                catalogNameContentParagraph.setFixedPosition(40, 660, 1330);
+
+
+                if(!theme.equals("Motyw_10")){
+                    catalogNameContentParagraph.setFixedPosition(40, 650, 1330);
+
+                }else{
+                    catalogNameContentParagraph.setFixedPosition(40, 660, 1330);
+
+                }
+
+                if(theme.equals("Motyw_5")){
+                    catalogNameContentParagraph.setFixedPosition(40, 670, 1330);
+
+                }
+
+
                 setBorderForAllElement(catalogNameContentParagraph);
                 catalogNameContentParagraph.setHeight(120);
                 catalogNameContentParagraph.setWidth(1366);

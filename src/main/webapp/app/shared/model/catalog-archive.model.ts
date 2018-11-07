@@ -1,9 +1,6 @@
 import { IBasket } from 'app/shared/model//basket.model';
 
-export const enum Theme {
-    NIEBIESKI = 'NIEBIESKI',
-    CZERWONY = 'CZERWONY'
-}
+export const enum Theme {}
 
 export interface ICatalogArchive {
     id?: number;
