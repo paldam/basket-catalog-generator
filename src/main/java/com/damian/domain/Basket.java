@@ -48,7 +48,7 @@ public class Basket implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "products_id", referencedColumnName = "id"))
     private Set<Product> products = new HashSet<>();
 
-    @ManyToMany(mappedBy = "baskets")
+    @ManyToMany(mappedBy = "baskets" ,fetch = FetchType.EAGER)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CatalogArchive> catalogArchives = new HashSet<>();
@@ -172,15 +172,5 @@ public class Basket implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "Basket{" +
-            "id=" + id +
-            ", basketName='" + basketName + '\'' +
-            ", basketTotalPrice=" + basketTotalPrice +
-            ", orginBasketId=" + orginBasketId +
-            ", products=" + products +
-            ", catalogArchives=" + catalogArchives +
-            '}';
-    }
+
 }

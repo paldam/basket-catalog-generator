@@ -9,7 +9,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>Data</span></th>
+   ŚŚ         <th><span>Data</span></th>
             <th><span>Nazwa Katalogu</span></th>
             <th><span>Dla</span></th>
             <th><span>Przedstawiciel</span></th>
@@ -49,3 +49,24 @@
         </table>
     </div>
 </div>
+
+<p-dialog  header="Generowanie katalogu" closeOnEscape="true" modal="true" width="400" height="200" [(visible)]="showPdfGenStatusModal"  >
+
+    <div *ngIf="!fileFilterLoaded" class="loading fadeIn">
+        <p-progressSpinner ></p-progressSpinner>
+        <p> Trwa generowanie katalogu </p>
+    </div>
+
+    <div *ngIf="fileFilterLoaded" class="loading fadeIn">
+
+        <p class="pdf_link" (click)="openPdfInBrowser()"> Pobierz katalog </p>
+    </div>
+
+
+
+
+
+
+</p-dialog>
+
+

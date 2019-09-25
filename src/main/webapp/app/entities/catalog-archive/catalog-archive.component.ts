@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
@@ -7,15 +7,21 @@ import { CatalogArchive, ICatalogArchive } from 'app/shared/model/catalog-archiv
 import { Principal } from 'app/core';
 import { CatalogArchiveService } from './catalog-archive.service';
 import { CatalogGeneratorService } from '../../catalog-generator/catalog-generator.service';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
     selector: 'jhi-catalog-archive',
-    templateUrl: './catalog-archive.component.html'
+    templateUrl: './catalog-archive.component.html',
+    styleUrls: ['./catalog-archive.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class CatalogArchiveComponent implements OnInit, OnDestroy {
     catalogArchives: ICatalogArchive[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    public showPdfGenStatusModal: boolean = false;
+    public generatedPdf: any;
+    fileFilterLoaded: Promise<boolean>;
 
     constructor(
         private catalogArchiveService: CatalogArchiveService,
@@ -69,9 +75,27 @@ export class CatalogArchiveComponent implements OnInit, OnDestroy {
     }
 
     genCatalog(id: number) {
+        this.showPdfGenStatusModal = true;
+
         this.catalogGeneratorService.reGenerteCatalog(id).subscribe(res => {
-            var fileURL = URL.createObjectURL(res);
-            window.open(fileURL);
+            setTimeout(() => {
+                this.fileFilterLoaded = Promise.resolve(true);
+            }, 1800);
+            this.generatedPdf = res;
         });
+    }
+
+    openPdfInBrowser() {
+        //window.open(this.generatedUrl);
+        let d = new Date();
+        let pdfName = 'katalog_' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString() + '.pdf';
+
+        saveAs(this.generatedPdf, pdfName);
+        this.showPdfGenStatusModal = false;
+        this.generatedPdf = [];
+
+        // setTimeout(() => {
+        //     this.router.navigateByUrl('/catalog-archive');
+        // }, 1000);
     }
 }

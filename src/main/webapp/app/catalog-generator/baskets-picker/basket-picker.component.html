@@ -4,7 +4,7 @@
      <p-dialog header="Title" [(visible)]="display" [contentStyle]="{'height': '740px'}"  [width]="800" [blockScroll]="true" [modal]="true" [dismissableMask]="true" [showHeader]="false">
          <div class="center">
              <i class="close_icon fa fa-times fa-2x" aria-hidden="true" (click)="closeDialog()"></i>
-            <img  src="http://www.kosze.ovh/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="700" width="700" />
+            <img  src="http://www.kosze.waw.pl/images/basketext/basket-image/{{selectedImgeToPreview}}.jpg" alt="Galleria 1" height="700" width="700" />
          </div>
      </p-dialog>
 
@@ -48,8 +48,9 @@
 
 
                     <img  *ngIf="basket.isAlcoholic==1" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
-                        <img src="http://www.kosze.ovh/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">
+                        <img src="http://www.kosze.waw.pl/images/basketext/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">
 
+                    <!--<img src="http://www.kosze.ovh/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">-->
 
                     <div class="basket_price">{{basket.basketTotalPrice/100| number : '1.2-2'}} zł</div>
                     <button *ngIf="!idExistsOnSelectedBasket(basket.basketId)"type="button" class="addBasketButton fadeIn" [disabled]='idExistsOnSelectedBasket(basket.basketId)'  (click)="addBasket(basket)" >Dodaj</button>

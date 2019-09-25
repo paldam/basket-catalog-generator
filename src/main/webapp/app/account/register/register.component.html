@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="email"
-                            [(ngModel)]="registerAccount.email" minlength=5 maxlength=254 email >
+                            [(ngModel)]="registerAccount.email" required minlength=5 maxlength=254 email >
                     <div *ngIf="email.dirty && email.invalid">
                         <small class="form-text text-danger" *ngIf="email.errors.required"
                                >

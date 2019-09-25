@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DialogModule, ProgressSpinnerModule } from 'primeng/primeng';
 
 import { BasketExtSharedModule } from 'app/shared';
 import {
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...catalogArchiveRoute, ...catalogArchivePopupRoute];
 
 @NgModule({
-    imports: [BasketExtSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [BasketExtSharedModule, ProgressSpinnerModule, DialogModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         CatalogArchiveComponent,
         CatalogArchiveDetailComponent,

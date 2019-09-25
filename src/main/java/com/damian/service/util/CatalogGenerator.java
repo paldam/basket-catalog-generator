@@ -70,7 +70,7 @@ public class CatalogGenerator {
 
         PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
 
-
+        log.error("DDDDDDDD" + catalog.toString());
 
         PdfFont fontSegopr = PdfFontFactory.createFont(FONT_SEGOPR, "Cp1250", true);
         PdfFont fontRobotoItalic = PdfFontFactory.createFont(FONT_ROBOTO_ITALIC, "Cp1250", true);
@@ -99,11 +99,19 @@ public class CatalogGenerator {
 
 
 
-        Image logoImg = new Image(ImageDataFactory.create(catalog.getLogo()));
-        logoImg.setFixedPosition(40, 450);
-        logoImg.setHeight(300);
-        logoImg.setWidth(400);
-        setBorderForAllElement(logoImg);
+
+
+        if (catalog.getLogo() != null){
+            Image logoImg = new Image(ImageDataFactory.create(catalog.getLogo()));
+            logoImg.setFixedPosition(40, 450);
+            logoImg.setHeight(300);
+            logoImg.setWidth(400);
+            setBorderForAllElement(logoImg);
+            doc.add(logoImg);
+        }
+
+
+
 
 
 
@@ -142,7 +150,16 @@ public class CatalogGenerator {
             .setWidth(408)
             .setFixedLeading(40f);
 
-        Text customer = new Text(catalog.getForWho())
+        Text customer = new Text("");
+        if (catalog.getForWho() == null) {
+
+            customer = new Text(" ");
+        }else{
+           customer = new Text(catalog.getForWho());
+
+        }
+
+        customer
             .setFont(fontRobotoBold)
             .setFontSize(36)
             .setFontColor(dSzary)
@@ -151,11 +168,21 @@ public class CatalogGenerator {
 
 
         Paragraph p3 = new Paragraph().add(customer)
-            .setFixedPosition(30, 180, 390);
+            .setFixedPosition(30, 165, 390);
         setBorderForAllElement(p3)
             .setHeight(80)
             .setWidth(408)
             .setFixedLeading(40f);
+
+
+        if (catalog.getForWho() != null) {
+
+            doc.add(p2);
+            doc.add(p3);
+        }
+
+
+
 
         Text customeAssistant = new Text("Opiekun klienta:")
             .setFont(fontRobotoItalic)
@@ -172,41 +199,77 @@ public class CatalogGenerator {
             .setFixedLeading(40f);
 
 
-        Text customeAssistantName = new Text(catalog.getCustomerAssistantName())
+        Text assistantName = new Text("");
+
+        if (catalog.getCustomerAssistantName() == null) {
+
+            assistantName = new Text(" ");
+        }else{
+            assistantName = new Text(catalog.getCustomerAssistantName());
+
+        }
+
+        assistantName
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
             .setTextAlignment(TextAlignment.CENTER)
             .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        Paragraph p5 = new Paragraph().add(customeAssistantName)
+        Paragraph p5 = new Paragraph().add(assistantName)
             .setFixedPosition(30, 100, 350);
         setBorderForAllElement(p5)
             .setWidth(408)
             .setFixedLeading(40f);
         setBorderForAllElement(p5);
 
-        Text customeAssistantEmail = new Text(catalog.getCustomerAssistantEmail())
+
+        Text assistantEmail = new Text("");
+
+        if (catalog.getCustomerAssistantEmail() == null) {
+
+            assistantEmail = new Text(" ");
+        }else{
+            assistantEmail = new Text(catalog.getCustomerAssistantEmail());
+
+        }
+
+        assistantEmail
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
             .setTextAlignment(TextAlignment.CENTER)
             .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        Paragraph p6 = new Paragraph().add(customeAssistantEmail)
+        Paragraph p6 = new Paragraph().add(assistantEmail)
             .setFixedPosition(30, 60, 350)
             .setHeight(50)
             .setWidth(408)
             .setFixedLeading(40f);
         setBorderForAllElement(p6);
-        Text customeAssistantPhone = new Text(catalog.getCustomerAssistantTel())
+
+
+
+
+        Text assistantTel = new Text("");
+
+        if (catalog.getCustomerAssistantTel() == null) {
+
+            assistantTel = new Text(" ");
+        }else{
+            assistantTel = new Text(catalog.getCustomerAssistantTel());
+
+        }
+
+
+       assistantTel
             .setFont(fontRobotoRegular)
             .setFontSize(20)
             .setFontColor(dSzary)
             .setTextAlignment(TextAlignment.CENTER)
             .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        Paragraph p7 = new Paragraph().add(customeAssistantPhone)
+        Paragraph p7 = new Paragraph().add(assistantTel)
             .setFixedPosition(30, 30, 350)
             .setHeight(50)
             .setWidth(408)
@@ -215,15 +278,21 @@ public class CatalogGenerator {
         /////////////////////////////////////////////////
 
 
+
+        if (catalog.getCustomerAssistantTel() == null ||  catalog.getCustomerAssistantEmail()== null || catalog.getCustomerAssistantName() ==null   ){
+
+        }else{
+            doc.add(p4);
+            doc.add(p5);
+            doc.add(p6);
+            doc.add(p7);
+        }
+
+
         doc.add(img);
-        doc.add(logoImg);
         doc.add(p);
-        doc.add(p2);
-        doc.add(p3);
-        doc.add(p4);
-        doc.add(p5);
-        doc.add(p6);
-        doc.add(p7);
+
+
 
 
         canvas.setStrokeColor(dZloty);
@@ -477,19 +546,38 @@ public class CatalogGenerator {
         imgLast.setWidth(891);
 
 
-        Image logoImgLast = new Image(ImageDataFactory.create(catalog.getLogo()));
-        logoImgLast.setFixedPosition(40, 450);
-        logoImgLast.setHeight(300);
-        logoImgLast.setWidth(400);
 
-        Text catalogLastPageInfo = new Text(catalog.getCatalogAdditionalDesc())
+
+        if (catalog.getLogo() != null){
+            Image logoImgLast = new Image(ImageDataFactory.create(catalog.getLogo()));
+            logoImgLast.setFixedPosition(40, 450);
+            logoImgLast.setHeight(300);
+            logoImgLast.setWidth(400);
+            doc.add(logoImgLast);
+        }
+
+
+
+
+        Text catalogAdditionalDes = new Text("");
+
+        if (catalog.getCatalogAdditionalDesc() == null) {
+
+            catalogAdditionalDes = new Text(" ");
+        }else{
+            catalogAdditionalDes = new Text(catalog.getCatalogAdditionalDesc());
+
+        }
+
+
+        catalogAdditionalDes
             .setFont(fontRobotoRegular)
             .setFontSize(17)
             .setFontColor(dSzary)
             .setTextAlignment(TextAlignment.CENTER)
             .setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        Paragraph lastPageParagraph = new Paragraph().add(catalogLastPageInfo);
+        Paragraph lastPageParagraph = new Paragraph().add(catalogAdditionalDes);
         lastPageParagraph.setFixedPosition(30, 40, 350);
         setBorderForAllElement(lastPageParagraph);
         lastPageParagraph.setHeight(380);
@@ -497,7 +585,6 @@ public class CatalogGenerator {
         lastPageParagraph.setFixedLeading(20f);
 
         doc.add(imgLast);
-        doc.add(logoImgLast);
         doc.add(lastPageParagraph);
 
         doc.close();
