@@ -1,18 +1,24 @@
 
 <div class="order_detail_form col-md-4">
     <p-panel header="Dodatkowe informacje">
-        <form id="CatalogForm" novalidate #form="ngForm">
+        <form id="catalogForm" validate #form="ngForm" (submit)="submitForm(form)">
 
 
 
             <div class="form-group">
                 <small id="catalog_nameDescript" class="text-muted">Nazwa katalogu</small>
                 <input type="text" name="catalog_name" #catalog_name="ngModel"  class="form-control" size="50" maxlength="25" aria-describedby="catalog_nameDesc" required [(ngModel)]="catalogArchive.catalogName">
-                <ul class="text-danger list-unstyled" *ngIf="catalog_name.dirty|| formSubmitted">
+                <ul class="text-danger list-unstyled" *ngIf="catalog_name.dirty||formSubmitted">
                     <li  *ngIf="catalog_name.errors?.required">Wprowadz nazwę katalogu</li>
                     <li  *ngIf="catalog_name.errors?.maxlength">Nazwa katalogu może mieć maksymalnie 32 znaki</li>
                 </ul>
             </div>
+
+
+
+
+
+
 
             <div class="form-group">
                 <small id="catalogForDescript" class="text-muted">Katalog dla</small>
@@ -126,16 +132,15 @@
                     <li  *ngIf="catalogLastPageDesc.errors?.required">Wprowadź informacje dodatkowe na ostatnią stronę</li>
                 </ul>
             </div>
+<button class="btn bg-primary " type="submit"  form="catalogForm" >Generuj katalog</button>
 
         </form>
-        <button class="btn bg-primary " (click)="submitForm(form)" form="CatalogForm" >Generuj katalog</button>
-        <button class="btn bg-primary "  >Anuluj </button>
         <!--<div *ngIf="orderItems.length<1 && formSubmitted" class="alert alert-danger" role="alert">-->
             <!--<strong>Błąd. Zamówienie nie może być puste</strong>-->
-<form>
-    <input  type="file" id="file_logo2" name="file_logo2" accept="image/png, image/jpeg" />
-    <input  type="file" id="file_logo3" name="file_logo2"  />
-</form>
+<!--<form>-->
+    <!--<input  type="file" id="file_logo2" name="file_logo2" accept="image/png, image/jpeg" />-->
+    <!--<input  type="file" id="file_logo3" name="file_logo2"  />-->
+<!--</form>-->
 
         <!--</div>-->
     </p-panel>

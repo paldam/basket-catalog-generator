@@ -8,7 +8,8 @@ import { SelectedBasketService } from '../selected-baskets/selected-basket.servi
     encapsulation: ViewEncapsulation.None
 })
 export class CatalogGeneratorCoreComponent implements OnInit {
-    constructor(private selectedBasketService: SelectedBasketService) {}
+    index: number = 0;
+    constructor(public selectedBasketService: SelectedBasketService) {}
 
     ngOnInit() {}
 
@@ -18,5 +19,21 @@ export class CatalogGeneratorCoreComponent implements OnInit {
         } else {
             return true;
         }
+    }
+
+    handleChange(e) {
+        this.index = e.index;
+    }
+
+    openNext() {
+        this.index = this.index === 2 ? 0 : this.index + 1;
+    }
+
+    openPrev() {
+        this.index = this.index === 0 ? 2 : this.index - 1;
+    }
+
+    openFirst() {
+        this.index = 0;
     }
 }

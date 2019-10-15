@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { SelectedBasketService } from '../selected-baskets/selected-basket.service';
 import { Basket } from '../../shared/model/basket.model';
 
@@ -9,6 +9,8 @@ import { Basket } from '../../shared/model/basket.model';
     encapsulation: ViewEncapsulation.None
 })
 export class BasketCustomizeComponent implements OnInit {
+    @Output() backToBeginning: EventEmitter<string> = new EventEmitter();
+
     public basketToCustomize: any[] = [];
     public selectedImgeToPreview: number;
     selectCars: Basket[];
@@ -52,10 +54,18 @@ export class BasketCustomizeComponent implements OnInit {
         }
     }
 
+    backToB() {
+        this.backToBeginning.emit();
+    }
+
     onTableEditInit(event: any) {
         console.log('WWWWWWWWWW');
         console.log(event.data);
         event.data.ownPrice = 0;
+    }
+
+    checkIfMustBackToBegining() {
+        return this.selectedBasketService.selectedBasket.length > 0 ? this.backToB() : this.backToB();
     }
 
     onTableEditComplete(event: any) {

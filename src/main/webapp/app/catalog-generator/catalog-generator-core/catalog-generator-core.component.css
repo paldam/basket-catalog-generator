@@ -3,3 +3,25 @@
     padding: 1em;
     background: 0;
 }
+button {
+    margin-right: 20px;
+}
+
+.navigation-button {
+    position: absolute;
+    right: 28px;
+    top: 27px;
+}
+
+.lei {
+    position: relative;
+    right: -2px;
+    top: -2px;
+}
+
+.pri {
+    position: relative;
+    right: -10px;
+    top: -2px;
+    padding-right: 16px;
+}

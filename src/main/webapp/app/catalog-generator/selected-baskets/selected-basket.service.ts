@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class SelectedBasketService {
+    public tabIndex: number = 0;
+
     public selectedBasket: any[] = [];
     public selectedBasketIds: any[] = [];
     public numberOfBasket = 0;
@@ -19,5 +21,9 @@ export class SelectedBasketService {
 
     removeBasket(basketId: number) {
         this.selectedBasket = this.selectedBasket.filter(basket => basket.basketId != basketId);
+    }
+
+    openNext() {
+        this.tabIndex = this.tabIndex + 1;
     }
 }

@@ -47,7 +47,7 @@
                     </div>
 
 
-                    <img  *ngIf="basket.isAlcoholic==1" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
+                    <img  *ngIf="basket.isAlcoholic==0" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
                         <img src="http://www.kosze.waw.pl/images/basketext/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">
 
                     <!--<img src="http://www.kosze.ovh/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">-->

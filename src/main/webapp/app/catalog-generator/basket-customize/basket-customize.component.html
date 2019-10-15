@@ -71,7 +71,7 @@
               </td>
 
               <td>
-                  <i class="fa fa-trash fa-2x edit_icon" aria-hidden="true" title="Usuń zamówienie" (click)="selectedBasketService.removeBasket(row.basketId)"></i>
+                  <i class="fa fa-trash fa-2x edit_icon" aria-hidden="true" title="Usuń zamówienie" (click)="selectedBasketService.removeBasket(row.basketId);checkIfMustBackToBegining()"></i>
               </td>
 
           </tr>

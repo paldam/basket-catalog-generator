@@ -91,13 +91,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
 
             this.genCatalog(this.catalogArchive);
             this.selectedBasketService.selectedBasket = [];
-
-            // setTimeout(() => {
-            //     this.router.navigateByUrl('/catalog-archive');
-            // }, 1000);
         }
-
-        this.formSubmitted = false;
     }
 
     genCatalog(catalog: CatalogArchive) {
