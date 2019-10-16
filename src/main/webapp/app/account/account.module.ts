@@ -5,7 +5,7 @@ import { BasketExtSharedModule } from 'app/shared';
 
 import {
     PasswordStrengthBarComponent,
-    RegisterComponent,
+    // RegisterComponent,
     ActivateComponent,
     PasswordComponent,
     PasswordResetInitComponent,
@@ -18,12 +18,12 @@ import {
     imports: [BasketExtSharedModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
-        RegisterComponent,
+        // RegisterComponent,
         PasswordComponent,
         PasswordStrengthBarComponent,
         PasswordResetInitComponent,
         PasswordResetFinishComponent,
-        SettingsComponent ,
+        SettingsComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -5,12 +5,14 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
 import { LoginModalService } from 'app/core';
 import { Register } from './register.service';
+import { RoutingState } from 'app/routing-stage';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-register',
     templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit, AfterViewInit {
+export class RegisterComponent2 implements OnInit, AfterViewInit {
     confirmPassword: string;
     doNotMatch: string;
     error: string;
@@ -21,19 +23,25 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     modalRef: NgbModalRef;
 
     constructor(
-        private loginModalService: LoginModalService,
+        // private loginModalService: LoginModalService,
         private registerService: Register,
         private elementRef: ElementRef,
-        private renderer: Renderer
+        private renderer: Renderer,
+        private routingState: RoutingState,
+        private router: Router
     ) {}
 
     ngOnInit() {
         this.success = false;
         this.registerAccount = {};
+        setTimeout(() => {
+            console.log('efwefewwe');
+            console.log(this.routingState.getHistory());
+        }, 1000);
     }
 
     ngAfterViewInit() {
-        this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
+        //this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#login'), 'focus', []);
     }
 
     register() {
@@ -49,14 +57,19 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 () => {
                     this.success = true;
                 },
-                response => this.processError(response)
+                response => this.processError(response),
+                () => {
+                    setTimeout(() => {
+                        this.router.navigateByUrl('home');
+                    }, 7000);
+                }
             );
         }
     }
 
-    openLogin() {
-        this.modalRef = this.loginModalService.open();
-    }
+    // openLogin() {
+    //     this.modalRef = this.loginModalService.open();
+    // }
 
     private processError(response: HttpErrorResponse) {
         this.success = null;

@@ -1,41 +1,81 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
+    <div class="col-md-12">
+        <h1 class="head-start"><span class="head-start-one">Witaj</span> w generatorze zestawów upominkowych dla agencji</h1>
+
+        <!--<div [ngSwitch]="isAuthenticated()">-->
+        <!--<div class="alert alert-success" *ngSwitchCase="true">-->
+        <!--<span id="home-logged-message" *ngIf="account"-->
+        <!--&gt; Jesteś zalogowany jako : "{{account.login}}". </span>-->
+        <!--</div>-->
+
+        <!--<div class="alert alert-warning" *ngSwitchCase="false">-->
+        <!--&lt;!&ndash;<span>If you want to </span>&ndash;&gt;-->
+        <!--<a class="alert-link" (click)="login()">Zaloguj się</a><span>-->
+        <!--</div>-->
+        <!--<div class="alert alert-warning" *ngSwitchCase="false">-->
+        <!--<span>Jeśli nie posidasz konta skontaktuj się z administratorem</span>&nbsp;-->
+        <!--<a class="alert-link" routerLink="register">Register a new account</a>-->
+        <!--</div>-->
+        <!--</div>-->
+
     </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Witaj, W generatorze katalogów</h1>
-        <!--<p class="lead">This is your homepage</p>-->
-
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account"
-                   > Jesteś zalogowany jako : "{{account.login}}". </span>
+        <div class="points">
+            <div class="points-cont">
+                <p><span class="step-num"> 1</span> <span class="step-text">Zakładasz konto</span> </p>
+                <p><span class="step-num"> 2</span> <span class="step-text">Logujesz się</span> </p>
+                <p><span class="step-num"> 3</span> <span class="step-text">Wybierasz zestawy</span> </p>
+                <p><span class="step-num"> 4</span> <span class="step-text">Wgrywasz swoje logo</span> </p>
+                <p><span class="step-num"> 5</span> <span class="step-text"> Generujesz katalog dla swojego klienta</span> </p>
             </div>
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <!--<span>If you want to </span>-->
-                <a class="alert-link" (click)="login()">Zaloguj się</a><span>
-            </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>Jeśli nie posidasz konta skontaktuj się z administratorem</span>&nbsp;
-                <!--<a class="alert-link" routerLink="register">Register a new account</a>-->
+
+            <div class="col-md-12 login">
+                <form class="form" role="form" (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label class="username-label" for="username">Login</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Login"
+                               [(ngModel)]="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Hasło</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Hasło"
+                               [(ngModel)]="password">
+                    </div>
+                    <p></p>
+                    <button type="submit" class="btn log-btn">Zaloguj</button>
+                    <button class="btn rej-btn" (click)="register()">Rejstracja</button>
+                </form>
+                <div class="alert alert-danger" *ngIf="authenticationError">
+                    <strong>Błąd logowania!</strong> Sprawdź login i hasło ponownie.
+                </div>
+                <p></p>
+                <!--<div class="alert alert-warning">-->
+                <!--<a class="alert-link" (click)="requestResetPassword()">Zapomniałeś hasła?</a>-->
+                <!--</div>-->
+                <!--<div class="alert alert-warning">-->
+                <!--<span>You don't have an account yet?</span>-->
+                <!--<a class="alert-link" (click)="register()">Register a new account</a>-->
+                <!--</div>-->
             </div>
         </div>
 
-        <!--<p>-->
-            <!--If you have any question on JHipster:-->
-        <!--</p>-->
 
-        <!--<ul>-->
-            <!--<li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>-->
-            <!--<li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>-->
-            <!--<li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>-->
-            <!--<li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>-->
-            <!--<li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>-->
-        <!--</ul>-->
 
-        <!--<p>-->
-            <!--<span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!-->
-        <!--</p>-->
-    </div>
+
+    <!--<p>-->
+    <!--If you have any question on JHipster:-->
+    <!--</p>-->
+
+    <!--<ul>-->
+    <!--<li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>-->
+    <!--<li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>-->
+    <!--<li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>-->
+    <!--<li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>-->
+    <!--<li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>-->
+    <!--</ul>-->
+
+    <!--<p>-->
+    <!--<span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!-->
+    <!--</p>-->
+</div>
 </div>

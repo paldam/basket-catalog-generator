@@ -43,11 +43,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private  MailService mailService;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, MailService mailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.mailService = mailService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -89,16 +92,16 @@ public class UserService {
 
     public User registerUser(UserDTO userDTO, String password) {
         userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
-            boolean removed = removeNonActivatedUser(existingUser);
-            if (!removed) {
+//            boolean removed = removeNonActivatedUser(existingUser);
+//            if (!removed) {
                 throw new LoginAlreadyUsedException();
-            }
+//            }
         });
         userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).ifPresent(existingUser -> {
-                boolean removed = removeNonActivatedUser(existingUser);
-                if (!removed) {
+//                boolean removed = removeNonActivatedUser(existingUser);
+//                if (!removed) {
                     throw new EmailAlreadyUsedException();
-                }
+//                }
         });
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
@@ -110,14 +113,23 @@ public class UserService {
      newUser.setEmail(userDTO.getEmail().toLowerCase());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
+        newUser.setPhone(userDTO.getPhone());
+        newUser.setWww(userDTO.getWww());
         // new user is not active
-        newUser.setActivated(true);
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+
+        mailService.sendEmail(newUser.getEmail(),
+            "Rejstracja konta w generatorze zestawów",
+            "Twoje konto zostało zarejstrowane w systemie, po potwierdzeniu konta przez administratora otrzymasz możliwość zalogowania się. ",
+            true,
+            true);
+
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
@@ -193,6 +205,10 @@ public class UserService {
      * @return updated user
      */
     public Optional<UserDTO> updateUser(UserDTO userDTO) {
+        User currUserState = userRepository.findById(userDTO.getId()).get();
+        boolean isActivating = currUserState.getActivated();
+
+
         return Optional.of(userRepository
             .findById(userDTO.getId()))
             .filter(Optional::isPresent)
@@ -205,6 +221,16 @@ public class UserService {
                 user.setEmail(userDTO.getEmail().toLowerCase());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
+
+
+                if(isActivating == false && userDTO.isActivated() == true){
+                    mailService.sendEmail(userDTO.getEmail(),
+                        "Rejstracja konta w generatorze zestawów",
+                        "Twoje konto zostało w pełni zarejstrowane. Zaloguj się  www.generatorzestawow.pl ",
+                        true,
+                        true);
+                }
+
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();

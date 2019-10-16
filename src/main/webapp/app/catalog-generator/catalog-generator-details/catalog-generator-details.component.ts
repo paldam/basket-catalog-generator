@@ -129,10 +129,12 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     }
 
     setFileData(event, entity, field, isImage) {
+        console.log('111 ');
         this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     onChange(evt: any) {
+        console.log('222222 ');
         this.percentDone = 100;
         this.uploadSuccess = true;
         let image: any = evt.target.files[0];
@@ -153,8 +155,6 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         };
 
         fr.readAsDataURL(image);
-
-        this.imgType.nativeElement.value = '';
     }
 
     chceckImageValid(): boolean {
@@ -164,16 +164,11 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
             return true;
         }
 
-        if (this.fileType != 'image/jpeg') {
+        if (this.fileType != 'image/jpeg' && this.fileType != 'image/png') {
             return false;
         }
-        if (this.width != 400) {
-            return false;
-        }
-        if (this.height != 300) {
-            return false;
-        }
-        if (this.size > 11) {
+
+        if (this.size > 2) {
             return false;
         } else {
             return true;

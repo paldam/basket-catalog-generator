@@ -19,10 +19,13 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 import { CatalogGeneratorModule } from './catalog-generator/catalog-generator.module';
 import { BasketExtSharedModule } from './shared/shared.module';
 import { GeneratedCatalogModule } from './generated-catalog/generated-catalog.module';
+import { RoutingState } from 'app/routing-stage';
+import { SampleRoutingModule } from 'app/rout.module';
 
 @NgModule({
     imports: [
         BrowserModule,
+        SampleRoutingModule,
         BasketExtAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         BasketExtSharedModule,
@@ -32,10 +35,13 @@ import { GeneratedCatalogModule } from './generated-catalog/generated-catalog.mo
         CatalogGeneratorModule,
         BasketExtEntityModule,
         GeneratedCatalogModule
+        //routing
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
     providers: [
+        RoutingState,
+
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

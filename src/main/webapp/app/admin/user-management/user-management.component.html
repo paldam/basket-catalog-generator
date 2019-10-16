@@ -16,6 +16,8 @@
                 <th jhiSortBy="createdDate"><span>Utworzony</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="lastModifiedBy"><span>Ostatnio modyfikowany</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="lastModifiedDate"><span>Data ostatniej modyfikacji</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="phone"><span>Telefon</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="www"><span>www</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th></th>
             </tr>
             </thead>
@@ -39,6 +41,8 @@
                 <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                 <td>{{user.lastModifiedBy}}</td>
                 <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.www}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <!--<button type="submit"-->
@@ -67,7 +71,7 @@
     </div>
     <div *ngIf="users">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <!--<jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>-->
         </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>

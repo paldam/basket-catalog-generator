@@ -1,10 +1,10 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Dodaj użytkownika</h1>
+            <h1>Zarejstruj konto w generatorze zestawów</h1>
 
             <div class="alert alert-success" *ngIf="success">
-                <strong>Dodano użytkownika</strong>
+                <strong>Twoje konto zostało zarejstrowane w systemie, po potwierdzeniu konta przez administratora otrzymasz możliwość zalogowania się.</strong>
             </div>
 
             <div class="alert alert-danger" *ngIf="error">
@@ -29,7 +29,7 @@
             <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
                 <div class="form-group">
                     <label class="form-control-label" for="login">Użykownik</label>
-                    <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="login"
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder=""
                             required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
                     <div *ngIf="login.dirty && login.invalid">
                         <small class="form-text text-danger" *ngIf="login.errors.required">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="email"
+                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder=""
                             [(ngModel)]="registerAccount.email" required minlength=5 maxlength=254 email >
                     <div *ngIf="email.dirty && email.invalid">
                         <small class="form-text text-danger" *ngIf="email.errors.required"
@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="password">Nowe hasło</label>
-                    <input type="password" class="form-control" id="password" name="password" #password="ngModel" placeholder="hasło"
+                    <input type="password" class="form-control" id="password" name="password" #password="ngModel" placeholder=""
                             [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
                     <div *ngIf="password.dirty && password.invalid">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="confirmPassword">Powtórz hasło</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="powtórz hasło"
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder=""
                             [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
                     <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
                         <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
@@ -113,7 +113,45 @@
                     </div>
                 </div>
 
-                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Dodaj użytkownika</button>
+                <div class="form-group">
+                    <label class="form-control-label" for="login">Telefon</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.phone" id="phone" name="phone" #phone="ngModel" placeholder=""
+                           required minlength="7" maxlength="50" >
+                    <div *ngIf="phone.dirty && phone.invalid">
+                        <small class="form-text text-danger" *ngIf="phone.errors.required">
+                            To pole jest obowiązkowe.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="phone.errors.minlength"
+                        >
+                            Telefon musi posiadać conajmniej 7 znaków
+                        </small>
+                        <small class="form-text text-danger" *ngIf="phone.errors.maxlength"
+                        >
+                            Telefon nie może być dłuższy niż 50 znaków
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="login">Strona www</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.www" id="www" name="www" #www="ngModel" placeholder=""
+                           required minlength="1" maxlength="50" >
+                    <div *ngIf="www.dirty && www.invalid">
+                        <small class="form-text text-danger" *ngIf="www.errors.required">
+                            To pole jest obowiązkowe.
+                        </small>
+                        <small class="form-text text-danger" *ngIf="www.errors.minlength"
+                        >
+                            Strona www musi posiadać conajmniej 1 znak
+                        </small>
+                        <small class="form-text text-danger" *ngIf="www.errors.maxlength"
+                        >
+                            Strona www nie może być dłuższy niż 50 znaków
+                        </small>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Zarejstruj</button>
             </form>
             <p></p>
 

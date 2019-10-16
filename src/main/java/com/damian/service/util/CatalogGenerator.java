@@ -10,6 +10,7 @@ import com.itextpdf.kernel.color.DeviceRgb;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -24,6 +25,7 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
@@ -70,7 +72,7 @@ public class CatalogGenerator {
 
         PdfFont fontTheme= PdfFontFactory.createFont(THEME_FONT, "Cp1250", true);
 
-        log.error("DDDDDDDD" + catalog.toString());
+
 
         PdfFont fontSegopr = PdfFontFactory.createFont(FONT_SEGOPR, "Cp1250", true);
         PdfFont fontRobotoItalic = PdfFontFactory.createFont(FONT_ROBOTO_ITALIC, "Cp1250", true);
@@ -101,11 +103,28 @@ public class CatalogGenerator {
 
 
 
+
         if (catalog.getLogo() != null){
             Image logoImg = new Image(ImageDataFactory.create(catalog.getLogo()));
-            logoImg.setFixedPosition(40, 450);
-            logoImg.setHeight(300);
-            logoImg.setWidth(400);
+
+
+            if (logoImg.getImageHeight() ==  logoImg.getImageWidth()){
+
+                logoImg.setFixedPosition(85, 455);
+                logoImg.setHeight(300);
+                logoImg.setWidth(300);
+                 System.out.println("1111" );
+
+
+
+            }else{
+                logoImg.setFixedPosition(40, 465);
+                logoImg.scaleToFit(400,300);
+                System.out.println("22222" );
+            }
+
+
+
             setBorderForAllElement(logoImg);
             doc.add(logoImg);
         }
@@ -305,7 +324,7 @@ public class CatalogGenerator {
          Set<Basket> basketList = catalog.getBaskets();
            int currentPosition = 0;
             for (Basket basket : basketList) {
-                log.error("Noa strona ____________________________ "  );
+
 
                 PdfCanvas canvasPage2 = new PdfCanvas(pdfDoc.addNewPage());
                 doc.add(new AreaBreak(AreaBreakType.NEXT_PAGE));
@@ -366,9 +385,10 @@ public class CatalogGenerator {
                 String BASKET_IMG = sb.toString();
 
                 Image BasketImage = new Image(ImageDataFactory.create(BASKET_IMG));
-                BasketImage.setFixedPosition(43, 35);
-                BasketImage.setHeight(600);
-                BasketImage.setWidth(600);
+                BasketImage.setFixedPosition(130, 65);
+                BasketImage.scaleToFit(600,600);
+//                BasketImage.setHeight(600);
+//                BasketImage.setWidth(600);
 
 
                 Text basketName = new Text(basket.getBasketName())
@@ -394,6 +414,15 @@ public class CatalogGenerator {
 
 
                 int hPosition = 460;
+
+
+                if(productsList.size()>20){
+
+                }
+                boolean isLongList = productsList.size()>15;
+
+                boolean isLastLineLong = false;
+
                 for (Product products : productsList) {
 
                     Text productName = new Text("- " + products.getProductName() + " " + products.getProductCapacity())
@@ -406,44 +435,67 @@ public class CatalogGenerator {
 
 
 
-                    if(currentPosition!=0){
-
-                        if(products.getProductName().length() > 52){
-                            hPosition -=  38;
-                        }else{
-                            hPosition -= 20;
-                        }
-                    }
 
 
 
                     Paragraph productNameParagraph = new Paragraph().add(productName);
-                    productNameParagraph.setFixedPosition(830, hPosition, 500);
 
-
-                    if(products.getProductName().length() > 52){
-                        productNameParagraph.setHeight(60);
+                    if(isLongList){
+                        productName.setFontSize(13);
                         productNameParagraph.setFixedLeading(20f);
+                        productNameParagraph.setHeight(25);
+
+//                        if(products.getProductName().length() > 69) {
+//                            hPosition -= 33;
+//                        }else{
+//                            hPosition -= 15;
+//                        }
+                        hPosition -= 15;
+
+
                     }else{
-                        productNameParagraph.setHeight(50);
+                        if(products.getProductName().length() > 52){
+
+                            productNameParagraph.setHeight(60);
+                            productNameParagraph.setFixedLeading(20f);
+
+
+                            if(isLastLineLong){
+                                hPosition -= 7;
+                            }
+
+                            if(currentPosition!=0) {
+                                hPosition -= 38;
+                            }
+                            isLastLineLong = true;
+                        }else{
+
+                            productNameParagraph.setHeight(50);
+                            if(currentPosition!=0) {
+                                hPosition -= 20;
+                            }
+
+                            if(isLastLineLong){
+                                hPosition -= 7;
+                            }
+
+                            isLastLineLong = false;
+                        }
+
+
+
                     }
 
-                    //setBorderForAllElement(productNameParagraph);
-                    //productNameParagraph.setHeight(50);
-                    productNameParagraph.setWidth(500);
-                    //setBorderForAllElement(productNameParagraph);
 
+                    productNameParagraph.setFixedPosition(830, hPosition, 500);
 
+                    productNameParagraph.setWidth(510);
 
 
                     doc.add(productNameParagraph);
                     currentPosition++;
 
 
-
-                        if(products.getProductName().length() > 52) {
-                            hPosition -= 7;
-                        }
                 }
 
                 canvasPage2.setStrokeColor(dZloty);
@@ -480,36 +532,36 @@ public class CatalogGenerator {
 
                 switch (convertedPrice.length()) {
                     case 5:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
                         basketPriceParagraph.setFixedPosition(1180, hPosition - 90, 500);
                         break;
                     case 6:
                         basketPriceParagraph.setFixedPosition(1150, hPosition - 90, 500);
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         break;
                     case 7:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         basketPriceParagraph.setFixedPosition(1120, hPosition - 90, 500);
                         break;
                     case 8:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         basketPriceParagraph.setFixedPosition(1110, hPosition - 90, 500);
                         break;
                     case 9:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         basketPriceParagraph.setFixedPosition(1080, hPosition - 90, 500);
                         break;
                     case 10:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         basketPriceParagraph.setFixedPosition(1050, hPosition - 90, 500);
                         break;
                     default:
-                        log.error("CEEEEEEEEE" + convertedPrice.length());
+
 
                         basketPriceParagraph.setFixedPosition(1160, hPosition - 90, 500);
                         break;
@@ -548,13 +600,37 @@ public class CatalogGenerator {
 
 
 
+
+
+
+
         if (catalog.getLogo() != null){
             Image logoImgLast = new Image(ImageDataFactory.create(catalog.getLogo()));
-            logoImgLast.setFixedPosition(40, 450);
-            logoImgLast.setHeight(300);
-            logoImgLast.setWidth(400);
+
+
+            if (logoImgLast.getImageHeight() ==  logoImgLast.getImageWidth()){
+
+                logoImgLast.setFixedPosition(85, 455);
+                logoImgLast.setHeight(300);
+                logoImgLast.setWidth(300);
+                System.out.println("1111" );
+
+
+
+            }else{
+                logoImgLast.setFixedPosition(40, 465);
+                logoImgLast.scaleToFit(400,300);
+                System.out.println("22222" );
+            }
+
+
+            setBorderForAllElement(logoImgLast);
             doc.add(logoImgLast);
         }
+
+
+
+
 
 
 

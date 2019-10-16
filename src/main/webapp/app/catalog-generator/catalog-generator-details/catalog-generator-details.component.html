@@ -95,17 +95,18 @@
 
 
             <div class="form-group filebox">
-                <label class="form-control-label" for="field_logo">Wgraj logo (rozmiar szer. 400px  wys 300px format .jpg)</label>
+                <label class="form-control-label" for="field_logo">Wgraj logo , max 2MB. Możliwe formaty to .jpg .png</label>
                 <div>
                     <div *ngIf="catalogArchive.logo" class="form-text clearfix">
                         <a class="pull-left" (click)="openFile(catalogArchive.logoContentType, catalogArchive.logo)"></a><br>
                         <span class="pull-left">{{catalogArchive.logoContentType}}, {{size| number:'1.1-2'}} MB</span>
-                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;"
+                        <button type="button" (click)="catalogArchive.logo=null;catalogArchive.logoContentType=null;imgType.nativeElement.value = '';this.image=null"
                                 class="btn btn-secondary btn-xs pull-right">
                             <fa-icon [icon]="'times'"></fa-icon>
                         </button>
                     </div>
-                    <input  #coverFilesInput  type="file" id="file_logo" accept="image/png, image/jpeg"   (change)="setFileData($event, catalogArchive, 'logo', false);onChange($event)"/>
+
+                    <input  #coverFilesInput  type="file" id="file_logo" accept="image/png, image/jpeg"    (change)="setFileData($event, catalogArchive, 'logo', false);onChange($event)"/>
 
 
                 </div>

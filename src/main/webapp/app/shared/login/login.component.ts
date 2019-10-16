@@ -44,6 +44,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
+        console.log('000000000 ');
         this.loginService
             .login({
                 username: this.username,
@@ -56,20 +57,17 @@ export class JhiLoginModalComponent implements AfterViewInit {
                 if (this.router.url === '/register' || /^\/activate\//.test(this.router.url) || /^\/reset\//.test(this.router.url)) {
                     this.router.navigateByUrl('/catalog-archive');
                 }
-
-                if (this.router.url === '/') {
-                    setTimeout(() => {
-                        this.router.navigateByUrl('/generator');
-                    }, 1000);
-                }
+                console.log('11111111111 ');
+                setTimeout(() => {
+                    this.router.navigateByUrl('generator');
+                    console.log('2222222222 ');
+                }, 200);
 
                 this.eventManager.broadcast({
                     name: 'authenticationSuccess',
                     content: 'Sending Authentication Success'
                 });
 
-                // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-                // since login is succesful, go to stored previousState and clear previousState
                 const redirect = this.stateStorageService.getUrl();
                 if (redirect) {
                     this.stateStorageService.storeUrl(null);

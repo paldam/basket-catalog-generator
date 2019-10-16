@@ -51,6 +51,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String firstName;
 
     @Size(max = 50)
+    @Column(name = "phone", length = 50)
+    private String phone;
+
+    @Size(max = 50)
+    @Column(name = "www", length = 50)
+    private String www;
+
+    @Size(max = 50)
     @Column(name = "last_name", length = 50)
     private String lastName;
 
@@ -199,7 +207,25 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getWww() {
+        return www;
+    }
+
+    public void setWww(String www) {
+        this.www = www;
+    }
+
     @Override
+
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;

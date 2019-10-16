@@ -21,3 +21,58 @@ Main page styles
         background-size: contain;
     }
 }
+
+.points {
+    width: 500px;
+    height: 700px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.step-num {
+    font-size: 30px;
+    color: #353d47;
+    color: #ee3162;
+}
+
+.points-cont {
+    text-align: left;
+    margin-left: 150px;
+    padding-bottom: 30px;
+}
+
+.step-text {
+    position: relative;
+    top: -8px;
+    left: 20px;
+    color: #212529;
+}
+
+.login {
+    padding-top: 30px;
+    padding-bottom: 15px;
+    text-align: left;
+    background-color: #fbfbfb;
+}
+
+.rej-btn {
+    background-color: #ee3162;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.head-start-one {
+    color: #0e9ae5;
+}
+
+.log-btn {
+    background-color: #0e9ae5;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.head-start {
+    color: #212529;
+    font-size: 38px;
+}

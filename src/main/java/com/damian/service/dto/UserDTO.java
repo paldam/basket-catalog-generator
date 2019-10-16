@@ -52,6 +52,8 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
+    private String phone;
+    private String www;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -73,6 +75,8 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.phone = user.getPhone();
+        this.www = user.getWww();
     }
 
     public Long getId() {
@@ -177,6 +181,22 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getWww() {
+        return www;
+    }
+
+    public void setWww(String www) {
+        this.www = www;
     }
 
     @Override
