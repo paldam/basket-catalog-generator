@@ -19,45 +19,78 @@
         <!--</div>-->
 
     </div>
-        <div class="points">
-            <div class="points-cont">
-                <p><span class="step-num"> 1</span> <span class="step-text">Zakładasz konto</span> </p>
-                <p><span class="step-num"> 2</span> <span class="step-text">Logujesz się</span> </p>
-                <p><span class="step-num"> 3</span> <span class="step-text">Wybierasz zestawy</span> </p>
-                <p><span class="step-num"> 4</span> <span class="step-text">Wgrywasz swoje logo</span> </p>
-                <p><span class="step-num"> 5</span> <span class="step-text"> Generujesz katalog dla swojego klienta</span> </p>
-            </div>
 
 
-            <div class="col-md-12 login">
-                <form class="form" role="form" (ngSubmit)="login()">
-                    <div class="form-group">
-                        <label class="username-label" for="username">Login</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Login"
-                               [(ngModel)]="username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Hasło</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Hasło"
-                               [(ngModel)]="password">
+    <div class="row intt">
+        <div class="col-xl-6 isn">
+            <p class="bold step-hei"> Witaj w generatorze katalogów</p>
+            <p class="step-hei">
+
+                Zestawy dostępne w generatorze nie pokrywają się z żadnymi innymi zestawami które prezentowane są na naszych stronach. Dzięki temu mają Państwo pewność, że klient któremu pragniecie przedstawić katalog agencyjny nie będzie w stanie znaleźć takiego zestawu w sieci oraz kontaktu do producenta.
+
+            <p class="step-hei">  Minimalne zamówienie to 20 zestawów upominkowych.  Podane ceny są cenami netto.</p>
+
+
+            <p class="step-hei"> Wszelkie zamówienia prosimy kierować na maila <a href = "mailto: biuro@swiatecznekosze.pl">biuro@swiatecznekosze.pl</a></p>
+
+            <p class="step-hei ">     Wszelkie pytania dotyczące działania generatora oraz pomoc techniczna: <a href = "mailto: info@zestawydlaagencji.pl">info@zestawydlaagencji.pl</a> </p>
+            <p class="bold">
+                Zapraszamy !!
+            </p>
+        </div>
+
+
+        <div class="col-xl-6">
+
+            <div class="points">
+                <div class="points-cont">
+                    <p><span class="step-num"> 1</span> <span class="step-text">Zakładasz konto</span> </p>
+                    <p><span class="step-num"> 2</span> <span class="step-text">Logujesz się</span> </p>
+                    <p><span class="step-num"> 3</span> <span class="step-text">Wybierasz zestawy</span> </p>
+                    <p><span class="step-num"> 4</span> <span class="step-text">Wgrywasz swoje logo</span> </p>
+                    <p><span class="step-num"> 5</span> <span class="step-text"> Generujesz katalog dla swojego klienta</span> </p>
+                </div>
+
+
+                <div class="col-md-12 login">
+                    <form class="form" role="form" (ngSubmit)="login()">
+                        <div class="form-group">
+                            <label class="username-label" for="username">Login</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Login"
+                                   [(ngModel)]="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Hasło</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Hasło"
+                                   [(ngModel)]="password">
+                        </div>
+                        <p></p>
+                        <button type="submit" class="btn log-btn">Zaloguj</button>
+                        <button class="btn rej-btn" (click)="register()">Rejstracja</button>
+                    </form>
+                    <div class="alert alert-danger" *ngIf="authenticationError">
+                        <strong>Błąd logowania!</strong> Sprawdź login i hasło ponownie.
                     </div>
                     <p></p>
-                    <button type="submit" class="btn log-btn">Zaloguj</button>
-                    <button class="btn rej-btn" (click)="register()">Rejstracja</button>
-                </form>
-                <div class="alert alert-danger" *ngIf="authenticationError">
-                    <strong>Błąd logowania!</strong> Sprawdź login i hasło ponownie.
+                    <!--<div class="alert alert-warning">-->
+                    <!--<a class="alert-link" (click)="requestResetPassword()">Zapomniałeś hasła?</a>-->
+                    <!--</div>-->
+                    <!--<div class="alert alert-warning">-->
+                    <!--<span>You don't have an account yet?</span>-->
+                    <!--<a class="alert-link" (click)="register()">Register a new account</a>-->
+                    <!--</div>-->
                 </div>
-                <p></p>
-                <!--<div class="alert alert-warning">-->
-                <!--<a class="alert-link" (click)="requestResetPassword()">Zapomniałeś hasła?</a>-->
-                <!--</div>-->
-                <!--<div class="alert alert-warning">-->
-                <!--<span>You don't have an account yet?</span>-->
-                <!--<a class="alert-link" (click)="register()">Register a new account</a>-->
-                <!--</div>-->
             </div>
         </div>
+
+    </div>
+
+
+
+
+
+
+
 
 
 

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -29,13 +28,11 @@ import java.util.Optional;
 public class CatalogArchiveResource {
 
     private final Logger log = LoggerFactory.getLogger(CatalogArchiveResource.class);
-
     private static final String ENTITY_NAME = "catalogArchive";
-
     private final CatalogArchiveRepository catalogArchiveRepository;
     private UserRepository userRepository;
 
-    public CatalogArchiveResource(CatalogArchiveRepository catalogArchiveRepository , UserRepository userRepository) {
+    public CatalogArchiveResource(CatalogArchiveRepository catalogArchiveRepository, UserRepository userRepository) {
         this.catalogArchiveRepository = catalogArchiveRepository;
         this.userRepository = userRepository;
     }
@@ -55,9 +52,7 @@ public class CatalogArchiveResource {
             throw new BadRequestAlertException("A new catalogArchive cannot already have an ID", ENTITY_NAME, "idexists");
         }
         CatalogArchive result = catalogArchiveRepository.save(catalogArchive);
-        return ResponseEntity.created(new URI("/api/catalog-archives/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity.created(new URI("/api/catalog-archives/" + result.getId())).headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
     }
 
     /**
@@ -77,9 +72,7 @@ public class CatalogArchiveResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         CatalogArchive result = catalogArchiveRepository.save(catalogArchive);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, catalogArchive.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, catalogArchive.getId().toString())).body(result);
     }
 
     /**
@@ -92,16 +85,14 @@ public class CatalogArchiveResource {
     @Timed
     public List<CatalogArchive> getAllCatalogArchives(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all CatalogArchives");
-
         Optional<String> userLogin = SecurityUtils.getCurrentUserLogin();
-
-
-
-        Optional<User> currentUser = userRepository.findOneByLogin(userLogin.get());
-
-        Long currentUserId = currentUser.get().getId();
-
-        return catalogArchiveRepository.findAllByUser(currentUserId);
+        if (SecurityUtils.isCurrentUserInRole("ROLE_SUPERADMIN")) {
+            return catalogArchiveRepository.findAll();
+        } else {
+            Optional<User> currentUser = userRepository.findOneByLogin(userLogin.get());
+            Long currentUserId = currentUser.get().getId();
+            return catalogArchiveRepository.findAllByUser(currentUserId);
+        }
     }
 
     /**
@@ -128,7 +119,6 @@ public class CatalogArchiveResource {
     @Timed
     public ResponseEntity<Void> deleteCatalogArchive(@PathVariable Long id) {
         log.debug("REST request to delete CatalogArchive : {}", id);
-
         catalogArchiveRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }

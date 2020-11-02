@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Basket } from 'app/shared/model/basket.model';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,12 @@ export class SelectedBasketService {
         this.selectedBasket.push(basket);
         this.numberOfBasket = this.selectedBasket.length;
         this.selectedBasketIds.push(basket.basketId);
+
+        console.log(
+            this.selectedBasket.forEach((value: Basket) => {
+                console.log(value.basketName);
+            })
+        );
     }
 
     removeBasket(basketId: number) {

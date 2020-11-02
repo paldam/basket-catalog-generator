@@ -113,3 +113,20 @@ h1 {
     top: 5px;
     right: 5px;
 }
+
+.basket_img {
+    width: 230px;
+    height: auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.main_info {
+    margin-top: 20px;
+}
+
+.step-hei {
+    margin-bottom: 10px !important;
+}

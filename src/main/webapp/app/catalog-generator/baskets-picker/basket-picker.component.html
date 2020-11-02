@@ -28,12 +28,28 @@
 
     </div>
 
+     <div class="alert alert-info tool_info main_info" role="alert">
+         <p class="bold step-hei"> Witaj w generatorze katalogów</p>
+         <p class="step-hei">
 
+             Zestawy dostępne w generatorze nie pokrywają się z żadnymi innymi zestawami które prezentowane są na naszych stronach. Dzięki temu mają Państwo pewność, że klient któremu pragniecie przedstawić katalog agencyjny nie będzie w stanie znaleźć takiego zestawu w sieci oraz kontaktu do producenta.
+
+         <p class="step-hei">  Minimalne zamówienie to 20 zestawów upominkowych.  Podane ceny są cenami netto.</p>
+
+
+         <p class="step-hei"> Wszelkie zamówienia prosimy kierować na maila <a href = "mailto: biuro@swiatecznekosze.pl">biuro@swiatecznekosze.pl</a></p>
+
+         <p class="step-hei ">     Wszelkie pytania dotyczące działania generatora oraz pomoc techniczna: <a href = "mailto: info@zestawydlaagencji.pl">info@zestawydlaagencji.pl</a> </p>
+        <p class="bold">
+             Zapraszamy !!
+         </p>
+
+     </div>
     <div class="container-fluid">
         <div class="row basket_card">
 
 
-                <p-card *ngFor="let basket of basketfiltered"  class="basket_card_in fadeIn" title="{{basket.basketName}}" [style]="{width: '260px',height:'390px'}">
+                <p-card *ngFor="let basket of basketfiltered"  class="basket_card_in fadeIn" title="{{basket.basketName}}" [style]="{width: '260px',height:'470px'}">
 
 
                      <div *ngIf="basket.isAvailable==1"class="available_status" >
@@ -48,7 +64,7 @@
 
 
                     <img  *ngIf="basket.isAlcoholic==0" class="alcohol_img" src="/content/images/kieliszek.jpg" alt="Galleria 1" height="32" width="32" />
-                        <img src="http://www.kosze.waw.pl/images/basketext/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">
+                        <img class="basket_img" src="http://www.kosze.waw.pl/images/basketext/basket-image/{{basket.basketId}}.jpg"   alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">
 
                     <!--<img src="http://www.kosze.ovh/basket-image/{{basket.basketId}}.jpg"  height="230" width="230" alt="" (click)="showDialog() ;selectImageToPreview(basket.basketId)">-->
 

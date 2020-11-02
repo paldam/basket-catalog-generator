@@ -39,6 +39,12 @@ public class CatalogGeneratorResource {
        // catalogGeneratorService.generateCatalog(catalog);
 
         CatalogGenerator catalogGenerator = new CatalogGenerator();
+
+         System.out.println(catalog.toString());
+
+
+
+
         ByteArrayInputStream bis = catalogGenerator.generateCatalog(catalog);
 
         HttpHeaders headers = new HttpHeaders();

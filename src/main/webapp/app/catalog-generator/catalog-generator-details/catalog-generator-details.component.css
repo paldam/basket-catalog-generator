@@ -12,7 +12,14 @@ legend {
 }
 
 .ui-dialog-content {
-    height: 300px;
+    /*height: 300px;*/
+}
+.theme-content {
+    margin: 0 auto;
+}
+
+.theme-btn {
+    width: 150px;
 }
 
 .fadeIn {
@@ -48,4 +55,8 @@ legend {
 }
 .ui-galleria-caption {
     width: 300px;
+}
+
+.order_detail_form {
+    width: 655px;
 }

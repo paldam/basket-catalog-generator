@@ -64,7 +64,7 @@ public class CatalogArchive implements Serializable {
     @JoinTable(name = "catalog_archive_baskets",
         joinColumns = @JoinColumn(name = "catalog_archives_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "baskets_id", referencedColumnName = "id"))
-    private Set<Basket> baskets = new HashSet<>();
+    private List<Basket> baskets = new ArrayList<>();
 
     @ManyToOne()
     private User user;
@@ -162,11 +162,11 @@ public class CatalogArchive implements Serializable {
         this.logoContentType = logoContentType;
     }
 
-    public Set<Basket> getBaskets() {
+    public List<Basket> getBaskets() {
         return baskets;
     }
 
-    public void setBaskets(Set<Basket> baskets) {
+    public void setBaskets(List<Basket> baskets) {
         this.baskets = baskets;
     }
 

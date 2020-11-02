@@ -129,7 +129,6 @@ public class UserService {
             "Twoje konto zostało zarejstrowane w systemie, po potwierdzeniu konta przez administratora otrzymasz możliwość zalogowania się. ",
             true,
             true);
-
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;

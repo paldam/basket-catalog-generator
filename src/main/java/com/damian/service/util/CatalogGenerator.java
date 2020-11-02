@@ -25,13 +25,14 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+
+import java.util.List;
 import java.util.Set;
 
 
@@ -321,7 +322,8 @@ public class CatalogGenerator {
 
 
 
-         Set<Basket> basketList = catalog.getBaskets();
+
+         List<Basket> basketList = catalog.getBaskets();
            int currentPosition = 0;
             for (Basket basket : basketList) {
 
@@ -425,7 +427,7 @@ public class CatalogGenerator {
 
                 for (Product products : productsList) {
 
-                    Text productName = new Text("- " + products.getProductName() + " " + products.getProductCapacity())
+                    Text productName = new Text("- " + products.getProductName())
 
                         .setFont(fontRobotoItalic)
                         .setFontSize(18)

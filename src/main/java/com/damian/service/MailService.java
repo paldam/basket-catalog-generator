@@ -64,10 +64,15 @@ public class MailService {
             message.setText(content, isHtml);
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
+            System.out.println("Sent email to User '{}'\", to" + to);
         } catch (Exception e) {
             if (log.isDebugEnabled()) {
+                 System.out.println("Email could not be sent to user {}, to, e");
+
+
                 log.warn("Email could not be sent to user '{}'", to, e);
             } else {
+                System.out.println("Email could not be sent to user '{}': {}\", to," + e.getMessage());
                 log.warn("Email could not be sent to user '{}': {}", to, e.getMessage());
             }
         }

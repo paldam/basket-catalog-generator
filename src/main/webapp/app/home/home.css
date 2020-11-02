@@ -23,11 +23,12 @@ Main page styles
 }
 
 .points {
-    width: 500px;
+    /*width: 500px;*/
     height: 700px;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 40px;
+    font-size: 15px;
+    /*text-align: center;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 40px;*/
 }
 
 .step-num {
@@ -38,7 +39,7 @@ Main page styles
 
 .points-cont {
     text-align: left;
-    margin-left: 150px;
+    margin-left: 75px;
     padding-bottom: 30px;
 }
 
@@ -54,6 +55,7 @@ Main page styles
     padding-bottom: 15px;
     text-align: left;
     background-color: #fbfbfb;
+    max-width: 400px;
 }
 
 .rej-btn {
@@ -75,4 +77,15 @@ Main page styles
 .head-start {
     color: #212529;
     font-size: 38px;
+}
+
+.intt {
+    margin-top: 100px;
+}
+
+.isn {
+    margin-bottom: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 15px;
 }

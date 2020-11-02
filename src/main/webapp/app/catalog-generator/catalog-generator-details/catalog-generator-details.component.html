@@ -1,5 +1,5 @@
 
-<div class="order_detail_form col-md-4">
+<div class="order_detail_form ">
     <p-panel header="Dodatkowe informacje">
         <form id="catalogForm" validate #form="ngForm" (submit)="submitForm(form)">
 
@@ -61,6 +61,25 @@
 
             </p-fieldset>
 
+
+
+
+            <p-fieldset legend="Wybierz motyw">
+                <div class="theme-content">
+                    <p-card   class="" [(title)]="themesImages[themeIndex].name" [style]="{width: '550px',height:'700px'}">
+
+                        <img  [(src)]="themesImages[themeIndex].img" alt="Galleria 1" height="630" width="534" />
+
+                    </p-card>
+
+
+
+                    <button class="btn theme-btn" type="button" (click)="prevTheme()"> <i class="fa fa-arrow-left "></i> poprzedni motyw</button>
+                    <button class="btn theme-btn" type="button" (click)="nextTheme()">następny motyw <i class="fa fa-arrow-right "></i> </button>
+                </div>
+
+            </p-fieldset>
+
             <!--<div class="form-group">-->
                 <!--<small id="catalogThemeDescript" class="text-muted">Motyw</small>-->
                 <!--<input type="text" name="catalogTheme" #catalogTheme="ngModel"  class="form-control" size="300"  aria-describedby="catalogThemeDesc" required [(ngModel)]="catalogArchive.catalogTheme">-->
@@ -69,15 +88,19 @@
                 <!--</ul>-->
             <!--</div>-->
 
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Wybierz motyw</label>
-                <select name="profile" class="form-control" id="exampleFormControlSelect1" #catalogTheme="ngModel" [(ngModel)]="catalogArchive.catalogTheme" required>
-                    <option  *ngFor="let theme of themesImages" [value]="theme.name" >{{theme.name}}</option>
-                </select>
-                <ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">
-                    <li  *ngIf="catalogTheme.errors?.required">Wybierz motyw</li>
-                </ul>
-            </div>
+
+
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="exampleFormControlSelect1">Wybierz motyw</label>-->
+                <!--<select name="profile" class="form-control" id="exampleFormControlSelect1" #catalogTheme="ngModel" [(ngModel)]="catalogArchive.catalogTheme" required>-->
+                    <!--<option  *ngFor="let theme of themesImages" [value]="theme.name" >{{theme.name}}</option>-->
+                <!--</select>-->
+                <!--<ul class="text-danger list-unstyled" *ngIf="catalogTheme.dirty|| formSubmitted">-->
+                    <!--<li  *ngIf="catalogTheme.errors?.required">Wybierz motyw</li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
 
 
@@ -158,7 +181,7 @@
 
 
 
-<p-dialog  header="Generowanie katalogu" closeOnEscape="true" modal="true" width="400" height="200" [(visible)]="showPdfGenStatusModal"  >
+<p-dialog *ngIf="!showThemePickerVisible" #dg header="Generowanie katalogu" closeOnEscape="true" modal="false" width="400" height="200" [(visible)]="showPdfGenStatusModal" (onHide)="showPdfGenStatusModal=false"  >
 
    <div *ngIf="!fileFilterLoaded" class="loading fadeIn">
        <p-progressSpinner ></p-progressSpinner>
@@ -172,6 +195,26 @@
 
 
 </p-dialog>
+
+
+
+
+
+<p-dialog #dg2 [style]="{width: '800px', height: '800px'}" header="Wybierz motyw"  clocloseOnEscape="true" modal="false" width="800" height="800" [(visible)]="showThemePickerVisible" (onHide)="closeThemePicker()" >
+
+    <p-card   class="" title="Motyw 1" [style]="{width: '500px',height:'500px'}">
+
+        <img  src="http://www.kosze.waw.pl/images/basketext/theme-prev/1a.jpg" alt="Galleria 1" height="225" width="400" />
+
+    </p-card>
+
+
+
+</p-dialog>
+
+
+<p-lightbox [images]="themesPrevImg"></p-lightbox>
+
 
 
 <!--<p-dialog header="Wybierz motyw" modal="true" width="1000" [(visible)]="showThemePickerVisible" >-->

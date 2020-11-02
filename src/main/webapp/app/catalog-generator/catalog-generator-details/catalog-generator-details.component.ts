@@ -27,7 +27,7 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     public themesImages: any[] = [];
     public themee: string;
     public image: any;
-
+    themesPrevImg: any[];
     //public generatedUrl: any;
     public generatedPdf: any;
     percentDone: number;
@@ -36,6 +36,8 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     width: number;
     height: number;
     fileType: string;
+
+    public themeIndex: number = 0;
 
     @ViewChild('coverFilesInput') imgType: ElementRef;
     @ViewChild('ww') ww: ElementRef;
@@ -58,16 +60,16 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         // this.catalogArchive.customerAssistantTel = '508703333';
         // this.catalogArchive.forWho = 'EnterStore Damian Paluch';
 
-        this.themesImages.push({ name: 'Motyw_1' });
-        this.themesImages.push({ name: 'Motyw_2' });
-        this.themesImages.push({ name: 'Motyw_3' });
-        this.themesImages.push({ name: 'Motyw_4' });
-        this.themesImages.push({ name: 'Motyw_5' });
-        this.themesImages.push({ name: 'Motyw_6' });
-        this.themesImages.push({ name: 'Motyw_7' });
-        this.themesImages.push({ name: 'Motyw_8' });
-        this.themesImages.push({ name: 'Motyw_9' });
-        this.themesImages.push({ name: 'Motyw_10' });
+        this.themesImages.push({ name: 'Motyw_1', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/1.jpg' });
+        this.themesImages.push({ name: 'Motyw_2', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/2.jpg' });
+        this.themesImages.push({ name: 'Motyw_3', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/3.jpg' });
+        this.themesImages.push({ name: 'Motyw_4', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/4.jpg' });
+        this.themesImages.push({ name: 'Motyw_5', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/5.jpg' });
+        this.themesImages.push({ name: 'Motyw_6', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/6.jpg' });
+        this.themesImages.push({ name: 'Motyw_7', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/7.jpg' });
+        this.themesImages.push({ name: 'Motyw_8', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/8.jpg' });
+        this.themesImages.push({ name: 'Motyw_9', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/9.jpg' });
+        this.themesImages.push({ name: 'Motyw_10', img: 'http://www.kosze.waw.pl/images/basketext/theme-prev/10.jpg' });
     }
 
     submitForm(form: NgForm) {
@@ -78,14 +80,20 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
                 let productToAdd: Product[] = [];
 
                 basket.basketItems.forEach(basketI => {
-                    productToAdd.push(new Product(basketI.product.productName, basketI.product.capacity));
+                    let excludedType = [3, 4];
+
+                    console.log(' wwwwwww' + basketI.product.productSubType.productType.typeName);
+                    if (excludedType.includes(basketI.product.productSubType.productType.typeId)) {
+                    } else {
+                        productToAdd.push(new Product(basketI.product.productCatalogName, basketI.product.capacity));
+                    }
                 });
 
                 this.baskets.push(new Basket(basket.basketName, basket.ownPrice * 100, basket.basketId, productToAdd));
                 productToAdd = [];
             });
 
-            console.log('ss' + JSON.stringify(this.catalogArchive));
+            this.catalogArchive.catalogTheme = this.themesImages[this.themeIndex].name;
 
             this.catalogArchive.baskets = this.baskets;
 
@@ -177,5 +185,25 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
 
     showThemePicker() {
         this.showThemePickerVisible = true;
+    }
+
+    closeThemePicker() {
+        this.showThemePickerVisible = false;
+    }
+
+    nextTheme() {
+        this.themeIndex++;
+
+        if (this.themesImages.length == this.themeIndex) {
+            this.themeIndex = 0;
+        }
+    }
+
+    prevTheme() {
+        if (this.themeIndex == 0) {
+            this.themeIndex = this.themesImages.length - 1;
+        } else {
+            this.themeIndex--;
+        }
     }
 }
