@@ -40,6 +40,8 @@ export class BasketPickerComponent implements OnInit {
                 //     item.basketTotalPrice = item.basketTotalPrice/100
                 // }
 
+                console.log(this.baskets);
+
                 this.rangeConst[0] = this.rangeValues[0] = Math.min.apply(
                     Math,
                     this.basketfiltered.map(function(o) {

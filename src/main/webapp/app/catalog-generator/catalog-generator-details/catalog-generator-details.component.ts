@@ -78,14 +78,10 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
         if (form.valid && this.chceckImageValid()) {
             this.selectedBasketService.selectedBasket.forEach(basket => {
                 let productToAdd: Product[] = [];
-
                 basket.basketItems.forEach(basketI => {
-                    let excludedType = [3, 4];
-
-                    console.log(' wwwwwww' + basketI.product.productSubType.productType.typeName);
-                    if (excludedType.includes(basketI.product.productSubType.productType.typeId)) {
-                    } else {
+                    if (basketI.product.productSubType.productType.activeForPdfExport) {
                         productToAdd.push(new Product(basketI.product.productCatalogName, basketI.product.capacity));
+                    } else {
                     }
                 });
 
@@ -166,8 +162,6 @@ export class CatalogGeneratorDetailsComponent implements OnInit {
     }
 
     chceckImageValid(): boolean {
-        console.log('Typ danych to ' + this.fileType);
-
         if (this.image == null) {
             return true;
         }
